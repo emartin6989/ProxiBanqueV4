@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+<h:outputStylesheet library="css" name="style.css"/>
+</h:head>
+<body>
+	<h:form>
+		<h:messages errorClass="error"/>
+		<h:panelGrid columns="2" cellpadding="5">
+			<h:outputLabel value="nom" />
+			<h:inputText id="nom" value="#{userBean.user.nom}" />
+			<h:outputLabel value="prenom" />
+			<h:inputText id="prenom" value="#{userBean.user.prenom}" />
+		</h:panelGrid>
+		<h:commandButton action="#{userBean.ajouterUser}" value="ajouter" />
+		<h2>Liste des users</h2>
+		<h:dataTable value="#{userBean.listerUser()}" var="c" border="1" >
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputText value="#{c.id}"/>
+			</h:column>
+		
+			<h:column>
+				<f:facet name="header">NOM</f:facet>
+				<h:outputText value="#{c.nom}"/>
+			</h:column>
+		
+			<h:column>
+				<f:facet name="header">PRENOM</f:facet>
+				<h:outputText value="#{c.prenom}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">SUPPRIMER</f:facet>
+				<h:commandLink action="#{userBean.supprimerUser(c.id)}" value="Supprimer">
+					<f:setPropertyActionListener target="#{userBean.user.id}" value="#{c.id}" />
+				</h:commandLink>
+			</h:column>	
+<!-- 			<h:column> -->
+<!-- 				<f:facet name="header">MAJ</f:facet> -->
+<!-- 				<h:commandLink action="#{userBean.maj}" value="Maj"> -->
+<!-- 					<f:setPropertyActionListener target="#{userBean.user}" value="#{c}" /> -->
+<!-- 				</h:commandLink> -->
+<!-- 			</h:column>	 -->
+		</h:dataTable>
+	</h:form>
+</body>
+</html>
