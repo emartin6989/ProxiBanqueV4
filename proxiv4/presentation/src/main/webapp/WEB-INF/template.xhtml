@@ -27,7 +27,11 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 infoCon">
 				<p:panel class="panel">
-					info connexion
+					info connexion: 
+					
+						<h:form>
+						<h:commandLink action="#{connexionBean.logout}">Disconnect</h:commandLink>
+					</h:form>
 				</p:panel>
 			</div>
 		</div>
