@@ -28,7 +28,7 @@ public abstract class Personne {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	protected int id;
+	protected long id;
 
 	/**
 	 * Le nom de la personne.
@@ -56,11 +56,11 @@ public abstract class Personne {
 	 */
 	protected String email;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -103,5 +103,7 @@ public abstract class Personne {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
 
 }
