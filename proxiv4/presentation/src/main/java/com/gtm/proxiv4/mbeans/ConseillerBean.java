@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.annotation.SessionScope;
@@ -32,10 +35,10 @@ public class ConseillerBean implements Serializable {
 	}
 
 	public Conseiller getConseiller() {
-		/*FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = facesContext.getExternalContext();
-		String email = externalContext.getRemoteUser();*/
-		return conseiller = serviceConseiller.findConseillerByEmail("mail");
+		String email = externalContext.getRemoteUser();
+		return conseiller = serviceConseiller.findConseillerByEmail(email);
 	}
 
 	public void setConseiller(Conseiller conseiller) {

@@ -1,0 +1,45 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">
+        Lister clients
+    </ui:define>
+
+	<ui:define name="content">
+		<h2>Liste des clients</h2>
+		
+		<h:form>
+			<p:dataTable value="#{conseillerBean.clients}" var="c" border="1"
+				style="width: 700">
+				<p:column sortBy="#{c.id}" filterBy="#{client.id}">
+					<f:facet name="header"><h:outputText value="ID" /></f:facet>
+					<h:outputText value="#{c.id}" />
+				</p:column>
+				<p:column sortBy="#{c.nom}" filterBy="#{client.nom}">
+					<f:facet name="header"><h:outputText value="NOM" /></f:facet>
+					<h:outputText value="#{c.nom}" />
+				</p:column>
+				<p:column sortBy="#{c.prenom}" filterBy="#{client.prenom}">
+					<f:facet name="header"><h:outputText value="PRENOM" /></f:facet>
+					<h:outputText value="#{c.prenom}" />
+				</p:column>
+				<p:column sortBy="#{c.nomEntreprise}" filterBy="#{client.nomEntreprise}">
+					<f:facet name="header"><h:outputText value="ENTREPRISE" /></f:facet>
+					<h:outputText value="#{c.nomEntreprise}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header"></f:facet>
+					<h:commandLink action="modifierClient" value="modifier">
+						<f:setPropertyActionListener value="#{client}"
+							target="#{clientBean.client}" />
+					</h:commandLink>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+			
+	</ui:define>
+</ui:composition>
