@@ -19,24 +19,31 @@
 					<p:inputText id="nom" value="#{clientBean.client.nom}" />
 					<h:outputLabel for="prenom" value="Prénom :" />
 					<p:inputText id="prenom" value="#{clientBean.client.prenom}" />
-					<h:outputLabel value="Entreprise :" />
+					<p:outputLabel for="entreprise" value="Type du client :" />
+					<p:selectOneRadio id="entreprise"
+						value="#{clientBean.client.entreprise}" label="Action">
+						<f:selectItem itemLabel="Entreprise" itemValue="true" />
+						<f:selectItem itemLabel="Particulier" itemValue="false" />
+						<f:ajax render="nomEntreprise" />
+					</p:selectOneRadio>
+					<h:outputLabel for="nomEntreprise" value="Entreprise :" />
 					<p:inputText id="nomEntreprise"
-						value="#{clientBean.clientEntreprise.nomEntreprise}" />
+						value="#{clientBean.client.nomEntreprise}"
+						disabled="#{clientBean.client.entreprise == false}" />
 					<h:outputLabel value="Email :" />
 					<p:inputText id="email" value="#{clientBean.client.email}" />
 					<h:outputLabel value="Téléphone :" />
-					<p:inputText id="telephone"
-						value="#{clientBean.client.telephone}" />
-					</h:panelGrid>
-					<h4>Adresse</h4>
-					<h:panelGrid columns="2" cellpadding="5">
+					<p:inputText id="telephone" value="#{clientBean.client.telephone}" />
+				</h:panelGrid>
+				<h4>Adresse</h4>
+				<h:panelGrid columns="2" cellpadding="5">
 					<h:outputLabel value="Rue :" />
-					<p:inputText id="rue" value="#{clientBean.client.adresse.rue}" />
+					<p:inputText id="rue" value="#{clientBean.adresse.rue}" />
 					<h:outputLabel value="Code Postal :" />
 					<p:inputText id="codePostal"
-						value="#{clientBean.client.adresse.rue}" />
+						value="#{clientBean.adresse.codePostal}" />
 					<h:outputLabel value="Ville :" />
-					<p:inputText id="ville" value="#{clientBean.client.adresse.ville}" />
+					<p:inputText id="ville" value="#{clientBean.adresse.ville}" />
 				</h:panelGrid>
 			</p:panel>
 

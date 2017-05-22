@@ -16,24 +16,24 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * Classe Client permettant de d�finir les clients 
+ * Classe Client permettant de d�finir les clients
  */
 @Component
 @Scope("prototype")
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue(value = "Client")
 public class Client extends Personne {
-	
-	private boolean isEntreprise;
+
+	private boolean entreprise;
 	private String nomEntreprise;
-	
+
 	public boolean isEntreprise() {
-		return isEntreprise;
+		return entreprise;
 	}
 
-	public void setEntreprise(boolean isEntreprise) {
-		this.isEntreprise = isEntreprise;
+	public void setEntreprise(boolean entreprise) {
+		this.entreprise = entreprise;
 	}
 
 	public String getNomEntreprise() {
@@ -47,10 +47,11 @@ public class Client extends Personne {
 	/**
 	 * Les comptes du client
 	 */
-	//cascade ALL car la suppression d'un client entraine la suppression de ses comptes
-	@OneToMany(fetch = FetchType.EAGER , mappedBy="client" , cascade=CascadeType.ALL)
+	// cascade ALL car la suppression d'un client entraine la suppression de ses
+	// comptes
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "client", cascade = CascadeType.ALL)
 	protected List<Compte> comptes = new ArrayList<Compte>();
-	
+
 	@ManyToOne
 	protected Conseiller conseiller;
 
@@ -70,5 +71,4 @@ public class Client extends Personne {
 		this.conseiller = conseiller;
 	}
 
-	
 }
