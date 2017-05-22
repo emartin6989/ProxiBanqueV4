@@ -2,19 +2,16 @@ package com.gtm.proxiv4.mbeans;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.context.annotation.SessionScope;
 
 import com.gtm.proxiv4.metier.Client;
 import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.service.IServiceConseiller;
 
 @Controller
-@ManagedBean
-@SessionScoped
+@SessionScope
 public class ConseillerBean {
 	
 	@Autowired

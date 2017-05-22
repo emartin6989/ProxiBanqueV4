@@ -1,21 +1,18 @@
 package com.gtm.proxiv4.mbeans;
 
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
-
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.context.annotation.SessionScope;
 
 import com.gtm.proxiv4.metier.Adresse;
 import com.gtm.proxiv4.metier.Client;
 import com.gtm.proxiv4.service.IServiceConseiller;
 
 @Controller
-@ManagedBean
-@SessionScoped
+@SessionScope
 public class ClientBean {
 	
 	@Autowired
