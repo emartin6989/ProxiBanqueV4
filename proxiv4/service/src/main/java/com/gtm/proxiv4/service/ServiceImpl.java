@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gtm.proxiv4.dao.ClientRepository;
 import com.gtm.proxiv4.dao.ConseillerRepository;
 import com.gtm.proxiv4.dao.GerantRepository;
 import com.gtm.proxiv4.metier.Client;
@@ -22,6 +23,8 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 	GerantRepository gerantRepo;
 	@Autowired
 	ConseillerRepository conseillerRepo;
+	@Autowired
+	ClientRepository clientRepo;
 	
 	@Override
 	public List<Conseiller> listerConseiller(long idGerant) {
@@ -42,8 +45,7 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 
 	@Override
 	public List<Client> listerClients(long idConseiller) {
-		// TODO Auto-generated method stub
-		return null;
+		return clientRepo.findByConseillerId(idConseiller);
 	}
 
 	@Override
@@ -79,6 +81,11 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 	@Override
 	public Gerant findGerantByEmail(String email) {
 		return gerantRepo.findOneByEmail(email);
+	}
+
+	@Override
+	public Conseiller findConseillerByEmail(String email) {
+	    return conseillerRepo.findOneByEmail(email);
 	}
 
 }

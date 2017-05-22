@@ -3,6 +3,8 @@ package com.gtm.proxiv4.service;
 import java.util.List;
 
 import com.gtm.proxiv4.metier.Client;
+import com.gtm.proxiv4.metier.Conseiller;
+import com.gtm.proxiv4.metier.Gerant;
 
 public interface IServiceConseiller {
 
@@ -17,4 +19,6 @@ public interface IServiceConseiller {
 	public void ajouterClient(Client client);
 
 	public List<Client> listerClientsDecouvert(long idConseiller);
+	
+	public Conseiller findConseillerByEmail(String email);
 }
