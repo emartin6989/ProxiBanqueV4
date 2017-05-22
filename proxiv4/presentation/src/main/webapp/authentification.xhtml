@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Espace sécurisé</title>
+</h:head>
+
+<body>
+	<form method="post" action="j_security_check">
+		<h:panelGrid columns="2" cellpadding="5">
+			<h:outputLabel value="e-mail" />
+			<input type="text" name="j_username" />
+			<h:outputLabel value="Mot de passe" />
+			<input type="password" name="j_password" />
+		</h:panelGrid>
+		<input type="submit" value="Connexion" />
+	</form>
+</body>
+
+</html>
