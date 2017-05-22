@@ -1,0 +1,14 @@
+<!-- declaration de la dataSource -->
+<Resource name="jdbc/jaas" auth="Container" type="javax.sql.DataSource" 
+	maxActive="100" maxIdle="30" maxWait="10000"
+	username="root" password="" driverClassName="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost/proxibanque?autoReconnect=true" />
+
+<!-- declaration du Realm -->
+<Realm className="org.apache.catalina.realm.DataSourceRealm"
+	dataSourceName="jdbc/jaas" localDataSource="true"
+	userTable="personne" userNameCol="email" userCredCol="password"
+	userRoleTable="role" roleNameCol="role">
+	<CredentialHandler
+      className="org.apache.catalina.realm.MessageDigestCredentialHandler"     
+algorithm="sha-1" />
+</Realm>
