@@ -55,23 +55,54 @@
 		</auth-constraint>
 	</security-constraint>
 
+	<security-constraint>
+		<display-name>Authentification</display-name>
+		<!-- liste des pages protégées -->
+		<web-resource-collection>
+			<web-resource-name>conseiller</web-resource-name>
+			<url-pattern>/conseiller/*</url-pattern>
+		</web-resource-collection>
+		<!-- roles pouvant acceder -->
+		<auth-constraint>
+			<role-name>CONSEILLER</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<display-name>Authentification</display-name>
+		<!-- liste des pages protégées -->
+		<web-resource-collection>
+			<web-resource-name>gerant</web-resource-name>
+			<url-pattern>/gerant/*</url-pattern>
+		</web-resource-collection>
+		<!-- roles pouvant acceder -->
+		<auth-constraint>
+			<role-name>GERANT</role-name>
+		</auth-constraint>
+	</security-constraint>
+
 	<!-- Interface de connexion -->
-	<!-- /!\ choisir le mode : mode BASIC -->
 	<login-config>
-		<auth-method>BASIC</auth-method>
+		<auth-method>FORM</auth-method>
 		<realm-name>Espace sécurisé</realm-name>
+		<!-- déclaration du formulaire de connection -->
+		<form-login-config>
+			<!-- page de connection -->
+			<form-login-page>/authentification.xhtml</form-login-page>
+			<!-- page d'erreur de connexion -->
+			<form-error-page>/error.xhtml</form-error-page>
+		</form-login-config>
 	</login-config>
+
 
 	<!-- rôles utilisés dans l'application -->
 	<security-role>
 		<description>conseiller</description>
 		<role-name>CONSEIELLER</role-name>
 	</security-role>
-		<security-role>
+	<security-role>
 		<description>gerant</description>
 		<role-name>GERANT</role-name>
 	</security-role>
-
-
 
 </web-app>
