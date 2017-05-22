@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8" />
+	<title><ui:insert name="title">Default title</ui:insert></title>
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+
+
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 titre">
+
+				<h1 class="mytitle">PROXIBANQUE</h1>
+				<h2 class="mysubtitle">La banque proche de ses clients</h2>
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 infoCon">
+				<p:panel class="panel">
+					info connexion
+				</p:panel>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+				<!-- MENU -->
+				<div class="panel">MENU</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 content">
+
+				<p:panel class="panel">
+					<ui:insert name="content">Default content apparait uniquement si le conseiller est connecté</ui:insert>
+
+				</p:panel>
+
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 footer">
+				Copyright 2017</div>
+		</div>
+
+	</div>
+
+
+</h:body>
+</html>

@@ -1,0 +1,95 @@
+@CHARSET "UTF-8";
+
+body {
+	color: black;
+	background-color: white;
+	background-image: url("#{resource['img:background.jpg']}");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-position: top;
+}
+
+.panel {
+	background-color: rgba(255, 255, 255, .7);
+}
+
+.mytitle {
+	margin-top: 60px;
+	margin-bottom: 30px;
+	font-family: Century Gothic;
+	font-size: 60px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 600;
+	line-height: 26.4px;
+	text-align: center;
+}
+
+.mysubtitle {
+	font-family: Brush Script MT, cursive;
+	font-size: 30px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 15.4px;
+	text-align: center;
+}
+
+.infoCon {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+table {
+	border: 1px solid black;
+}
+
+th {
+	text-align: center;
+}
+
+td {
+	text-align: center;
+}
+
+.connection {
+	
+}
+
+.menu {
+	font-family: Century Gothic;
+	background: none;
+	border: none;
+}
+
+.menuHeader {
+	color: black;
+	font-size: 25px;
+	font-style: normal;
+	font-variant : normal;
+	font-weight : 600;
+	background: none;
+	border: none;
+	font-variant: normal;
+	font-weight: 600;
+}
+
+.menuItem {
+	margin-left: 10px;
+	font-size: 18px;
+	font-weight: 600;
+	background: none;
+	border: none;
+}
+
+.content {
+	
+}
+
+.footer {
+	position: fixed;
+	bottom: 0px;
+	margin: 0;
+	padding-right: 5px;
+	font-style: italic;
+}
