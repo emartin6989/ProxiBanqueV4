@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
@@ -21,8 +22,28 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-public abstract class Client extends Personne {
+@DiscriminatorValue(value = "Client")
+public class Client extends Personne {
 	
+	private boolean isEntreprise;
+	private String nomEntreprise;
+	
+	public boolean isEntreprise() {
+		return isEntreprise;
+	}
+
+	public void setEntreprise(boolean isEntreprise) {
+		this.isEntreprise = isEntreprise;
+	}
+
+	public String getNomEntreprise() {
+		return nomEntreprise;
+	}
+
+	public void setNomEntreprise(String nomEntreprise) {
+		this.nomEntreprise = nomEntreprise;
+	}
+
 	/**
 	 * Les comptes du client
 	 */
@@ -32,6 +53,22 @@ public abstract class Client extends Personne {
 	
 	@ManyToOne
 	protected Conseiller conseiller;
+
+	public List<Compte> getComptes() {
+		return comptes;
+	}
+
+	public void setComptes(List<Compte> comptes) {
+		this.comptes = comptes;
+	}
+
+	public Conseiller getConseiller() {
+		return conseiller;
+	}
+
+	public void setConseiller(Conseiller conseiller) {
+		this.conseiller = conseiller;
+	}
 
 	
 }
