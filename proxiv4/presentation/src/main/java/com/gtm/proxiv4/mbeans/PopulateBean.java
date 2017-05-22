@@ -1,6 +1,5 @@
 package com.gtm.proxiv4.mbeans;
 
-import javax.annotation.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import org.apache.catalina.realm.RealmBase;
@@ -15,7 +14,6 @@ import com.gtm.proxiv4.metier.Gerant;
 import com.gtm.proxiv4.metier.Role;
 
 @Controller
-@ManagedBean
 @RequestScoped
 public class PopulateBean {
 	
@@ -82,7 +80,7 @@ public class PopulateBean {
 
 	public void ajouterConseiller() {
 		
-		conseiller.setPassword(RealmBase.Digest("conseiller", "SHA-1", "UTF-8"));
+		conseiller.setPassword(RealmBase.Digest(conseiller.getPassword(), "SHA-1", "UTF-8"));
 		role.setEmail(conseiller.getEmail());
 		role.setRole("CONSEILLER");
 
@@ -93,8 +91,7 @@ public class PopulateBean {
 	
 	public void ajouterGerant() {
 		
-		gerant.setPassword(RealmBase.Digest("conseiller", "SHA-1", "UTF-8"));
-		
+		gerant.setPassword(RealmBase.Digest(gerant.getPassword(), "SHA-1", "UTF-8"));
 		role.setEmail(gerant.getEmail());
 		role.setRole("GERANT");
 
