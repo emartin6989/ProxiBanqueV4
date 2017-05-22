@@ -1,5 +1,7 @@
 package com.gtm.proxiv4.mbeans;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +14,14 @@ import com.gtm.proxiv4.service.IServiceConseiller;
 
 @Controller
 @SessionScope
-public class ConseillerBean {
+public class ConseillerBean implements Serializable {
 	
 	@Autowired
 	private IServiceConseiller serviceConseiller;
-	@Autowired
+	
 	private Conseiller conseiller;
 	
-	private List<Client> clients;
+	private List<Client> clients = new ArrayList<Client>();
 
 	public IServiceConseiller getServiceConseiller() {
 		return serviceConseiller;
@@ -30,7 +32,10 @@ public class ConseillerBean {
 	}
 
 	public Conseiller getConseiller() {
-		return conseiller;
+		/*FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		String email = externalContext.getRemoteUser();*/
+		return conseiller = serviceConseiller.findConseillerByEmail("mail");
 	}
 
 	public void setConseiller(Conseiller conseiller) {
@@ -38,7 +43,7 @@ public class ConseillerBean {
 	}
 
 	public List<Client> getClients() {
-		return serviceConseiller.listerClients(conseiller.getId());
+		return serviceConseiller.listerClients(getConseiller().getId());
 	}
 
 	public void setClients(List<Client> clients) {
