@@ -6,4 +6,5 @@ import com.gtm.proxiv4.metier.Gerant;
 
 public interface GerantRepository extends JpaRepository<Gerant,Long> {
 
+	public Gerant findOneByEmail(String email);
 }
