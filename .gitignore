@@ -11,7 +11,10 @@
 # Generated files
 bin/
 gen/
-target/
+*/metier/target/
+*/dao/target/
+*/service/target/
+*/presentation/target/
 
 # Gradle files
 .gradle/
