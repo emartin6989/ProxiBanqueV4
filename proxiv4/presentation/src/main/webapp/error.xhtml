@@ -1,4 +1,4 @@
-<ui:composition template="/WEB-INF/template.xhtml"
+<ui:composition template="/WEB-INF/authentificationTemplate.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -6,11 +6,11 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="title">
-        ERREUR
+        Erreur de connexion
     </ui:define>
 
 	<ui:define name="content">
-		<h2>ERREUR D'AUTHENTIFICATION</h2>
-		
+		<h3>ERREUR D'AUTHENTIFICATION</h3>
+		<a href="index.xhtml">Essayer à nouveau</a>
     </ui:define>
 </ui:composition>
