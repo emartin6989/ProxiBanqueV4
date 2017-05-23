@@ -24,4 +24,8 @@ public interface IServiceConseiller {
 	
 	public Conseiller findConseillerByEmail(String email);
 	
+	public List<Compte> listerComptesEpargneClient(Client client);
+	
+	public List<Compte> listerComptesCourantClient(Client client);
+	
 }
