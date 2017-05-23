@@ -45,7 +45,7 @@ public class GerantBean implements Serializable {
 		this.gerant = gerant;
 	}
 	public List<Conseiller> getConseillers() {
-		return service.listerConseiller(getGerant().getId());
+		return service.listerConseiller(gerant);
 	}
 
 	public void setConseillers(List<Conseiller> conseillers) {
