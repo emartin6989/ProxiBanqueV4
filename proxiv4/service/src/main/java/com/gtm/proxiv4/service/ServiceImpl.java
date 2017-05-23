@@ -1,5 +1,6 @@
 package com.gtm.proxiv4.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import com.gtm.proxiv4.dao.ConseillerRepository;
 import com.gtm.proxiv4.dao.GerantRepository;
 import com.gtm.proxiv4.metier.Client;
 import com.gtm.proxiv4.metier.Compte;
+import com.gtm.proxiv4.metier.CompteCourant;
 import com.gtm.proxiv4.metier.CompteEpargne;
 import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.metier.Gerant;
@@ -67,14 +69,28 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 	
 	@Override
 	public List<Compte> listerComptesEpargneClient(Client client){
-		return compteRepo.findByClientIdAndtypeCompteEquals(client.getId(), "CompteEpargne");
+		List<Compte> comptesE= new ArrayList<Compte>();
+		List<Compte> comptes = compteRepo.findByClientId(client.getId());
+		for(Compte c: comptes){
+			if(c instanceof CompteEpargne){
+				comptesE.add(c);
+			}
+		}
+		return comptesE;
 	}
 	
 	@Override
 	public List<Compte> listerComptesCourantClient(Client client){
-		return compteRepo.findByClientIdAndtypeCompteEquals(client.getId(), "CompteCourant");
+		List<Compte> comptesC= new ArrayList<Compte>();
+		List<Compte> comptes = compteRepo.findByClientId(client.getId());
+		for(Compte c: comptes){
+			if(c instanceof CompteCourant){
+				comptesC.add(c);
+			}
+		}
+		return comptesC;
 	}
-
+	
 	@Override
 	public void effectuerVirement(Compte compteDebiteur, Compte compteCrediteur, double montant) {
 		// TODO Auto-generated method stub

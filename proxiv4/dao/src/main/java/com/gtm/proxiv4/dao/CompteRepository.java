@@ -11,7 +11,6 @@ public interface CompteRepository extends JpaRepository<Compte,Long>  {
 
 	public List<Compte> findByClientId(long id);
 	
-	@Query("Select c from Compte c where client_id =?1 and TypeCompte=?2")
-	public List<Compte> findByClientIdAndtypeCompteEquals(long id, String TypeCompte);
+
 	
 }
