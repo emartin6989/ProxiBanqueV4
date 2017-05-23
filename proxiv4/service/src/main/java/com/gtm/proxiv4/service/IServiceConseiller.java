@@ -28,4 +28,8 @@ public interface IServiceConseiller {
 	
 	public List<Compte> listerComptesCourantClient(Client client);
 	
+	public List<Compte> listerComptesConseiller(Conseiller conseiller);
+	
+	public List<Compte> listerAutresComptes(long idCompte);
+	
 }

@@ -43,7 +43,7 @@ public abstract class Personne {
 	/**
 	 * L'adresse de la personne
 	 */
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	protected Adresse adresse;
 
 	/**

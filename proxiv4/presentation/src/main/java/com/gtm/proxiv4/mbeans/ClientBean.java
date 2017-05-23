@@ -37,8 +37,6 @@ public class ClientBean {
 		this.serviceConseiller = serviceConseiller;
 	}
 
-
-
 	public Adresse getAdresse() {
 		return adresse;
 	}
@@ -87,16 +85,15 @@ public class ClientBean {
     }
     
     public String modifierClient(){
-    	client.setAdresse(adresse);
     	serviceConseiller.modifierInfoClient(client);
     	return "listerClients";
     }
     
-    public List<Compte> listerComptesCourant(){
-    	return serviceConseiller.listerComptesCourantClient(client);
-    }
-
-    public List<Compte> listerComptesEpargne(){
-    	return serviceConseiller.listerComptesEpargneClient(client);
-    }
+//    public List<Compte> listerComptesCourant(){
+//    	return serviceConseiller.listerComptesCourantClient(client);
+//    }
+//
+//    public List<Compte> listerComptesEpargne(){
+//    	return serviceConseiller.listerComptesEpargneClient(client);
+//    }
 }
