@@ -98,13 +98,17 @@
 					<f:facet name="header">
 						<h:outputText value="SOLDE" />
 					</f:facet>
-					<h:outputText value="#{coc.solde}" />
+					<h:outputText value="#{coc.solde}">
+					<f:convertNumber pattern="#0.00" />
+					</h:outputText>
 				</p:column>
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="DECOUVERT" />
 					</f:facet>
-					<h:outputText value="#{coc.decouvert}" />
+					<h:outputText value="#{coc.decouvert}">
+					<f:convertNumber pattern="#0.00" />
+					</h:outputText>
 				</p:column>
 				<p:column>
 					<f:facet name="header">
@@ -131,13 +135,17 @@
 					<f:facet name="header">
 						<h:outputText value="SOLDE" />
 					</f:facet>
-					<h:outputText value="#{coe.solde}" />
+					<h:outputText value="#{coe.solde}">
+					<f:convertNumber pattern="#0.00" />
+					</h:outputText>
 				</p:column>
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="TAUX" />
 					</f:facet>
-					<h:outputText value="#{coe.taux}" />
+					<h:outputText value="#{coe.taux}">
+					<f:convertNumber pattern="#0.00" />
+					</h:outputText>
 				</p:column>
 				<p:column>
 					<f:facet name="header">
