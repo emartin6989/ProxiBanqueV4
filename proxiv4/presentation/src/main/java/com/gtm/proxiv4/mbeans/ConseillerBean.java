@@ -26,8 +26,6 @@ public class ConseillerBean implements Serializable {
 	private Conseiller conseiller;
 	
 	private List<Client> clients = new ArrayList<Client>();
-	
-	private Client client;
 
 	public IServiceConseiller getServiceConseiller() {
 		return serviceConseiller;
@@ -49,14 +47,12 @@ public class ConseillerBean implements Serializable {
 	}
 
 	public List<Client> getClients() {
-		return serviceConseiller.listerClients(conseiller);
+		return serviceConseiller.listerClients(getConseiller());
 	}
 
 	public void setClients(List<Client> clients) {
 		this.clients = clients;
 	}
 
-	public List<Compte> getComptes() {
-		return serviceConseiller.listerComptesClient(client);
-	}
+
 }
