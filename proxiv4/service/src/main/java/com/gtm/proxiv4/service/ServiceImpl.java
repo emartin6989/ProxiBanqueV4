@@ -31,8 +31,8 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 	CompteRepository compteRepo;
 	
 	@Override
-	public List<Conseiller> listerConseiller(long idGerant) {
-		return conseillerRepo.findByGerantId(idGerant);
+	public List<Conseiller> listerConseiller(Gerant gerant) {
+		return conseillerRepo.findByGerantId(gerant.getId());
 	}
 
 	@Override
@@ -42,14 +42,14 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 	}
 
 	@Override
-	public List<Client> listerCientsDecouvert(long idGerant) {
+	public List<Client> listerClientsDecouvert(Gerant gerant) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Client> listerClients(long idConseiller) {
-		return clientRepo.findByConseillerId(idConseiller);
+	public List<Client> listerClients(Conseiller conseiller) {
+		return clientRepo.findByConseillerId(conseiller.getId());
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 	}
 
 	@Override
-	public void effectuerVirement(long idCompteDebiteur, long idCompteCrediteur, double montant) {
+	public void effectuerVirement(Compte compteDebiteur, Compte compteCrediteur, double montant) {
 		// TODO Auto-generated method stub
 
 	}
@@ -76,7 +76,7 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 	}
 
 	@Override
-	public List<Client> listerClientsDecouvert(long idConseiller) {
+	public List<Client> listerClientsDecouvert(Conseiller conseiller) {
 		// TODO Auto-generated method stub
 		return null;
 	}

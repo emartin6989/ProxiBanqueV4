@@ -10,11 +10,11 @@ import com.gtm.proxiv4.metier.Gerant;
 
 public interface IServiceGerant {
 	
-	public List<Conseiller> listerConseiller(long idGerant);
+	public List<Conseiller> listerConseiller(Gerant gerant);
 	
 	public Map<Client, Integer> compterTransactionsParClient(Date dateDebut);
 
-	public List<Client> listerCientsDecouvert(long idGerant);
+	public List<Client> listerClientsDecouvert(Gerant gerant);
 	
 	public Gerant findGerantByEmail(String email);
 }
