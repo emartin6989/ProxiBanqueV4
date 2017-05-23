@@ -15,7 +15,7 @@ proxiv4/metier/target/
 proxiv4/dao/target/
 proxiv4/service/target/
 proxiv4/presentation/target/
-
+*/target/*
 
 # Eclipse Server
 Servers/
