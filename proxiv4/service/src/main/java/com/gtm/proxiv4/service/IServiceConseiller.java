@@ -22,5 +22,4 @@ public interface IServiceConseiller {
 	
 	public Conseiller findConseillerByEmail(String email);
 	
-	
 }

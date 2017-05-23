@@ -54,7 +54,7 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 
 	@Override
 	public void modifierInfoClient(Client client) {
-		// TODO Auto-generated method stub
+		clientRepo.save(client);
 
 	}
 
