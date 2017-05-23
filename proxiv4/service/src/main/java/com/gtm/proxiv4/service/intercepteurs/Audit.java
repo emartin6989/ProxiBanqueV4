@@ -29,18 +29,19 @@ public class Audit {
 
 	@Around("auditer()")
 	public Object Enregistrement(ProceedingJoinPoint pjp) throws Throwable {
-
+ System.out.println(pjp);
 		final Object[] args = pjp.getArgs();
-		Compte compteDebiteur = (Compte) args[0];
-		Compte compteCrediteur = (Compte) args[1];
-		double montant = (double) args[2];
-
-		transaction.setDate(new Date());
+		System.out.println(args);
+		/*Compte compteDebiteur = (Compte) args[1];
+		Compte compteCrediteur = (Compte) args[2];
+		double montant = (double) args[3];
+*/
+		/*transaction.setDate(new Date());
 		transaction.setCompteCrediteur(compteCrediteur);
 		transaction.setCompteDebiteur(compteDebiteur);
 		transaction.setMontant(montant);
 		transactionRepo.save(transaction);
-
+*/
 		return pjp.proceed();
 
 	}
