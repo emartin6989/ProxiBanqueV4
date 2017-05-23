@@ -3,11 +3,13 @@ package com.gtm.proxiv4.mbeans;
 import java.util.List;
 
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.context.annotation.SessionScope;
 
 import com.gtm.proxiv4.metier.Adresse;
@@ -16,7 +18,7 @@ import com.gtm.proxiv4.metier.Compte;
 import com.gtm.proxiv4.service.IServiceConseiller;
 
 @Controller
-//@SessionScope
+@SessionScope
 public class ClientBean {
 	
 	@Autowired
@@ -109,11 +111,11 @@ public class ClientBean {
     	return "listerClients";
     }
     
-//    public List<Compte> listerComptesCourant(){
-//    	return serviceConseiller.listerComptesCourantClient(client);
-//    }
-//
-//    public List<Compte> listerComptesEpargne(){
-//    	return serviceConseiller.listerComptesEpargneClient(client);
-//    }
+    public List<Compte> listerComptesCourant(){
+    	return serviceConseiller.listerComptesCourantClient(client);
+    }
+
+    public List<Compte> listerComptesEpargne(){
+    	return serviceConseiller.listerComptesEpargneClient(client);
+    }
 }
