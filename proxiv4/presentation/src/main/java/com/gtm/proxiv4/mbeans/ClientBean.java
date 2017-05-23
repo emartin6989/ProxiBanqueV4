@@ -20,7 +20,6 @@ public class ClientBean {
 	private IServiceConseiller serviceConseiller;
 	@Autowired
 	private Client client;
-	
 	@Autowired
 	private	Adresse adresse;
 	
@@ -82,6 +81,12 @@ public class ClientBean {
     	client.setAdresse(adresse);
     	serviceConseiller.ajouterClient(client);
     	return "ajouterClient";
+    }
+    
+    public String modifierClient(){
+    	client.setAdresse(adresse);
+    	serviceConseiller.modifierInfoClient(client);
+    	return "listerClients";
     }
 
 }
