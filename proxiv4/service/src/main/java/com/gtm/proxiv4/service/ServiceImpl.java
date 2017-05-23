@@ -45,7 +45,7 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 	EmployeRepository employeRepo;
 	@Autowired
 	TransactionRepository transactionRepo;
-	
+
 	final static double DECOUVERT_MAX_ENTREPRISE = 50000;
 	final static double DECOUVERT_MAX_PARTICULIER = 5000;
 
@@ -60,7 +60,7 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 		// préparation de la réponse
 		List<Compte> comptesADecouvert = new ArrayList<Compte>();
 
-		//recherche de tous les conseillers du gérant
+		// recherche de tous les conseillers du gérant
 		for (Conseiller conseiller : gerant.getConseillers()) {
 			// recherche de tous les clients du conseiller
 			for (Client client : conseiller.getClients()) {
@@ -248,12 +248,12 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 	public Map<Client, Integer> listerNbTransactionsParClients(List<Client> clients, Date dateDebut) {
 		List<Compte> comptes = compteRepo.findByClientIn(clients);
 		List<Transaction> transactions = transactionRepo.findByDateAfterAndCompteDebiteurIn(dateDebut, comptes);
-		
+
 		Map<Client, Integer> liste = new HashMap<Client, Integer>();
 		int nbTransactions = 0;
 		for (Client c : clients) {
 			for (Transaction t : transactions) {
-				if(t.getCompteDebiteur().equals(c))
+				if (t.getCompteDebiteur().equals(c))
 					nbTransactions++;
 			}
 			liste.put(c, nbTransactions);
@@ -264,8 +264,19 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 
 	@Override
 	public List<Client> listerClients(Gerant gerant) {
-		// TODO Auto-generated method stub
-		return null;
+		// préparation de la réponse
+		List<Client> clients = new ArrayList<Client>();
+
+		// recherche de tous les conseillers du gérant
+		for (Conseiller conseiller : gerant.getConseillers()) {
+			// recherche de tous les clients du conseiller
+			for (Client client : conseiller.getClients()) {
+
+				clients.add(client);
+			}
+		}
+
+		return clients;
 	}
 
 }
