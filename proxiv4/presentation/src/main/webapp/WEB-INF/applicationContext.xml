@@ -3,9 +3,11 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- recherche du fichier de properties -->
@@ -46,4 +48,15 @@
 
 		<!-- prise en compte du gestionnaire de transaction pour @Transactional -->
 	<tx:annotation-driven transaction-manager="transactionManagerJPA"/>
+	
+<!-- 	 permet de détecter les @Aspect -->
+		<aop:aspectj-autoproxy />
+		
+		<!-- config aop via annotations-->
+<bean id="audit" class="com.gtm.proxiv4.service.intercepteurs.Audit" /> 
+	<aop:config>
+		<aop:aspect ref="audit">
+		</aop:aspect>
+	</aop:config> 
+		
 </beans>
