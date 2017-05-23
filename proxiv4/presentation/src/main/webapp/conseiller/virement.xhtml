@@ -17,14 +17,14 @@
 				<p:ajax listener="#{virementBean.onCompteDebiteurChange}" update="compteCrediteur" />
 				<f:selectItem itemLabel="Choisir un compte" itemValue="" />
 				<f:selectItems value="#{virementBean.comptesConseiller}" var="c"
-					itemLabel="#{c.client.nom} #{c.client.prenom} - #{c.id}"
+					itemLabel="#{c.id} - #{c.client.prenom} #{c.client.nom} - #{c['class'].simpleName} : #{c.solde}"
 					itemValue="#{c.id}" />
 			</p:selectOneMenu>
 			<h2>Compte à Créditer</h2>
 			<p:selectOneMenu id="compteCrediteur" value="#{virementBean.idCompteCrediteur}">
 				<f:selectItem itemLabel="Choisir un compte" itemValue="" />
 				<f:selectItems value="#{virementBean.comptesBanque}" var="c"
-					itemLabel="#{c.client.nom} #{c.client.prenom} - #{c.id}"
+					itemLabel="#{c.id} - #{c.client.prenom} #{c.client.nom} - #{c['class'].simpleName}"
 					itemValue="#{c.id}" />
 			</p:selectOneMenu>
 

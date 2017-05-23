@@ -16,6 +16,8 @@ import org.springframework.web.context.annotation.SessionScope;
 import com.gtm.proxiv4.metier.Compte;
 import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.service.IServiceConseiller;
+import com.gtm.proxiv4.service.exceptions.MontantNegatifException;
+import com.gtm.proxiv4.service.exceptions.SoldeInsuffisantException;
 
 import javassist.expr.NewArray;
 
@@ -86,12 +88,27 @@ public class VirementBean implements Serializable {
 	
 	public String effectuerVirement(){
 		
-		//FacesContext context = FacesContext.getCurrentInstance();
-		//context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Solde insuffisant, virement non effectué", null));
 		compteDebiteur = service.findCompteById(idCompteDebiteur);
-		service.effectuerVirement(compteDebiteur, compteCrediteur, montant);
+		compteCrediteur = service.findCompteById(idCompteCrediteur);
+		
+		try {
+			service.effectuerVirement(compteDebiteur, compteCrediteur, montant);
+			idCompteDebiteur = 0;
+			idCompteCrediteur = 0;
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Virement effectué avec succés", null);
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} catch (MontantNegatifException e) {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Impossible de virer un montant négatif", null);
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} catch (SoldeInsuffisantException e) {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Solde du compte créditeur insuffisant", null);
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		}
 		montant = 0;
-		return "listerClients";
+		return "virement";
 	}
 	
 	public void onCompteDebiteurChange(){
