@@ -262,4 +262,10 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 		return liste;
 	}
 
+	@Override
+	public List<Client> listerClients(Gerant gerant) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
