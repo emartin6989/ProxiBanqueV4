@@ -65,6 +65,12 @@
 			<artifactId>jstl</artifactId>
 			<version>1.1.2</version>
 		</dependency>
+		<!-- pour encryption du mot de passe (org.apache.catalina.realm) -->
+		<dependency>
+		    <groupId>org.apache.tomcat</groupId>
+		    <artifactId>tomcat-catalina</artifactId>
+		    <version>9.0.0.M21</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>presentation</finalName>
