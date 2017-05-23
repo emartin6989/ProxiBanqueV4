@@ -2,14 +2,10 @@ package com.gtm.proxiv4.mbeans;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
-
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.context.annotation.SessionScope;
 
 import com.gtm.proxiv4.metier.Adresse;
