@@ -43,7 +43,7 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 
 	final static double DECOUVERT_MAX_ENTREPRISE = 50000;
 	final static double DECOUVERT_MAX_PARTICULIER = 5000;
-	
+
 	@Override
 	public List<Conseiller> listerConseiller(Gerant gerant) {
 		return conseillerRepo.findByGerantId(gerant.getId());
@@ -124,8 +124,8 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 		compteCrediteur.setSolde(compteCrediteur.getSolde() + montant);
 		compteDebiteur.setSolde(compteDebiteur.getSolde() - montant);
 
-		 compteRepo.save(compteCrediteur);
-		 compteRepo.save(compteDebiteur);
+		compteRepo.save(compteCrediteur);
+		compteRepo.save(compteDebiteur);
 
 	}
 
@@ -133,49 +133,50 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 	public void ajouterClient(Client client) throws ConseillerNonSpecifieException, NombreMaxDeClientException {
 
 		Conseiller conseiller = client.getConseiller();
-		
 
 		// on verifie que le conseiller existe
 		if (conseiller == null) {
 			throw new ConseillerNonSpecifieException();
 		} else {
-			
+
 			System.out.println(conseiller.getClients().size());
-			
-			//on recupère le conseiller de la base
-			//conseiller = conseillerRepo.findOne(conseiller.getId());
+
+			// on recupère le conseiller de la base
+			// conseiller = conseillerRepo.findOne(conseiller.getId());
 
 			int nbClients = conseiller.getClients().size();
-			
-			if (nbClients >= 10){
+
+			if (nbClients >= 10) {
 				throw new NombreMaxDeClientException();
 			}
 		}
-		
+
 		clientRepo.save(client);
 	}
 
 	@Override
 	public List<Compte> listerComptesDecouvert(Conseiller conseiller) {
-	
-		//préparation de la réponse
-		List<Compte> comptesADecouvert = new ArrayList<Compte>();
-		
-		//recherche de tous les clients du conseiller
-		for(Client client : conseiller.getClients()){
-			
-			//détermination du seuil d'alerte en fonction du client
-			double seuilAlerte = client.isEntreprise() ? DECOUVERT_MAX_ENTREPRISE :DECOUVERT_MAX_PARTICULIER;
-			
-			//pour chaque compte du client on compare son solde au seuil d'alerte
-			for (Compte compte : client.getComptes()){
 
-				if(compte.getSolde()<=seuilAlerte){
+		// préparation de la réponse
+		List<Compte> comptesADecouvert = new ArrayList<Compte>();
+
+		// recherche de tous les clients du conseiller
+		for (Client client : conseiller.getClients()) {
+
+			// détermination du seuil d'alerte en fonction du client (- le decouvert max pour le type de client)
+			double seuilAlerte = client.isEntreprise() ? -DECOUVERT_MAX_ENTREPRISE : -DECOUVERT_MAX_PARTICULIER;
+
+			// pour chaque compte du client on compare son solde au seuil
+			// d'alerte
+			for (Compte compte : client.getComptes()) {
+
+				if (compte.getSolde() <= seuilAlerte) {
+
 					comptesADecouvert.add(compte);
 				}
-			}			
-		}		
-		
+			}
+		}
+
 		return comptesADecouvert;
 	}
 
@@ -204,7 +205,7 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 	public Compte findCompteById(long idCompte) {
 		return compteRepo.findById(idCompte);
 	}
-	
+
 	@Override
 	public Employe findEmployeByEmail(String email) {
 
