@@ -117,8 +117,8 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 		compteCrediteur.setSolde(compteCrediteur.getSolde() + montant);
 		compteDebiteur.setSolde(compteDebiteur.getSolde() - montant);
 
-		// compteRepo.save(compteCrediteur);
-		// compteRepo.save(compteDebiteur);
+		 compteRepo.save(compteCrediteur);
+		 compteRepo.save(compteDebiteur);
 
 	}
 
@@ -135,10 +135,13 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 			conseiller = conseillerRepo.findOne(conseiller.getId());
 
 			int nbClients = conseiller.getClients().size();
-			System.out.println("le conseiller à "+ nbClients + "clients");
 			
-			clientRepo.save(client);
+			if (nbClients >= 10){
+				throw new NombreMaxDeClientException();
+			}
 		}
+		
+		clientRepo.save(client);
 	}
 
 	@Override
