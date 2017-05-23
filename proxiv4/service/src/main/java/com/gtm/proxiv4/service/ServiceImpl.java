@@ -19,6 +19,8 @@ import com.gtm.proxiv4.metier.CompteCourant;
 import com.gtm.proxiv4.metier.CompteEpargne;
 import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.metier.Gerant;
+import com.gtm.proxiv4.service.exceptions.MontantNegatifException;
+import com.gtm.proxiv4.service.exceptions.SoldeInsuffisantException;
 
 @Transactional
 @Service
@@ -92,8 +94,24 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 	}
 	
 	@Override
-	public void effectuerVirement(Compte compteDebiteur, Compte compteCrediteur, double montant) {
-		// TODO Auto-generated method stub
+	public void effectuerVirement(Compte compteDebiteur, Compte compteCrediteur, double montant) throws SoldeInsuffisantException, MontantNegatifException {
+		// montant doit etre positif
+		if (montant <= 0) throw new MontantNegatifException();
+		// le montant ne doit pas depasser le solde d'un CompteEpargne
+		if (compteDebiteur instanceof CompteEpargne) {
+			if (montant > compteDebiteur.getSolde()) throw new SoldeInsuffisantException();
+		}
+		// le montant ne pas pas depasser le solde (avec son decouvert) d'un CompteCourant
+		if (compteDebiteur instanceof CompteCourant) {
+			double decouvert = ((CompteCourant) compteDebiteur).getDecouvert();
+			if (montant > compteDebiteur.getSolde() + decouvert) throw new SoldeInsuffisantException();
+		}
+		
+		compteCrediteur.setSolde(compteCrediteur.getSolde() + montant);
+		compteDebiteur.setSolde(compteDebiteur.getSolde() - montant);
+		
+		//compteRepo.save(compteCrediteur);
+		//compteRepo.save(compteDebiteur);
 
 	}
 
@@ -116,6 +134,18 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 	@Override
 	public Conseiller findConseillerByEmail(String email) {
 	    return conseillerRepo.findOneByEmail(email);
+	}
+
+	@Override
+	public List<Compte> listerComptesConseiller(Conseiller conseiller) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Compte> listerAutresComptes(long idCompte) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
