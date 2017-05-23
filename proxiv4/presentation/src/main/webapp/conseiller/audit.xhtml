@@ -1,0 +1,51 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">
+        Audit des comptes client
+    </ui:define>
+
+	<ui:define name="content">
+		
+		<p:panel id="warningAcountPannel" header="Comptes à surveiller"
+				style="width: 700;" widgetVar="oneUser">
+			<p:dataTable var="compte" value="#{auditBean.comptesASurveiller}"
+				id="userUpdateForm3">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Numéro" />
+					</f:facet>
+					<h:outputText value="#{compte.id}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="SOLDE" />
+					</f:facet>
+					<h:outputText value="#{compte.solde}">
+					<f:convertNumber pattern="#0.00" />
+					</h:outputText>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Titulaire" />
+					</f:facet>
+					<h:outputText value="#{compte.client.nom.concat(' ').concat(compte.client.prenom)}">
+					</h:outputText>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="DATE OUVERTURE" />
+					</f:facet>
+					<h:outputText value="#{compte.dateOuverture}">
+					<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</p:column>
+			</p:dataTable>
+			</p:panel>
+		
+    </ui:define>
+</ui:composition>
