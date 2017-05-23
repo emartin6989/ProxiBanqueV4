@@ -6,27 +6,10 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="title">
-        Lister clients
+        Index
     </ui:define>
 
 	<ui:define name="content">
-		<h2>Liste des clients</h2>
-		<h:form>
-			<p:dataTable value="#{conseillerBean.clients}" var="c" border="1"
-				style="width: 700">
-				<p:column sortBy="#{c.id}">
-					<f:facet name="header">ID</f:facet>
-					<h:outputText value="#{c.id}" />
-				</p:column>
-				<p:column sortBy="#{c.nom}">
-					<f:facet name="header">Nom</f:facet>
-					<h:outputText value="#{c.nom}" />
-				</p:column>
-				<p:column sortBy="#{c.prenom}">
-					<f:facet name="header">Prénom</f:facet>
-					<h:outputText value="#{c.prenom}" />
-				</p:column>
-			</p:dataTable>
-		</h:form>
-	</ui:define>
+		INDEX
+    </ui:define>
 </ui:composition>
