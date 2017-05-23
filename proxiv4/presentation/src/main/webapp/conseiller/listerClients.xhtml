@@ -44,15 +44,7 @@
 						<h:outputText value="ENTREPRISE" />
 					</f:facet>
 					<h:outputText value="#{c.nomEntreprise}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header"></f:facet>
-					<h:commandLink action="modifierClient" value="modifier">
-						<f:setPropertyActionListener value="#{client}"
-							target="#{clientBean.client}" />
-					</h:commandLink>
-				</p:column>
-				
+				</p:column>				
 			</p:dataTable>
 
 			<p:panel id="userDetailsPanelId" header="Détails Client"
@@ -84,8 +76,8 @@
 					<h:inputText value="#{clientBean.client.adresse.ville}" style="width: 100;"
 						></h:inputText>	
 				</h:panelGrid>
+				<h:commandButton type="submit" value="Modifier" action="modifierClient" />
 			</p:panel>
-
 		</h:form>
 
 	</ui:define>
