@@ -1,5 +1,6 @@
 package com.gtm.proxiv4.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -18,8 +19,6 @@ import com.gtm.proxiv4.metier.CompteCourant;
 import com.gtm.proxiv4.metier.CompteEpargne;
 import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.metier.Gerant;
-import com.gtm.proxiv4.service.exceptions.MontantNegatifException;
-import com.gtm.proxiv4.service.exceptions.SoldeInsuffisantException;
 
 @Transactional
 @Service
@@ -67,26 +66,35 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 		// TODO Auto-generated method stub
 		return compteRepo.findByClientId(client.getId());
 	}
-
+	
 	@Override
-	public void effectuerVirement(Compte compteDebiteur, Compte compteCrediteur, double montant) throws MontantNegatifException, SoldeInsuffisantException {
-		// montant doit etre positif
-		if (montant <= 0) throw new MontantNegatifException();
-		// le montant ne doit pas depasser le solde d'un CompteEpargne
-		if (compteDebiteur instanceof CompteEpargne) {
-			if (montant > compteDebiteur.getSolde()) throw new SoldeInsuffisantException();
+	public List<Compte> listerComptesEpargneClient(Client client){
+		List<Compte> comptesE= new ArrayList<Compte>();
+		List<Compte> comptes = compteRepo.findByClientId(client.getId());
+		for(Compte c: comptes){
+			if(c instanceof CompteEpargne){
+				comptesE.add(c);
+			}
 		}
-		// le montant ne pas pas depasser le solde (avec son decouvert) d'un CompteCourant
-		if (compteDebiteur instanceof CompteCourant) {
-			double decouvert = ((CompteCourant) compteDebiteur).getDecouvert();
-			if (montant > compteDebiteur.getSolde() + decouvert) throw new SoldeInsuffisantException();
+		return comptesE;
+	}
+	
+	@Override
+	public List<Compte> listerComptesCourantClient(Client client){
+		List<Compte> comptesC= new ArrayList<Compte>();
+		List<Compte> comptes = compteRepo.findByClientId(client.getId());
+		for(Compte c: comptes){
+			if(c instanceof CompteCourant){
+				comptesC.add(c);
+			}
 		}
-		
-		compteCrediteur.setSolde(compteCrediteur.getSolde() + montant);
-		compteDebiteur.setSolde(compteDebiteur.getSolde() - montant);
-		
-		//compteRepo.save(compteCrediteur);
-		//compteRepo.save(compteDebiteur);
+		return comptesC;
+	}
+	
+	@Override
+	public void effectuerVirement(Compte compteDebiteur, Compte compteCrediteur, double montant) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override

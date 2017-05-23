@@ -1,33 +1,77 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
+<!-- <!DOCTYPE html> -->
+<!-- <html xmlns="http://www.w3.org/1999/xhtml" -->
+<!-- 	xmlns:c="http://java.sun.com/jsp/jstl/core" -->
+<!-- 	xmlns:f="http://xmlns.jcp.org/jsf/core" -->
+<!-- 	xmlns:h="http://xmlns.jcp.org/jsf/html" -->
+<!-- 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" -->
+<!-- 	xmlns:p="http://primefaces.org/ui"> -->
+<!-- <h:head> -->
+<!-- 	<meta charset="UTF-8" /> -->
+<!-- 	<title><ui:insert name="title">Authentification</ui:insert></title> -->
+<!-- 	<h:outputStylesheet library="css" name="bootstrap.min.css" /> -->
+<!-- 	<h:outputStylesheet library="css" name="authentification.css" /> -->
+<!-- </h:head> -->
+<!-- <h:body> -->
+
+
+<!-- 	<div class="container-fluid"> -->
+
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 titre"> -->
+
+<!-- 				<h1 class="mytitle">PROXIBANQUE</h1> -->
+<!-- 				<h2 class="mysubtitle">La banque proche de ses clients</h2> -->
+
+<!-- 			</div> -->
+<!-- 		</div> -->
+
+<!-- 		<div class="row"> -->
+<!-- 			<div class="identification"> -->
+<!-- 				<h:panelGroup styleClass="container" layout="block"> -->
+<!-- 					<h:panelGroup styleClass="wrapper"> -->
+
+<!-- 						<form method="post" action="j_security_check" class="form-signin"> -->
+<!-- 							<h:panelGrid columns="2" cellpadding="5"> -->
+
+<!-- 								<h:outputLabel value="e-mail" required="true"/> -->
+<!-- 								<input id="email" type="text" name="j_username" /> -->
+<!-- 								<h:outputLabel value="Mot de passe" required="true" /> -->
+<!-- 								<input id="email" type="password" name="j_password" /> -->
+<!-- 							</h:panelGrid> -->
+<!-- 							<input type="submit" value="Connexion" /> -->
+<!-- 						</form> -->
+
+<!-- 					</h:panelGroup> -->
+<!-- 				</h:panelGroup> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+
+
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 footer"> -->
+<!-- 				Copyright 2017</div> -->
+<!-- 		</div> -->
+
+<!-- 	</div> -->
+
+
+<!-- </h:body> -->
+<!-- </html> -->
+
+
+<ui:composition template="/WEB-INF/authentificationTemplate.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta charset="UTF-8" />
-	<title><ui:insert name="title">Default title</ui:insert></title>
-	<h:outputStylesheet library="css" name="bootstrap.min.css" />
-	<h:outputStylesheet library="css" name="authentification.css" />
-</h:head>
-<h:body>
 
+	<ui:define name="title">
+        Authentification
+    </ui:define>
 
-	<div class="container-fluid">
-
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 titre">
-
-				<h1 class="mytitle">PROXIBANQUE</h1>
-				<h2 class="mysubtitle">La banque proche de ses clients</h2>
-
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 identification">
-
+	<ui:define name="content">
+		<div class="identification">
 				<h:panelGroup styleClass="container" layout="block">
 					<h:panelGroup styleClass="wrapper">
 
@@ -44,43 +88,7 @@
 
 					</h:panelGroup>
 				</h:panelGroup>
-
 			</div>
-		</div>
-
-
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 footer">
-				Copyright 2017</div>
-		</div>
-
-	</div>
-
-
-</h:body>
-</html>
-
-
-
-<!-- <!DOCTYPE html> -->
-<!-- <html xmlns="http://www.w3.org/1999/xhtml" -->
-<!-- 	xmlns:h="http://java.sun.com/jsf/html" -->
-<!-- 	xmlns:f="http://java.sun.com/jsf/core"> -->
-<!-- <h:head> -->
-<!-- 	<meta charset="UTF-8" /> -->
-<!-- 	<title>Espace sécurisé</title> -->
-<!-- </h:head> -->
-
-<!-- <body> -->
-<!-- 	<form method="post" action="j_security_check"> -->
-<!-- 		<h:panelGrid columns="2" cellpadding="5"> -->
-<!-- 			<h:outputLabel value="e-mail" /> -->
-<!-- 			<input type="text" name="j_username" /> -->
-<!-- 			<h:outputLabel value="Mot de passe" /> -->
-<!-- 			<input type="password" name="j_password" /> -->
-<!-- 		</h:panelGrid> -->
-<!-- 		<input type="submit" value="Connexion" /> -->
-<!-- 	</form> -->
-<!-- </body> -->
-
-<!-- </html> -->
+		
+    </ui:define>
+</ui:composition>
