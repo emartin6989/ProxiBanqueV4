@@ -102,18 +102,7 @@ public class ClientBean {
     	System.out.println("client = "+client.getPrenom());	
 }
     
-    public String ajouterClient(){
-    	client.setAdresse(adresse);
-    	client.setConseiller((Conseiller)connexionBean.employeConnecte());
-    	
-    	try {
-			serviceConseiller.ajouterClient(client);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	return "ajouterClient";
-    }
+
     
     public String modifierClient(){
     	serviceConseiller.modifierInfoClient(client);
