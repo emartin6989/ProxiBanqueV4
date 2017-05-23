@@ -33,5 +33,7 @@ public interface IServiceConseiller {
 	public List<Compte> listerComptesConseiller(Conseiller conseiller);
 	
 	public List<Compte> listerAutresComptes(long idCompte);
+
+	public Compte findCompteById(long idCompte);
 	
 }

@@ -171,4 +171,9 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 		return compteRepo.findByIdNot(idCompte);
 	}
 
+	@Override
+	public Compte findCompteById(long idCompte) {
+		return compteRepo.findById(idCompte);
+	}
+
 }

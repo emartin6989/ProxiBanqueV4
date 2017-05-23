@@ -16,4 +16,6 @@ public interface CompteRepository extends JpaRepository<Compte, Long> {
 	public List<Compte> findByIdNot(long idCompte);
 	
 	public List<Compte> findByClientIn(List<Client> clients);
+
+	public Compte findById(long idCompte);
 }

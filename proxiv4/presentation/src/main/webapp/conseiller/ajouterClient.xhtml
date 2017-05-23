@@ -14,24 +14,24 @@
 			<p:panel id="panel" header="Ajouter Client"
 				style="margin-bottom:10px;">
 
-				<p:messages id="messages" globalOnly="true" />
+				<p:messages id="messages" globalOnly="true"/>
 
 				<h:panelGrid columns="3" cellpadding="5">
 
 					<h:outputLabel for="nom" value="Nom :" />
-					<p:inputText id="nom" value="#{clientBean.client.nom}"
+					<p:inputText id="nom" value="#{addClientBean.client.nom}"
 						required="true" requiredMessage="champ obligatoire" />
 					<p:message for="nom" />
 
 					<h:outputLabel for="prenom" value="Prénom :" />
-					<p:inputText id="prenom" value="#{clientBean.client.prenom}"
+					<p:inputText id="prenom" value="#{addClientBean.client.prenom}"
 						required="true" requiredMessage="champ obligatoire" />
 					<p:message for="prenom" />
 
 
 					<p:outputLabel for="entreprise" value="Type du client :" />
 					<p:selectOneRadio id="entreprise"
-						value="#{clientBean.client.entreprise}" label="Action">
+						value="#{addClientBean.client.entreprise}" label="Action">
 						<f:selectItem itemLabel="Entreprise" itemValue="true" />
 						<f:selectItem itemLabel="Particulier" itemValue="false" />
 						<f:ajax render="nomEntreprise" />
@@ -41,20 +41,20 @@
 					<h:outputLabel id="labelNomEntreprise" for="nomEntreprise" value="Entreprise :">
 					</h:outputLabel>
 					<p:inputText id="nomEntreprise"
-						value="#{clientBean.client.nomEntreprise}"
-						disabled="#{clientBean.client.entreprise == false}"
-						required="#{clientBean.client.entreprise}"
+						value="#{addClientBean.client.nomEntreprise}"
+						disabled="#{addClientBean.client.entreprise == false}"
+						required="#{addClientBean.client.entreprise}"
 						requiredMessage="champ obligatoire" />
 					<p:message for="nomEntreprise" />
 
 
 					<h:outputLabel value="Email :" />
-					<p:inputText id="email" value="#{clientBean.client.email}"
+					<p:inputText id="email" value="#{addClientBean.client.email}"
 						required="true" requiredMessage="champ obligatoire" />
 					<p:message for="email" />
 
 					<h:outputLabel value="Téléphone :" />
-					<p:inputText id="telephone" value="#{clientBean.client.telephone}"
+					<p:inputText id="telephone" value="#{addClientBean.client.telephone}"
 						required="true" requiredMessage="champ obligatoire" />
 					<p:message for="telephone" />
 
@@ -65,25 +65,25 @@
 				<h:panelGrid columns="3" cellpadding="5">
 
 					<h:outputLabel value="Rue :" />
-					<p:inputText id="rue" value="#{clientBean.adresse.rue}"
+					<p:inputText id="rue" value="#{addClientBean.adresse.rue}"
 						required="true" requiredMessage="champ obligatoire" />
 					<p:message for="rue" />
 
 					<h:outputLabel value="Code Postal :" />
 					<p:inputText id="codePostal"
-						value="#{clientBean.adresse.codePostal}" required="true"
+						value="#{addClientBean.adresse.codePostal}" required="true"
 						requiredMessage="champ obligatoire" />
 					<p:message for="codePostal" />
 
 					<h:outputLabel value="Ville :" />
-					<p:inputText id="ville" value="#{clientBean.adresse.ville}"
+					<p:inputText id="ville" value="#{addClientBean.adresse.ville}"
 						required="true" requiredMessage="champ obligatoire" />
 					<p:message for="ville" />
 
 				</h:panelGrid>
 			</p:panel>
 
-			<p:commandButton action="#{clientBean.ajouterClient}" value="Valider"
+			<p:commandButton action="#{addClientBean.ajouterClient}" value="Valider"
 				update="panel" />
 		</h:form>
 
