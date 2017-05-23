@@ -2,6 +2,8 @@ package com.gtm.proxiv4.mbeans;
 
 import java.util.List;
 
+import javax.faces.bean.ManagedProperty;
+
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,7 @@ import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.service.IServiceConseiller;
 
 @Controller
-@SessionScope
+//@SessionScope
 public class ClientBean {
 	
 
@@ -118,11 +120,11 @@ public class ClientBean {
     	return "listerClients";
     }
     
-    public List<Compte> listerComptesCourant(){
-    	return serviceConseiller.listerComptesCourantClient(client);
-    }
-
-    public List<Compte> listerComptesEpargne(){
-    	return serviceConseiller.listerComptesEpargneClient(client);
-    }
+//    public List<Compte> listerComptesCourant(){
+//    	return serviceConseiller.listerComptesCourantClient(client);
+//    }
+//
+//    public List<Compte> listerComptesEpargne(){
+//    	return serviceConseiller.listerComptesEpargneClient(client);
+//    }
 }
