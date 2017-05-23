@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gtm.proxiv4.dao.ClientRepository;
+import com.gtm.proxiv4.dao.CompteRepository;
 import com.gtm.proxiv4.dao.ConseillerRepository;
 import com.gtm.proxiv4.dao.GerantRepository;
 import com.gtm.proxiv4.metier.Client;
+import com.gtm.proxiv4.metier.Compte;
 import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.metier.Gerant;
 
@@ -25,6 +27,8 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 	ConseillerRepository conseillerRepo;
 	@Autowired
 	ClientRepository clientRepo;
+	@Autowired
+	CompteRepository compteRepo;
 	
 	@Override
 	public List<Conseiller> listerConseiller(long idGerant) {
@@ -55,7 +59,7 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 	}
 
 	@Override
-	public List<Client> listerCompesClient(Client client) {
+	public List<Compte> listerComptesClient(Client client) {
 		// TODO Auto-generated method stub
 		return null;
 	}
