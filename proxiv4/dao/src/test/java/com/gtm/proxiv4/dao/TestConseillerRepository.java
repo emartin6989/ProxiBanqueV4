@@ -51,7 +51,6 @@ public class TestConseillerRepository {
 		assertNull(conseillerRepo.findOne(999L));
 	}
 	
-	@Ignore
 	@Test
 	@Transactional
 	public void testFindByGerantId(){
@@ -77,18 +76,17 @@ public class TestConseillerRepository {
 		
 		assertEquals(3, conseillerRepo.findByGerantId(g.getId()).size());
 	}
-	
-	@Ignore
+	//@Ignore
 	@Test
-	@Transactional
+	//@Transactional
 	public void testFindOneByEmail(){
 		Conseiller c = new Conseiller();
-		c.setId(33L);
 		c.setNom("TEST");
 		c.setEmail("email@test.fr");
 		conseillerRepo.save(c);
 		
 		assertEquals("TEST", conseillerRepo.findOneByEmail("email@test.fr").getNom());
+		conseillerRepo.delete(c);
 	}
 	
 
