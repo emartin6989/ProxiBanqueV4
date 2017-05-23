@@ -2,6 +2,7 @@ package com.gtm.proxiv4.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import com.gtm.proxiv4.dao.CompteRepository;
 import com.gtm.proxiv4.dao.ConseillerRepository;
 import com.gtm.proxiv4.dao.EmployeRepository;
 import com.gtm.proxiv4.dao.GerantRepository;
+import com.gtm.proxiv4.dao.TransactionRepository;
 import com.gtm.proxiv4.metier.Client;
 import com.gtm.proxiv4.metier.Compte;
 import com.gtm.proxiv4.metier.CompteCourant;
@@ -21,6 +23,7 @@ import com.gtm.proxiv4.metier.CompteEpargne;
 import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.metier.Employe;
 import com.gtm.proxiv4.metier.Gerant;
+import com.gtm.proxiv4.metier.Transaction;
 import com.gtm.proxiv4.service.exceptions.ConseillerNonSpecifieException;
 import com.gtm.proxiv4.service.exceptions.MontantNegatifException;
 import com.gtm.proxiv4.service.exceptions.NombreMaxDeClientException;
@@ -40,19 +43,15 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 	CompteRepository compteRepo;
 	@Autowired
 	EmployeRepository employeRepo;
-
+	@Autowired
+	TransactionRepository transactionRepo;
+	
 	final static double DECOUVERT_MAX_ENTREPRISE = 50000;
 	final static double DECOUVERT_MAX_PARTICULIER = 5000;
 
 	@Override
 	public List<Conseiller> listerConseiller(Gerant gerant) {
 		return conseillerRepo.findByGerantId(gerant.getId());
-	}
-
-	@Override
-	public Map<Client, Integer> compterTransactionsParClient(Date dateDebut) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -243,6 +242,24 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 		}
 
 		return e;
+	}
+
+	@Override
+	public Map<Client, Integer> listerNbTransactionsParClients(List<Client> clients, Date dateDebut) {
+		List<Compte> comptes = compteRepo.findByClientIn(clients);
+		List<Transaction> transactions = transactionRepo.findByDateAfterAndCompteDebiteurIn(dateDebut, comptes);
+		
+		Map<Client, Integer> liste = new HashMap<Client, Integer>();
+		int nbTransactions = 0;
+		for (Client c : clients) {
+			for (Transaction t : transactions) {
+				if(t.getCompteDebiteur().equals(c))
+					nbTransactions++;
+			}
+			liste.put(c, nbTransactions);
+			nbTransactions = 0;
+		}
+		return liste;
 	}
 
 }
