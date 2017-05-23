@@ -117,8 +117,8 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 		compteCrediteur.setSolde(compteCrediteur.getSolde() + montant);
 		compteDebiteur.setSolde(compteDebiteur.getSolde() - montant);
 
-		// compteRepo.save(compteCrediteur);
-		// compteRepo.save(compteDebiteur);
+		 compteRepo.save(compteCrediteur);
+		 compteRepo.save(compteDebiteur);
 
 	}
 
@@ -135,10 +135,13 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 			conseiller = conseillerRepo.findOne(conseiller.getId());
 
 			int nbClients = conseiller.getClients().size();
-			System.out.println("le conseiller à "+ nbClients + "clients");
 			
-			clientRepo.save(client);
+			if (nbClients >= 10){
+				throw new NombreMaxDeClientException();
+			}
 		}
+		
+		clientRepo.save(client);
 	}
 
 	@Override
@@ -159,14 +162,13 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 
 	@Override
 	public List<Compte> listerComptesConseiller(Conseiller conseiller) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Client> clients = clientRepo.findByConseillerId(conseiller.getId());
+		return compteRepo.findByClientIn(clients);
 	}
 
 	@Override
 	public List<Compte> listerAutresComptes(long idCompte) {
-		// TODO Auto-generated method stub
-		return null;
+		return compteRepo.findByIdNot(idCompte);
 	}
 
 }

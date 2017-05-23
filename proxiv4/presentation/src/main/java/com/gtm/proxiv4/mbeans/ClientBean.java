@@ -15,12 +15,16 @@ import org.springframework.web.context.annotation.SessionScope;
 import com.gtm.proxiv4.metier.Adresse;
 import com.gtm.proxiv4.metier.Client;
 import com.gtm.proxiv4.metier.Compte;
+import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.service.IServiceConseiller;
 
 @Controller
 @SessionScope
 public class ClientBean {
 	
+
+	@Autowired
+	private ConnexionBean connexionBean;
 	@Autowired
 	private IServiceConseiller serviceConseiller;
 	@Autowired
@@ -102,7 +106,14 @@ public class ClientBean {
     
     public String ajouterClient(){
     	client.setAdresse(adresse);
-    	serviceConseiller.ajouterClient(client);
+    	client.setConseiller((Conseiller)connexionBean.employeConnecte());
+    	
+    	try {
+			serviceConseiller.ajouterClient(client);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	return "ajouterClient";
     }
     

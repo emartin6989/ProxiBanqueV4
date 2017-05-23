@@ -27,10 +27,10 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 infoCon">
 				<p:panel class="panel">
-					info connexion: 
 					
-						<h:form>
-						<h:commandLink action="#{connexionBean.logout}">Disconnect</h:commandLink>
+					
+						<h:form><h:outputText value="#{connexionBean.employeConnecte().prenom.concat(' ').concat(connexionBean.employeConnecte().nom).concat(' : ')}"/>
+						<h:commandLink action="#{connexionBean.logout}" value="DECONNEXION"/>
 					</h:form>
 				</p:panel>
 			</div>
