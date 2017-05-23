@@ -11,35 +11,74 @@
 
 	<ui:define name="content">
 		<h2>Liste des clients</h2>
-		
-		<h:form>
-			<p:dataTable value="#{conseillerBean.clients}" var="c" border="1"
-				style="width: 700">
-				<p:column sortBy="#{c.id}" filterBy="#{client.id}">
-					<f:facet name="header"><h:outputText value="ID" /></f:facet>
+
+		<h:form id="formDataTable">
+			<p:dataTable var="c" value="#{conseillerBean.clients}"
+				selection="#{clientBean.client}" selectionMode="single"
+				style="width: 700" rowKey="#{not empty c.id ? c.id : c.hashCode()}"
+				first="#{c.id}" paginator="true" rows="5" editable="true">
+
+				<p:ajax event="rowSelect" update=":formDataTable:userUpdateForm"
+					listener="#{clientBean.onUserSelect}" />
+
+				<p:column sortBy="#{c.id}" filterBy="#{c.id}">
+					<f:facet name="header">
+						<h:outputText value="ID" />
+					</f:facet>
 					<h:outputText value="#{c.id}" />
 				</p:column>
-				<p:column sortBy="#{c.nom}" filterBy="#{client.nom}">
-					<f:facet name="header"><h:outputText value="NOM" /></f:facet>
+				<p:column sortBy="#{c.nom}" filterBy="#{c.nom}">
+					<f:facet name="header">
+						<h:outputText value="NOM" />
+					</f:facet>
 					<h:outputText value="#{c.nom}" />
 				</p:column>
-				<p:column sortBy="#{c.prenom}" filterBy="#{client.prenom}">
-					<f:facet name="header"><h:outputText value="PRENOM" /></f:facet>
+				<p:column sortBy="#{c.prenom}" filterBy="#{c.prenom}">
+					<f:facet name="header">
+						<h:outputText value="PRENOM" />
+					</f:facet>
 					<h:outputText value="#{c.prenom}" />
 				</p:column>
-				<p:column sortBy="#{c.nomEntreprise}" filterBy="#{client.nomEntreprise}">
-					<f:facet name="header"><h:outputText value="ENTREPRISE" /></f:facet>
+				<p:column sortBy="#{c.nomEntreprise}" filterBy="#{c.nomEntreprise}">
+					<f:facet name="header">
+						<h:outputText value="ENTREPRISE" />
+					</f:facet>
 					<h:outputText value="#{c.nomEntreprise}" />
 				</p:column>
-				<p:column>
-					<f:facet name="header"></f:facet>
-					<h:commandLink action="modifierClient" value="modifier">
-						<f:setPropertyActionListener value="#{client}"
-							target="#{clientBean.client}" />
-					</h:commandLink>
-				</p:column>
 			</p:dataTable>
+
+			<p:panel id="userDetailsPanelId" header="Détails Client"
+				style="width: 700;" widgetVar="oneUser">
+				<h:panelGrid columns="2" cellpadding="2" id="userUpdateForm"
+					border="0">
+					<h:outputLabel for="#{clientBean.client.nom}" value="Nom" />
+					<h:inputText value="#{clientBean.client.nom}" style="width: 100;"></h:inputText>
+					<h:outputLabel for="#{clientBean.client.prenom}" value="Prenom" />
+					<h:inputText value="#{clientBean.client.prenom}"
+						style="width: 100;"></h:inputText>
+					<h:outputLabel for="#{clientBean.client.nomEntreprise}"
+						value="Entreprise" />
+					<h:inputText value="#{clientBean.client.nomEntreprise}"
+						style="width: 100;"></h:inputText>
+					<h:outputLabel for="#{clientBean.client.email}" value="Email" />
+					<h:inputText value="#{clientBean.client.email}" style="width: 100;"
+						></h:inputText>
+					<h:outputLabel for="#{clientBean.client.telephone}" value="Telephone" />
+					<h:inputText value="#{clientBean.client.telephone}" style="width: 100;"
+						></h:inputText>
+					<h:outputLabel for="#{clientBean.client.adresse.rue}" value="Rue" />
+					<h:inputText value="#{clientBean.client.adresse.rue}" style="width: 100;"
+						></h:inputText>
+					<h:outputLabel for="#{clientBean.client.adresse.codePostal}" value="Code postal" />
+					<h:inputText value="#{clientBean.client.adresse.codePostal}" style="width: 100;"
+						></h:inputText>
+					<h:outputLabel for="#{clientBean.client.adresse.ville}" value="Ville" />
+					<h:inputText value="#{clientBean.client.adresse.ville}" style="width: 100;"
+						></h:inputText>	
+				</h:panelGrid>
+			</p:panel>
+
 		</h:form>
-			
+
 	</ui:define>
 </ui:composition>
