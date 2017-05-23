@@ -22,7 +22,7 @@ public interface IServiceConseiller {
 
 	public void ajouterClient(Client client) throws ConseillerNonSpecifieException, NombreMaxDeClientException;
 
-	public List<Client> listerClientsDecouvert(Conseiller conseiller);
+	public List<Compte> listerComptesDecouvert(Conseiller conseiller);
 	
 	public Conseiller findConseillerByEmail(String email);
 	
