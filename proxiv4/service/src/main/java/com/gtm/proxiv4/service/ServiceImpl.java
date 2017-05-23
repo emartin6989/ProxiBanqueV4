@@ -12,12 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gtm.proxiv4.dao.ClientRepository;
 import com.gtm.proxiv4.dao.CompteRepository;
 import com.gtm.proxiv4.dao.ConseillerRepository;
+import com.gtm.proxiv4.dao.EmployeRepository;
 import com.gtm.proxiv4.dao.GerantRepository;
 import com.gtm.proxiv4.metier.Client;
 import com.gtm.proxiv4.metier.Compte;
 import com.gtm.proxiv4.metier.CompteCourant;
 import com.gtm.proxiv4.metier.CompteEpargne;
 import com.gtm.proxiv4.metier.Conseiller;
+import com.gtm.proxiv4.metier.Employe;
 import com.gtm.proxiv4.metier.Gerant;
 import com.gtm.proxiv4.service.exceptions.ConseillerNonSpecifieException;
 import com.gtm.proxiv4.service.exceptions.MontantNegatifException;
@@ -26,7 +28,7 @@ import com.gtm.proxiv4.service.exceptions.SoldeInsuffisantException;
 
 @Transactional
 @Service
-public class ServiceImpl implements IServiceConseiller, IServiceGerant {
+public class ServiceImpl implements IServiceConseiller, IServiceGerant, IServiceEmploye {
 
 	@Autowired
 	GerantRepository gerantRepo;
@@ -36,7 +38,12 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 	ClientRepository clientRepo;
 	@Autowired
 	CompteRepository compteRepo;
+	@Autowired
+	EmployeRepository employeRepo;
 
+	final static double DECOUVERT_MAX_ENTREPRISE = 50000;
+	final static double DECOUVERT_MAX_PARTICULIER = 5000;
+	
 	@Override
 	public List<Conseiller> listerConseiller(Gerant gerant) {
 		return conseillerRepo.findByGerantId(gerant.getId());
@@ -49,7 +56,7 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 	}
 
 	@Override
-	public List<Client> listerClientsDecouvert(Gerant gerant) {
+	public List<Compte> listerComptesDecouvert(Gerant gerant) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -126,13 +133,17 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 	public void ajouterClient(Client client) throws ConseillerNonSpecifieException, NombreMaxDeClientException {
 
 		Conseiller conseiller = client.getConseiller();
+		
 
 		// on verifie que le conseiller existe
 		if (conseiller == null) {
 			throw new ConseillerNonSpecifieException();
 		} else {
+			
+			System.out.println(conseiller.getClients().size());
+			
 			//on recupère le conseiller de la base
-			conseiller = conseillerRepo.findOne(conseiller.getId());
+			//conseiller = conseillerRepo.findOne(conseiller.getId());
 
 			int nbClients = conseiller.getClients().size();
 			
@@ -145,9 +156,27 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 	}
 
 	@Override
-	public List<Client> listerClientsDecouvert(Conseiller conseiller) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Compte> listerComptesDecouvert(Conseiller conseiller) {
+	
+		//préparation de la réponse
+		List<Compte> comptesADecouvert = new ArrayList<Compte>();
+		
+		//recherche de tous les clients du conseiller
+		for(Client client : conseiller.getClients()){
+			
+			//détermination du seuil d'alerte en fonction du client
+			double seuilAlerte = client.isEntreprise() ? DECOUVERT_MAX_ENTREPRISE :DECOUVERT_MAX_PARTICULIER;
+			
+			//pour chaque compte du client on compare son solde au seuil d'alerte
+			for (Compte compte : client.getComptes()){
+
+				if(compte.getSolde()<=seuilAlerte){
+					comptesADecouvert.add(compte);
+				}
+			}			
+		}		
+		
+		return comptesADecouvert;
 	}
 
 	@Override
@@ -174,6 +203,21 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 	@Override
 	public Compte findCompteById(long idCompte) {
 		return compteRepo.findById(idCompte);
+	}
+	
+	@Override
+	public Employe findEmployeByEmail(String email) {
+
+		Employe e = employeRepo.findOneByEmail(email);
+
+		if (e instanceof Conseiller) {
+			e = (Conseiller) e;
+		}
+		if (e instanceof Gerant) {
+			e = (Gerant) e;
+		}
+
+		return e;
 	}
 
 }

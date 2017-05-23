@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.gtm.proxiv4.metier.Client;
+import com.gtm.proxiv4.metier.Compte;
 import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.metier.Gerant;
 
@@ -14,7 +15,7 @@ public interface IServiceGerant {
 	
 	public Map<Client, Integer> compterTransactionsParClient(Date dateDebut);
 
-	public List<Client> listerClientsDecouvert(Gerant gerant);
+	public List<Compte> listerComptesDecouvert(Gerant gerant);
 	
 	public Gerant findGerantByEmail(String email);
 }
