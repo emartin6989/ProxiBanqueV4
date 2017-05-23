@@ -1,5 +1,7 @@
 package com.gtm.proxiv4.mbeans;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedProperty;
 
 import org.primefaces.event.SelectEvent;
@@ -10,6 +12,7 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import com.gtm.proxiv4.metier.Adresse;
 import com.gtm.proxiv4.metier.Client;
+import com.gtm.proxiv4.metier.Compte;
 import com.gtm.proxiv4.service.IServiceConseiller;
 
 @Controller
@@ -88,5 +91,12 @@ public class ClientBean {
     	serviceConseiller.modifierInfoClient(client);
     	return "listerClients";
     }
+    
+    public List<Compte> listerComptesCourant(){
+    	return serviceConseiller.listerComptesCourantClient(client);
+    }
 
+    public List<Compte> listerComptesEpargne(){
+    	return serviceConseiller.listerComptesEpargneClient(client);
+    }
 }
