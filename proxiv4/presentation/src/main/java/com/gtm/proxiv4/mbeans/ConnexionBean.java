@@ -32,7 +32,7 @@ public class ConnexionBean {
 		HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
 		session.invalidate();
 		
-		return "/protected/index.xhtml?faces-redirect=true";
+		return "/index.xhtml?faces-redirect=true";
 	}
 
 }
