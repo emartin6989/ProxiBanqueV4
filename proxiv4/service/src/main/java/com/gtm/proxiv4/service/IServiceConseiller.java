@@ -5,6 +5,8 @@ import java.util.List;
 import com.gtm.proxiv4.metier.Client;
 import com.gtm.proxiv4.metier.Compte;
 import com.gtm.proxiv4.metier.Conseiller;
+import com.gtm.proxiv4.service.exceptions.MontantNegatifException;
+import com.gtm.proxiv4.service.exceptions.SoldeInsuffisantException;
 
 public interface IServiceConseiller {
 
