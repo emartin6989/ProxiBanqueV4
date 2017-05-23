@@ -27,10 +27,16 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 infoCon">
 				<p:panel class="panel">
-					
-					
-						<h:form><h:outputText value="#{connexionBean.employeConnecte().prenom.concat(' ').concat(connexionBean.employeConnecte().nom).concat(' : ')}"/>
-						<h:commandLink action="#{connexionBean.logout}" value="DECONNEXION"/>
+					<h:form>
+						<h:outputText
+							value="#{connexionBean.employeConnecte().prenom.concat(' ').concat(connexionBean.employeConnecte().nom).concat(' : ')}" />
+						connecté en tant que 
+						<h:outputText value="Conseiller"
+							rendered="#{request.isUserInRole('CONSEILLER')}" />
+						<h:outputText value="Gérant"
+							rendered="#{request.isUserInRole('GERANT')}" />
+						<h:commandLink action="#{connexionBean.logout}"
+							value="DECONNEXION" />
 					</h:form>
 				</p:panel>
 			</div>
@@ -39,7 +45,20 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 				<!-- MENU -->
-				<div class="panel">MENU</div>
+				<div class="panel">
+					<ul class="nav nav-pills nav-stacked">
+					<ui:fragment rendered="#{request.isUserInRole('CONSEILLER')}">
+						<li class="#{view.viewId eq '/index.xhtml' ? 'active' : ''}"><h:link value="Lister clients" outcome="/index.xhtml"/></li>
+						<li class="#{view.viewId eq '/conseiller/virement.xhtml' ? 'active' : ''}"><h:link value="Effectuer virement" outcome="/conseiller/virement.xhtml"/></li>
+						<li class="#{view.viewId eq '/conseiller/ajouterClient.xhtml' ? 'active' : ''}"><h:link value="Ajouter client" outcome="/conseiller/ajouterClient.xhtml"/></li>
+						<li class="#{view.viewId eq '/conseiller/audit.xhtml' ? 'active' : ''}"><h:link value="Auditer comptes" outcome="/conseiller/audit.xhtml" /></li>
+					</ui:fragment>
+					<ui:fragment rendered="#{request.isUserInRole('GERANT')}">
+						<li class="#{view.viewId eq '/index.xhtml' ? 'active' : ''}"><h:link value="Lister conseillers" outcome="/index.xhtml"/></li>
+						<li class="#{view.viewId eq '/audit/audit.xhtml' ? 'active' : ''}"><h:link value="Auditer agence" outcome="/gerant/audit.xhtml" /></li>
+					</ui:fragment>
+					</ul>
+				</div>
 			</div>
 
 			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 content">
