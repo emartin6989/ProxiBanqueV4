@@ -56,7 +56,5 @@ public class ConseillerBean implements Serializable {
 		this.clients = clients;
 	}
 
-	public List<Compte> getComptes() {
-		return serviceConseiller.listerComptesClient(client);
-	}
+
 }
