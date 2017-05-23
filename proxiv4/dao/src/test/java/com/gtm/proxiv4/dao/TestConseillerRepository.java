@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.metier.Gerant;
  
-@ContextConfiguration(locations = "classpath:ApplicationContext.xml")
+@ContextConfiguration(locations = "classpath:/applicationContext.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TestConseillerRepository {
 	

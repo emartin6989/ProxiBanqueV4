@@ -3,8 +3,8 @@ package com.gtm.proxiv4.service;
 import java.util.List;
 
 import com.gtm.proxiv4.metier.Client;
+import com.gtm.proxiv4.metier.Compte;
 import com.gtm.proxiv4.metier.Conseiller;
-import com.gtm.proxiv4.metier.Gerant;
 
 public interface IServiceConseiller {
 
@@ -12,7 +12,7 @@ public interface IServiceConseiller {
 
 	public void modifierInfoClient(Client client);
 
-	public List<Client> listerCompesClient(Client client);
+	public List<Compte> listerComptesClient(Client client);
 
 	public void effectuerVirement(long idCompteDebiteur, long idCompteCrediteur, double montant);
 
@@ -21,4 +21,6 @@ public interface IServiceConseiller {
 	public List<Client> listerClientsDecouvert(long idConseiller);
 	
 	public Conseiller findConseillerByEmail(String email);
+	
+	
 }
