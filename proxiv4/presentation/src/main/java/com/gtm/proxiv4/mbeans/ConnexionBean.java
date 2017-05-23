@@ -1,6 +1,8 @@
 package com.gtm.proxiv4.mbeans;
 
 
+import java.io.Serializable;
+
 import javax.annotation.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
@@ -12,9 +14,10 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 //@ManagedBean
-public class ConnexionBean {
+public class ConnexionBean implements Serializable{
 	
-	
+	private static final long serialVersionUID = 1L;
+
 	public String logout(){
 		
 //		FacesContext facesContext = FacesContext.getCurrentInstance();
