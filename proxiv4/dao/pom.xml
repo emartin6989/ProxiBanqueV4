@@ -59,6 +59,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.6</version>
 		</dependency>
-
+		<!-- pour encryption du mot de passe (org.apache.catalina.realm) -->
+		<dependency>
+		    <groupId>org.apache.tomcat</groupId>
+		    <artifactId>tomcat-catalina</artifactId>
+		    <version>9.0.0.M21</version>
+		</dependency>
+		
 	</dependencies>
 </project>
