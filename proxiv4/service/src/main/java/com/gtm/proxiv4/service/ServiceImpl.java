@@ -19,7 +19,9 @@ import com.gtm.proxiv4.metier.CompteCourant;
 import com.gtm.proxiv4.metier.CompteEpargne;
 import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.metier.Gerant;
+import com.gtm.proxiv4.service.exceptions.ConseillerNonSpecifieException;
 import com.gtm.proxiv4.service.exceptions.MontantNegatifException;
+import com.gtm.proxiv4.service.exceptions.NombreMaxDeClientException;
 import com.gtm.proxiv4.service.exceptions.SoldeInsuffisantException;
 
 @Transactional
@@ -34,7 +36,7 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 	ClientRepository clientRepo;
 	@Autowired
 	CompteRepository compteRepo;
-	
+
 	@Override
 	public List<Conseiller> listerConseiller(Gerant gerant) {
 		return conseillerRepo.findByGerantId(gerant.getId());
@@ -68,56 +70,75 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 		// TODO Auto-generated method stub
 		return compteRepo.findByClientId(client.getId());
 	}
-	
+
 	@Override
-	public List<Compte> listerComptesEpargneClient(Client client){
-		List<Compte> comptesE= new ArrayList<Compte>();
+	public List<Compte> listerComptesEpargneClient(Client client) {
+		List<Compte> comptesE = new ArrayList<Compte>();
 		List<Compte> comptes = compteRepo.findByClientId(client.getId());
-		for(Compte c: comptes){
-			if(c instanceof CompteEpargne){
+		for (Compte c : comptes) {
+			if (c instanceof CompteEpargne) {
 				comptesE.add(c);
 			}
 		}
 		return comptesE;
 	}
-	
+
 	@Override
-	public List<Compte> listerComptesCourantClient(Client client){
-		List<Compte> comptesC= new ArrayList<Compte>();
+	public List<Compte> listerComptesCourantClient(Client client) {
+		List<Compte> comptesC = new ArrayList<Compte>();
 		List<Compte> comptes = compteRepo.findByClientId(client.getId());
-		for(Compte c: comptes){
-			if(c instanceof CompteCourant){
+		for (Compte c : comptes) {
+			if (c instanceof CompteCourant) {
 				comptesC.add(c);
 			}
 		}
 		return comptesC;
 	}
-	
+
 	@Override
-	public void effectuerVirement(Compte compteDebiteur, Compte compteCrediteur, double montant) throws SoldeInsuffisantException, MontantNegatifException {
+	public void effectuerVirement(Compte compteDebiteur, Compte compteCrediteur, double montant)
+			throws SoldeInsuffisantException, MontantNegatifException {
 		// montant doit etre positif
-		if (montant <= 0) throw new MontantNegatifException();
+		if (montant <= 0)
+			throw new MontantNegatifException();
 		// le montant ne doit pas depasser le solde d'un CompteEpargne
 		if (compteDebiteur instanceof CompteEpargne) {
-			if (montant > compteDebiteur.getSolde()) throw new SoldeInsuffisantException();
+			if (montant > compteDebiteur.getSolde())
+				throw new SoldeInsuffisantException();
 		}
-		// le montant ne pas pas depasser le solde (avec son decouvert) d'un CompteCourant
+		// le montant ne pas pas depasser le solde (avec son decouvert) d'un
+		// CompteCourant
 		if (compteDebiteur instanceof CompteCourant) {
 			double decouvert = ((CompteCourant) compteDebiteur).getDecouvert();
-			if (montant > compteDebiteur.getSolde() + decouvert) throw new SoldeInsuffisantException();
+			if (montant > compteDebiteur.getSolde() + decouvert)
+				throw new SoldeInsuffisantException();
 		}
-		
+
 		compteCrediteur.setSolde(compteCrediteur.getSolde() + montant);
 		compteDebiteur.setSolde(compteDebiteur.getSolde() - montant);
-		
-		//compteRepo.save(compteCrediteur);
-		//compteRepo.save(compteDebiteur);
+
+		// compteRepo.save(compteCrediteur);
+		// compteRepo.save(compteDebiteur);
 
 	}
 
 	@Override
-	public void ajouterClient(Client client) {
-		clientRepo.save(client); 
+	public void ajouterClient(Client client) throws ConseillerNonSpecifieException, NombreMaxDeClientException {
+
+		Conseiller conseiller = client.getConseiller();
+
+		// on verifie que le conseiller existe
+		if (conseiller == null) {
+			throw new ConseillerNonSpecifieException();
+		} else {
+			//on recupère le conseiller de la base
+			conseiller = conseillerRepo.findOne(conseiller.getId());
+
+			int nbClients = conseiller.getClients().size();
+			System.out.println("le conseiller à "+ nbClients + "clients");
+			
+			clientRepo.save(client);
+		}
 	}
 
 	@Override
@@ -133,7 +154,7 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 
 	@Override
 	public Conseiller findConseillerByEmail(String email) {
-	    return conseillerRepo.findOneByEmail(email);
+		return conseillerRepo.findOneByEmail(email);
 	}
 
 	@Override

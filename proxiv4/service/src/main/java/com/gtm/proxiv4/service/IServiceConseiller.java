@@ -5,7 +5,9 @@ import java.util.List;
 import com.gtm.proxiv4.metier.Client;
 import com.gtm.proxiv4.metier.Compte;
 import com.gtm.proxiv4.metier.Conseiller;
+import com.gtm.proxiv4.service.exceptions.ConseillerNonSpecifieException;
 import com.gtm.proxiv4.service.exceptions.MontantNegatifException;
+import com.gtm.proxiv4.service.exceptions.NombreMaxDeClientException;
 import com.gtm.proxiv4.service.exceptions.SoldeInsuffisantException;
 
 public interface IServiceConseiller {
@@ -18,7 +20,7 @@ public interface IServiceConseiller {
 
 	public void effectuerVirement(Compte compteDebiteur, Compte compteCrediteur, double montant) throws MontantNegatifException, SoldeInsuffisantException;
 
-	public void ajouterClient(Client client);
+	public void ajouterClient(Client client) throws ConseillerNonSpecifieException, NombreMaxDeClientException;
 
 	public List<Client> listerClientsDecouvert(Conseiller conseiller);
 	
