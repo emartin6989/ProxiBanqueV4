@@ -68,8 +68,7 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 
 	@Override
 	public void ajouterClient(Client client) {
-		// TODO Auto-generated method stub
-
+		clientRepo.save(client); 
 	}
 
 	@Override

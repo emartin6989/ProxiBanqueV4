@@ -1,6 +1,7 @@
 package com.gtm.proxiv4.mbeans;
 
 import javax.faces.bean.ManagedProperty;
+
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class ClientBean {
 	@Autowired
 	private	Adresse adresse;
 	
-	@ManagedProperty(value="#{conseillerBean}")
+	@Autowired
     private ConseillerBean conseillerBean;
 
 	public IServiceConseiller getServiceConseiller() {
@@ -34,8 +35,10 @@ public class ClientBean {
 		this.serviceConseiller = serviceConseiller;
 	}
 
+
+
 	public Adresse getAdresse() {
-		return client.getAdresse();
+		return adresse;
 	}
 
 	public void setAdresse(Adresse adresse) {
@@ -43,9 +46,9 @@ public class ClientBean {
 	}
 
 	public Client getClient() {
-		if(client == null){
-            client = new Client();
-        }
+		//if(client == null){
+          //  client = new Client();
+        //}
         return client;
 	}
 
@@ -74,5 +77,11 @@ public class ClientBean {
     	client =  (Client)event.getObject();
     	System.out.println("client = "+client.getPrenom());	
 }
+    
+    public String ajouterClient(){
+    	client.setAdresse(adresse);
+    	serviceConseiller.ajouterClient(client);
+    	return "ajouterClient";
+    }
 
 }
