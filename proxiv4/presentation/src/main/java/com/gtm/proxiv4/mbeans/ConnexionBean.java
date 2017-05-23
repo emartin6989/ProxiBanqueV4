@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 
 @Controller
-@ManagedBean
+//@ManagedBean
 public class ConnexionBean {
 	
 	

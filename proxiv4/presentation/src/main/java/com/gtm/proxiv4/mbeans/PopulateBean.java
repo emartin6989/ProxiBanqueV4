@@ -1,10 +1,12 @@
 package com.gtm.proxiv4.mbeans;
 
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import org.apache.catalina.realm.RealmBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.context.annotation.RequestScope;
 
 import com.gtm.proxiv4.dao.ConseillerRepository;
 import com.gtm.proxiv4.dao.GerantRepository;
@@ -14,7 +16,9 @@ import com.gtm.proxiv4.metier.Gerant;
 import com.gtm.proxiv4.metier.Role;
 
 @Controller
-@RequestScoped
+@RequestScope
+//@ManagedBean
+//@RequestScoped
 public class PopulateBean {
 	
 	@Autowired
