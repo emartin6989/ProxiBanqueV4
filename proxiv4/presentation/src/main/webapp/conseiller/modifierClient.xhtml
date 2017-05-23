@@ -15,31 +15,39 @@
 		<h:form>
 			<p:panel id="panel" header="Modifier Client"
 				style="margin-bottom:10px;">
-				<p:messages id="messages" />
-				<h:panelGrid columns="2" cellpadding="5">
+				<p:messages id="messages" globalOnly="true"/>
+				<h:panelGrid columns="3" cellpadding="5">
 					<h:outputLabel for="nom" value="Nom :" />
-					<p:inputText id="nom" value="#{clientBean.client.nom}" />
+					<p:inputText id="nom" value="#{clientBean.client.nom}" required="true" requiredMessage="champ obligatoire"/>
+					<p:message for="nom" />
 					<h:outputLabel for="prenom" value="Prénom :" />
-					<p:inputText id="prenom" value="#{clientBean.client.prenom}" />
+					<p:inputText id="prenom" value="#{clientBean.client.prenom}" required="true" requiredMessage="champ obligatoire"/>
+					<p:message for="prenom" />
 					<h:outputLabel for="nomEntreprise" value="Entreprise :" />
 					<p:inputText id="nomEntreprise"
-						value="#{clientBean.client.nomEntreprise}"/>
+						value="#{clientBean.client.nomEntreprise}" />
+					<p:message for="nomEntreprise" />
 					<h:outputLabel value="Email :" />
-					<p:inputText id="email" value="#{clientBean.client.email}" />
+					<p:inputText id="email" value="#{clientBean.client.email}" required="true" requiredMessage="champ obligatoire"/>
+					<p:message for="email" />
 					<h:outputLabel value="Téléphone :" />
-					<p:inputText id="telephone" value="#{clientBean.client.telephone}" />
+					<p:inputText id="telephone" value="#{clientBean.client.telephone}" required="true" requiredMessage="champ obligatoire"/>
+					<p:message for="telephone" />
 				</h:panelGrid>
 				<h4>Adresse</h4>
-				<h:panelGrid columns="2" cellpadding="5">
+				<h:panelGrid columns="3" cellpadding="5">
 					<h:outputLabel for="#{clientBean.client.adresse.rue}" value="Rue :" />
-					<h:inputText value="#{clientBean.client.adresse.rue}" style="width: 100;"
-						></h:inputText>
+					<h:inputText id="rue" value="#{clientBean.client.adresse.rue}" style="width: 100;"
+						required="true" requiredMessage="champ obligatoire"></h:inputText>
+					<p:message for="rue" />
 					<h:outputLabel for="#{clientBean.client.adresse.codePostal}" value="Code postal :" />
-					<h:inputText value="#{clientBean.client.adresse.codePostal}" style="width: 100;"
-						></h:inputText>
-					<h:outputLabel for="#{clientBean.client.adresse.ville}" value="Ville :" />
+					<h:inputText id="codePostal" value="#{clientBean.client.adresse.codePostal}" style="width: 100;"
+						required="true" requiredMessage="champ obligatoire"></h:inputText>
+					<p:message for="codePostal" />
+					<h:outputLabel id="ville" for="#{clientBean.client.adresse.ville}" value="Ville :" />
 					<h:inputText value="#{clientBean.client.adresse.ville}" style="width: 100;"
-						></h:inputText>	
+						required="true" requiredMessage="champ obligatoire"></h:inputText>
+					<p:message for="ville" />	
 				</h:panelGrid>
 			</p:panel>
 

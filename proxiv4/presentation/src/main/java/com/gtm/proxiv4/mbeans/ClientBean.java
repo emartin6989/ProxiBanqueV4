@@ -2,7 +2,9 @@ package com.gtm.proxiv4.mbeans;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
@@ -20,9 +22,6 @@ import com.gtm.proxiv4.service.IServiceConseiller;
 //@SessionScope
 public class ClientBean {
 	
-
-	@Autowired
-	private ConnexionBean connexionBean;
 	@Autowired
 	private IServiceConseiller serviceConseiller;
 	@Autowired
@@ -102,18 +101,12 @@ public class ClientBean {
     	System.out.println("client = "+client.getPrenom());	
 }
     
-
-    
     public String modifierClient(){
-    	serviceConseiller.modifierInfoClient(client);
-    	return "listerClients";
+    	try{ serviceConseiller.modifierInfoClient(client);
+    	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"Client modifié", null);
+		FacesContext.getCurrentInstance().addMessage(null, message);}
+    	finally {return "modifierClients";}
     }
     
-//    public List<Compte> listerComptesCourant(){
-//    	return serviceConseiller.listerComptesCourantClient(client);
-//    }
-//
-//    public List<Compte> listerComptesEpargne(){
-//    	return serviceConseiller.listerComptesEpargneClient(client);
-//    }
 }
