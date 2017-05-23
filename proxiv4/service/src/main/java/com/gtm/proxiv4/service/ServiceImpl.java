@@ -57,8 +57,31 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 
 	@Override
 	public List<Compte> listerComptesDecouvert(Gerant gerant) {
-		// TODO Auto-generated method stub
-		return null;
+
+		// préparation de la réponse
+		List<Compte> comptesADecouvert = new ArrayList<Compte>();
+
+		//recherche de tous les conseillers du gérant
+		for (Conseiller conseiller : gerant.getConseillers()) {
+			// recherche de tous les clients du conseiller
+			for (Client client : conseiller.getClients()) {
+
+				// détermination du seuil d'alerte en fonction du client (- le
+				// decouvert max pour le type de client)
+				double seuilAlerte = client.isEntreprise() ? -DECOUVERT_MAX_ENTREPRISE : -DECOUVERT_MAX_PARTICULIER;
+
+				// pour chaque compte du client on compare son solde au seuil
+				// d'alerte
+				for (Compte compte : client.getComptes()) {
+
+					if (compte.getSolde() <= seuilAlerte) {
+
+						comptesADecouvert.add(compte);
+					}
+				}
+			}
+		}
+		return comptesADecouvert;
 	}
 
 	@Override
@@ -163,7 +186,8 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 		// recherche de tous les clients du conseiller
 		for (Client client : conseiller.getClients()) {
 
-			// détermination du seuil d'alerte en fonction du client (- le decouvert max pour le type de client)
+			// détermination du seuil d'alerte en fonction du client (- le
+			// decouvert max pour le type de client)
 			double seuilAlerte = client.isEntreprise() ? -DECOUVERT_MAX_ENTREPRISE : -DECOUVERT_MAX_PARTICULIER;
 
 			// pour chaque compte du client on compare son solde au seuil
