@@ -2,7 +2,7 @@
 
 body {
 	color: black;
-	background-color: white;
+	background-color: aqua;
 	background-image: url("#{resource['img:background.jpg']}");
 	background-repeat: no-repeat;
 	background-position: center;
@@ -52,8 +52,12 @@ td {
 	text-align: center;
 }
 
-.noBorder{
+.noBorder {
 	border: none;
+}
+
+.rightAlign {
+	float: right;
 }
 
 .connection {
@@ -70,8 +74,8 @@ td {
 	color: black;
 	font-size: 25px;
 	font-style: normal;
-	font-variant : normal;
-	font-weight : 600;
+	font-variant: normal;
+	font-weight: 600;
 	background: none;
 	border: none;
 	font-variant: normal;
