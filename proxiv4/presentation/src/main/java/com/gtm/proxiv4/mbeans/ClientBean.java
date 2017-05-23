@@ -16,7 +16,7 @@ import com.gtm.proxiv4.metier.Compte;
 import com.gtm.proxiv4.service.IServiceConseiller;
 
 @Controller
-@SessionScope
+//@SessionScope
 public class ClientBean {
 	
 	@Autowired
@@ -25,6 +25,10 @@ public class ClientBean {
 	private Client client;
 	@Autowired
 	private	Adresse adresse;
+	@Autowired
+	private	List<Compte> comptesCourants;
+	@Autowired
+	private	List<Compte> comptesEpargnes;
 	
 	@Autowired
     private ConseillerBean conseillerBean;
@@ -62,6 +66,22 @@ public class ClientBean {
 
 	public void setConseillerBean(ConseillerBean conseillerBean) {
 		this.conseillerBean = conseillerBean;
+	}
+
+	public List<Compte> getComptesCourants() {
+		return serviceConseiller.listerComptesCourantClient(client);
+	}
+
+	public void setComptesCourants(List<Compte> comptesCourants) {
+		this.comptesCourants = comptesCourants;
+	}
+
+	public List<Compte> getComptesEpargnes() {
+		return serviceConseiller.listerComptesEpargneClient(client);
+	}
+
+	public void setComptesEpargnes(List<Compte> comptesEpargnes) {
+		this.comptesEpargnes = comptesEpargnes;
 	}
 
 	public void onUserSelect(SelectEvent event){ 

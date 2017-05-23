@@ -18,7 +18,8 @@
 				style="width: 700" rowKey="#{not empty c.id ? c.id : c.hashCode()}"
 				first="#{c.id}" paginator="true" rows="5" editable="true">
 
-				<p:ajax event="rowSelect" update=":formDataTable:userUpdateForm"
+				<p:ajax event="rowSelect"
+					update=":formDataTable:userUpdateForm, :formDataTable:userUpdateForm2, :formDataTable:userUpdateForm3"
 					listener="#{clientBean.onUserSelect}" />
 
 				<p:column sortBy="#{c.id}" filterBy="#{c.id}">
@@ -44,7 +45,7 @@
 						<h:outputText value="ENTREPRISE" />
 					</f:facet>
 					<h:outputText value="#{c.nomEntreprise}" />
-				</p:column>				
+				</p:column>
 			</p:dataTable>
 
 			<p:panel id="userDetailsPanelId" header="Détails Client"
@@ -52,32 +53,103 @@
 				<h:panelGrid columns="2" cellpadding="2" id="userUpdateForm"
 					border="0">
 					<h:outputLabel for="#{clientBean.client.nom}" value="Nom" />
-					<h:inputText value="#{clientBean.client.nom}" style="width: 100;"></h:inputText>
+					<h:outputText value="#{clientBean.client.nom}" style="width: 100;"></h:outputText>
 					<h:outputLabel for="#{clientBean.client.prenom}" value="Prenom" />
-					<h:inputText value="#{clientBean.client.prenom}"
-						style="width: 100;"></h:inputText>
+					<h:outputText value="#{clientBean.client.prenom}"
+						style="width: 100;"></h:outputText>
 					<h:outputLabel for="#{clientBean.client.nomEntreprise}"
 						value="Entreprise" />
-					<h:inputText value="#{clientBean.client.nomEntreprise}"
-						style="width: 100;"></h:inputText>
+					<h:outputText value="#{clientBean.client.nomEntreprise}"
+						style="width: 100;"></h:outputText>
 					<h:outputLabel for="#{clientBean.client.email}" value="Email" />
-					<h:inputText value="#{clientBean.client.email}" style="width: 100;"
-						></h:inputText>
-					<h:outputLabel for="#{clientBean.client.telephone}" value="Telephone" />
-					<h:inputText value="#{clientBean.client.telephone}" style="width: 100;"
-						></h:inputText>
+					<h:outputText value="#{clientBean.client.email}"
+						style="width: 100;"></h:outputText>
+					<h:outputLabel for="#{clientBean.client.telephone}"
+						value="Telephone" />
+					<h:outputText value="#{clientBean.client.telephone}"
+						style="width: 100;"></h:outputText>
 					<h:outputLabel for="#{clientBean.client.adresse.rue}" value="Rue" />
-					<h:inputText value="#{clientBean.client.adresse.rue}" style="width: 100;"
-						></h:inputText>
-					<h:outputLabel for="#{clientBean.client.adresse.codePostal}" value="Code postal" />
-					<h:inputText value="#{clientBean.client.adresse.codePostal}" style="width: 100;"
-						></h:inputText>
-					<h:outputLabel for="#{clientBean.client.adresse.ville}" value="Ville" />
-					<h:inputText value="#{clientBean.client.adresse.ville}" style="width: 100;"
-						></h:inputText>	
+					<h:outputText value="#{clientBean.client.adresse.rue}"
+						style="width: 100;"></h:outputText>
+					<h:outputLabel for="#{clientBean.client.adresse.codePostal}"
+						value="Code postal" />
+					<h:outputText value="#{clientBean.client.adresse.codePostal}"
+						style="width: 100;"></h:outputText>
+					<h:outputLabel for="#{clientBean.client.adresse.ville}"
+						value="Ville" />
+					<h:outputText value="#{clientBean.client.adresse.ville}"
+						style="width: 100;"></h:outputText>
 				</h:panelGrid>
-				<h:commandButton type="submit" value="Modifier" action="modifierClient" />
+				<h:commandButton type="submit" value="Modifier"
+					action="modifierClient" />
 			</p:panel>
+
+			<p:panel id="userDetailsPanelId2" header="Comptes courants"
+				style="width: 700;" widgetVar="oneUser">	
+			<p:dataTable var="coc" value="#{clientBean.comptesCourants}"
+				id="userUpdateForm2">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="ID" />
+					</f:facet>
+					<h:outputText value="#{coc.id}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="SOLDE" />
+					</f:facet>
+					<h:outputText value="#{coc.solde}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="DECOUVERT" />
+					</f:facet>
+					<h:outputText value="#{coc.decouvert}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="DATE OUVERTURE" />
+					</f:facet>
+					<h:outputText value="#{coc.dateOuverture}">
+					<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</p:column>
+			</p:dataTable>
+			</p:panel>
+			
+			<p:panel id="userDetailsPanelId3" header="Comptes épargnes"
+				style="width: 700;" widgetVar="oneUser">
+			<p:dataTable var="coe" value="#{clientBean.comptesEpargnes}"
+				id="userUpdateForm3">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="ID" />
+					</f:facet>
+					<h:outputText value="#{coe.id}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="SOLDE" />
+					</f:facet>
+					<h:outputText value="#{coe.solde}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="TAUX" />
+					</f:facet>
+					<h:outputText value="#{coe.taux}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="DATE OUVERTURE" />
+					</f:facet>
+					<h:outputText value="#{coe.dateOuverture}">
+					<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</p:column>
+			</p:dataTable>
+			</p:panel>
+
 		</h:form>
 
 	</ui:define>
