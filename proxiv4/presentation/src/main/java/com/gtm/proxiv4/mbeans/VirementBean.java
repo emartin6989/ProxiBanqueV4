@@ -86,15 +86,18 @@ public class VirementBean implements Serializable {
 	
 	public String effectuerVirement(){
 		
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Solde insuffisant, virement non effectué", null));
+		//FacesContext context = FacesContext.getCurrentInstance();
+		//context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Solde insuffisant, virement non effectué", null));
+		compteDebiteur = service.findCompteById(idCompteDebiteur);
+		service.effectuerVirement(compteDebiteur, compteCrediteur, montant);
 		montant = 0;
-		return "listerConseillers";
+		return "listerClients";
 	}
 	
 	public void onCompteDebiteurChange(){
-		 if(idCompteCrediteur != 0)
-			 comptesBanque = service.listerAutresComptes(idCompteCrediteur);
+		//idCompteDebiteur = 19;
+		 if(idCompteDebiteur != 0)
+			 comptesBanque = service.listerAutresComptes(idCompteDebiteur);
 		else
 			comptesBanque = new ArrayList<Compte>();
 	}
