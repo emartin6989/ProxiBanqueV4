@@ -53,9 +53,9 @@
 		<aop:aspectj-autoproxy />
 		
 		<!-- config aop via annotations-->
-<bean id="audit" class="com.gtm.proxiv4.service.intercepteurs.Audit" /> 
+<bean id="transactionLog" class="com.gtm.proxiv4.service.intercepteurs.TransactionLog" /> 
 	<aop:config>
-		<aop:aspect ref="audit">
+		<aop:aspect ref="transactionLog">
 		</aop:aspect>
 	</aop:config> 
 		

@@ -15,33 +15,29 @@ import com.gtm.proxiv4.metier.Transaction;
 
 @Controller
 @Aspect
-public class Audit {
+public class TransactionLog {
 
 	@Autowired
 	private Transaction transaction;
 
-
+	@Autowired
 	private TransactionRepository transactionRepo;
 
-	@Pointcut("execution(* *.effectuerVirement(..))")
-	public void auditer() {
+	@Pointcut("execution(* *.effectuerVirement(..)) && args(compteDebiteur, compteCrediteur, montant)")
+	public void auditer(Compte compteDebiteur, Compte compteCrediteur, double montant) {
 	}
 
-	@Around("auditer()")
-	public Object Enregistrement(ProceedingJoinPoint pjp) throws Throwable {
- System.out.println(pjp);
-		final Object[] args = pjp.getArgs();
-		System.out.println(args);
-		/*Compte compteDebiteur = (Compte) args[1];
-		Compte compteCrediteur = (Compte) args[2];
-		double montant = (double) args[3];
-*/
-		/*transaction.setDate(new Date());
+	@Around("auditer(compteDebiteur, compteCrediteur, montant)")
+	public Object Enregistrement(ProceedingJoinPoint pjp, Compte compteDebiteur, Compte compteCrediteur, double montant)
+			throws Throwable {
+
+		transaction.setDate(new Date());
 		transaction.setCompteCrediteur(compteCrediteur);
 		transaction.setCompteDebiteur(compteDebiteur);
 		transaction.setMontant(montant);
+
 		transactionRepo.save(transaction);
-*/
+
 		return pjp.proceed();
 
 	}
