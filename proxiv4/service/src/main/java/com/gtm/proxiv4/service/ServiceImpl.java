@@ -159,14 +159,13 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 
 	@Override
 	public List<Compte> listerComptesConseiller(Conseiller conseiller) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Client> clients = clientRepo.findByConseillerId(conseiller.getId());
+		return compteRepo.findByClientIn(clients);
 	}
 
 	@Override
 	public List<Compte> listerAutresComptes(long idCompte) {
-		// TODO Auto-generated method stub
-		return null;
+		return compteRepo.findByIdNot(idCompte);
 	}
 
 }
