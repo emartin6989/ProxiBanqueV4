@@ -14,12 +14,9 @@ import com.gtm.proxiv4.dao.ConseillerRepository;
 import com.gtm.proxiv4.dao.GerantRepository;
 import com.gtm.proxiv4.metier.Client;
 import com.gtm.proxiv4.metier.Compte;
-import com.gtm.proxiv4.metier.CompteCourant;
 import com.gtm.proxiv4.metier.CompteEpargne;
 import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.metier.Gerant;
-import com.gtm.proxiv4.service.exceptions.MontantNegatifException;
-import com.gtm.proxiv4.service.exceptions.SoldeInsuffisantException;
 
 @Transactional
 @Service
@@ -67,26 +64,21 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 		// TODO Auto-generated method stub
 		return compteRepo.findByClientId(client.getId());
 	}
+	
+	@Override
+	public List<Compte> listerComptesEpargneClient(Client client){
+		return compteRepo.findByClientIdAndtypeCompteEquals(client.getId(), "CompteEpargne");
+	}
+	
+	@Override
+	public List<Compte> listerComptesCourantClient(Client client){
+		return compteRepo.findByClientIdAndtypeCompteEquals(client.getId(), "CompteCourant");
+	}
 
 	@Override
-	public void effectuerVirement(Compte compteDebiteur, Compte compteCrediteur, double montant) throws MontantNegatifException, SoldeInsuffisantException {
-		// montant doit etre positif
-		if (montant <= 0) throw new MontantNegatifException();
-		// le montant ne doit pas depasser le solde d'un CompteEpargne
-		if (compteDebiteur instanceof CompteEpargne) {
-			if (montant > compteDebiteur.getSolde()) throw new SoldeInsuffisantException();
-		}
-		// le montant ne pas pas depasser le solde (avec son decouvert) d'un CompteCourant
-		if (compteDebiteur instanceof CompteCourant) {
-			double decouvert = ((CompteCourant) compteDebiteur).getDecouvert();
-			if (montant > compteDebiteur.getSolde() + decouvert) throw new SoldeInsuffisantException();
-		}
-		
-		compteCrediteur.setSolde(compteCrediteur.getSolde() + montant);
-		compteDebiteur.setSolde(compteDebiteur.getSolde() - montant);
-		
-		//compteRepo.save(compteCrediteur);
-		//compteRepo.save(compteDebiteur);
+	public void effectuerVirement(Compte compteDebiteur, Compte compteCrediteur, double montant) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
