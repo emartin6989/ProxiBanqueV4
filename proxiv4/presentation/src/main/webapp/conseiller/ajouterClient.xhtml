@@ -16,7 +16,7 @@
 
 				<p:messages id="messages" globalOnly="true"/>
 
-				<h:panelGrid columns="3" cellpadding="5">
+				<h:panelGrid columns="3" cellpadding="5" styleClass="noBorder">
 
 					<h:outputLabel for="nom" value="Nom :" />
 					<p:inputText id="nom" value="#{addClientBean.client.nom}"
@@ -30,7 +30,7 @@
 
 
 					<p:outputLabel for="entreprise" value="Type du client :" />
-					<p:selectOneRadio id="entreprise"
+					<p:selectOneRadio id="entreprise" styleClass="noBorder"
 						value="#{addClientBean.client.entreprise}" label="Action">
 						<f:selectItem itemLabel="Entreprise" itemValue="true" />
 						<f:selectItem itemLabel="Particulier" itemValue="false" />
@@ -58,11 +58,6 @@
 						required="true" requiredMessage="champ obligatoire" />
 					<p:message for="telephone" />
 
-				</h:panelGrid>
-
-				<h4>Adresse</h4>
-
-				<h:panelGrid columns="3" cellpadding="5">
 
 					<h:outputLabel value="Rue :" />
 					<p:inputText id="rue" value="#{addClientBean.adresse.rue}"
