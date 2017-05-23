@@ -35,8 +35,9 @@
 							rendered="#{request.isUserInRole('CONSEILLER')}" />
 						<h:outputText value="Gérant"
 							rendered="#{request.isUserInRole('GERANT')}" />
-						<h:commandLink action="#{connexionBean.logout}"
+						<h:commandLink id="logoutLink" action="#{connexionBean.logout}"
 							value="DECONNEXION" />
+
 					</h:form>
 				</p:panel>
 			</div>
@@ -55,7 +56,7 @@
 					</ui:fragment>
 					<ui:fragment rendered="#{request.isUserInRole('GERANT')}">
 						<li class="#{view.viewId eq '/index.xhtml' ? 'active' : ''}"><h:link value="Lister conseillers" outcome="/index.xhtml"/></li>
-						<li class="#{view.viewId eq '/audit/audit.xhtml' ? 'active' : ''}"><h:link value="Auditer agence" outcome="/gerant/audit.xhtml" /></li>
+						<li class="#{view.viewId eq '/gerant/audit.xhtml' ? 'active' : ''}"><h:link value="Auditer agence" outcome="/gerant/audit.xhtml" /></li>
 					</ui:fragment>
 					</ul>
 				</div>
