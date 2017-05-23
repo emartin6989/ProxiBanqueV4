@@ -250,14 +250,18 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 		List<Transaction> transactions = transactionRepo.findByDateAfterAndCompteDebiteurIn(dateDebut, comptes);
 
 		Map<Client, Integer> liste = new HashMap<Client, Integer>();
-		int nbTransactions = 0;
-		for (Client c : clients) {
-			for (Transaction t : transactions) {
-				if (t.getCompteDebiteur().equals(c))
-					nbTransactions++;
+		if(transactions.size() > 0){
+			int nbTransactions = 0;
+			for (Client c : clients) {
+				for (Transaction t : transactions) {
+					if (t.getCompteDebiteur().getClient().getId() == c.getId()){
+						nbTransactions++;
+					}
+				}
+				if(nbTransactions > 0)
+					liste.put(c, nbTransactions);
+				nbTransactions = 0;
 			}
-			liste.put(c, nbTransactions);
-			nbTransactions = 0;
 		}
 		return liste;
 	}
