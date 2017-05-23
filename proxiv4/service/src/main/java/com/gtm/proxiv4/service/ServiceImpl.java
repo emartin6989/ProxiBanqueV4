@@ -61,7 +61,7 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant {
 	@Override
 	public List<Compte> listerComptesClient(Client client) {
 		// TODO Auto-generated method stub
-		return null;
+		return compteRepo.findByClientId(client.getId());
 	}
 
 	@Override
