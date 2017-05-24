@@ -100,7 +100,7 @@ public class VirementBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} catch (MontantNegatifException e) {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Impossible de virer un montant négatif", null);
+					"Impossible de virer un montant négatif ou nul", null);
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} catch (SoldeInsuffisantException e) {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,

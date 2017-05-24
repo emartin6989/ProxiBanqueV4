@@ -11,26 +11,36 @@
 
 	<ui:define name="content">
 		<h:form>
-			<p:messages />
+			<p:messages globalOnly="true"/>
 			<h2>Compte à débiter</h2>
-			<p:selectOneMenu id="compteDebiteur" value="#{virementBean.idCompteDebiteur}">
-				<p:ajax listener="#{virementBean.onCompteDebiteurChange}" update="compteCrediteur" />
-				<f:selectItem itemLabel="Choisir un compte" itemValue="" />
-				<f:selectItems value="#{virementBean.comptesConseiller}" var="c"
-					itemLabel="#{c.id} - #{c.client.prenom} #{c.client.nom} - #{c['class'].simpleName} : #{c.solde}"
-					itemValue="#{c.id}" />
-			</p:selectOneMenu>
+			<h:panelGrid columns="2" cellpadding="5" styleClass="noBorder">
+				<p:selectOneMenu id="compteDebiteur" value="#{virementBean.idCompteDebiteur}"  required="true" requiredMessage="champ obligatoire">
+					<p:ajax listener="#{virementBean.onCompteDebiteurChange}" update="compteCrediteur" />
+					<f:selectItem itemLabel="Choisir un compte" itemValue="" />
+					<f:selectItems value="#{virementBean.comptesConseiller}" var="c"
+						itemLabel="#{c.id} - #{c.client.prenom} #{c.client.nom} - #{c['class'].simpleName} : #{c.solde}"
+						itemValue="#{c.id}" />
+				</p:selectOneMenu>
+				<p:message for="compteDebiteur" />
+			</h:panelGrid>
 			<h2>Compte à Créditer</h2>
-			<p:selectOneMenu id="compteCrediteur" value="#{virementBean.idCompteCrediteur}">
-				<f:selectItem itemLabel="Choisir un compte" itemValue="" />
-				<f:selectItems value="#{virementBean.comptesBanque}" var="c"
-					itemLabel="#{c.id} - #{c.client.prenom} #{c.client.nom} - #{c['class'].simpleName}"
-					itemValue="#{c.id}" />
-			</p:selectOneMenu>
+			<h:panelGrid columns="2" cellpadding="5" styleClass="noBorder">
+				<p:selectOneMenu id="compteCrediteur" value="#{virementBean.idCompteCrediteur}"  required="true" requiredMessage="champ obligatoire">
+					<f:selectItem itemLabel="Choisir un compte" itemValue="" />
+					<f:selectItems value="#{virementBean.comptesBanque}" var="c"
+						itemLabel="#{c.id} - #{c.client.prenom} #{c.client.nom} - #{c['class'].simpleName}"
+						itemValue="#{c.id}" />
+				</p:selectOneMenu>
+				<p:message for="compteCrediteur" />
+			</h:panelGrid>
 
 
 			<h2>Montant à virer</h2>
-			<p:inputText value="#{virementBean.montant}" label="Montant" />
+			<h:panelGrid columns="3" cellpadding="5" styleClass="noBorder">
+				<p:inputText id="montant" value="#{virementBean.montant}" label="Montant" required="true" requiredMessage="champ obligatoire"/>
+				<p:message for="montant" />
+				<p:watermark for="montant" value="Montant à virer" />
+			</h:panelGrid>
 
 			<h:commandButton action="#{virementBean.effectuerVirement}"	value="Effectuer virement" />
 		</h:form>
