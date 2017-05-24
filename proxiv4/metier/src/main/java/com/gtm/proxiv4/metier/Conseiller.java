@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * Classe ConseillerClientele servant � d�finir les conseillers client�le des
+ * Classe Conseiller servant a definir les conseillers clientele des
  * agences bancaires
  */
 @Component
@@ -23,13 +23,13 @@ import org.springframework.stereotype.Component;
 public class Conseiller extends Employe {
 
 	/**
-	 * Le g�rant responsable du conseiller client�le
+	 * Le gerant responsable du conseiller
 	 */
 	@ManyToOne
 	private Gerant gerant;
 
 	/**
-	 * Les clients affect�s � un conseiller client�le
+	 * Les clients du conseiller
 	 */
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "conseiller")
 	private Collection<Client> clients = new ArrayList<Client>();

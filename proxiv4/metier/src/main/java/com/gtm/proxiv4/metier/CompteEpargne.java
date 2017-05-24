@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * La classe CompteEpargne permet de d�finir les comptes bancaires d'�pargne.
+ * La classe CompteEpargne permet de definir les comptes bancaires d'epargne.
  */
 @Component
 @Scope("prototype")

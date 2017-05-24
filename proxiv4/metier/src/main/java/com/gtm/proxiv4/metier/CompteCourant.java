@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * La classe CompteCourant permet de d�finir les comptes bancaires courants.
+ * La classe CompteCourant permet de definir les comptes bancaires courants.
  */
 @Component
 @Scope("prototype")
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @DiscriminatorValue(value="CompteCourant")
 public class CompteCourant extends Compte {
 	/**
-	 * Le d�couvert autoris�.
+	 * Le decouvert autorise.
 	 */
 	private double decouvert;
 

@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * Classe Client permettant de d�finir les clients
+ * Classe Client permettant de definir les clients
  */
 @Component
 @Scope("prototype")
@@ -25,7 +25,14 @@ import org.springframework.stereotype.Component;
 @DiscriminatorValue(value = "Client")
 public class Client extends Personne {
 
+	/**
+	 * Represente le type de client (true si le client est une entreprise)
+	 */
 	private boolean entreprise;
+	
+	/**
+	 * Nom de l'entreprise du client dans le cas où le client est une entreprise, null sinon
+	 */
 	private String nomEntreprise;
 
 	public boolean isEntreprise() {
@@ -52,6 +59,9 @@ public class Client extends Personne {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "client", cascade = CascadeType.ALL)
 	protected List<Compte> comptes = new ArrayList<Compte>();
 
+	/**
+	 * conseiller en charge du client
+	 */
 	@ManyToOne
 	protected Conseiller conseiller;
 
