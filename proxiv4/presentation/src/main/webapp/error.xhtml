@@ -10,7 +10,15 @@
     </ui:define>
 
 	<ui:define name="content">
-		<h3>ERREUR D'AUTHENTIFICATION</h3>
-		<a href="javascript:history.back()">Essayer à nouveau</a>
+		<div class="identification">
+			<h:panelGroup styleClass="container" layout="block">
+				<h3 class="alert alert-danger text-center">Erreur d'authentification</h3>
+				<form>
+					<button type="button" onclick="history.back()" class="btn btn-default center-block">Veuillez réessayer</button>
+				</form>
+			</h:panelGroup>
+		</div>
+	
+
     </ui:define>
 </ui:composition>
