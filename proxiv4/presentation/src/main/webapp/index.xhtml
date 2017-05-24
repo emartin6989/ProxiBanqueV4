@@ -11,13 +11,11 @@
 
 	<ui:define name="content">
 		<h:form id="formDataTable"
-			rendered="#{request.isUserInRole('CONSEILLER')}">
+			rendered="#{request.isUserInRole('CONSEILLER')}"> 
 			<p:dataTable id="eventsClient" var="c"
 				value="#{conseillerBean.clients}" selectionMode="single"
 				selection="#{clientBean.client}" rowKey="#{c.id}">
-				<f:facet name="header">
-            Clients
-        </f:facet>
+				<f:facet name="header">Clients</f:facet>
 				<p:ajax event="rowSelect" listener="#{clientBean.rowSelect}"
 					update=":formDataTable:clientDetail, :formDataTable:cocDetail, :formDataTable:coeDetail"
 					oncomplete="PF('clientDialog').show()" title="View" />
@@ -38,11 +36,8 @@
 
 			<p:dialog header="Informations client" widgetVar="clientDialog"
 				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-				<p:outputPanel id="clientDetail" style="text-align:center;">
+				<p:outputPanel id="clientDetail" style="text-align:center;" header="Coordonnées">
 					<p:panelGrid columns="2" rendered="#{not empty clientBean.client}">
-						<f:facet name="header">
-						Coordonnées
-						</f:facet>
 						<h:outputText value="NOM" />
 						<h:outputText value="#{clientBean.client.nom}" />
 						<h:outputText value="PRENOM" />
