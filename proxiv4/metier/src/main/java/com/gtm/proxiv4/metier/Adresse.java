@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * La classe Adresse permet de d�finir une adresse.
+ * La classe Adresse permet de definir une adresse.
  */
 @Component
 @Scope("prototype")

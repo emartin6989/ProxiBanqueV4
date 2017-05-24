@@ -12,21 +12,42 @@ import javax.persistence.ManyToOne;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+/**
+ * La classe transaction represente un enregistrement de mouvement de fonds
+ * entre deux comptes
+ */
 @Component
 @Scope("prototype")
 @Entity
 public class Transaction {
 
+	/**
+	 * identifiant de la transaction
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
+	/**
+	 * date de la transaction
+	 */
 	private Date date = new Date();
-	
+
+	/**
+	 * compte debiteur concerne par la transaction
+	 */
 	@ManyToOne
 	private Compte compteDebiteur;
+	
+	/**
+	 * compte crediteur concerne par la transaction
+	 */
 	@ManyToOne
-	private Compte compteCrediteur;	
+	private Compte compteCrediteur;
+	
+	/**
+	 * montant de la transaction
+	 */
 	@Column(columnDefinition = "Decimal(10,2)") // bride à 2 décimales la BDD
 	private double montant;
 

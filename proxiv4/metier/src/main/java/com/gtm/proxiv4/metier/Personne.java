@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * La classe Personne permet de d�finir une personne. Classe abstraite.
+ * La classe Personne permet de definir une personne. Classe abstraite.
  */
 @Component
 @Scope("prototype")
@@ -36,7 +36,7 @@ public abstract class Personne {
 	protected String nom;
 
 	/**
-	 * Le pr�nom de la personne.
+	 * Le prenom de la personne.
 	 */
 	protected String prenom;
 
@@ -47,7 +47,7 @@ public abstract class Personne {
 	protected Adresse adresse;
 
 	/**
-	 * Le num�ro de t�l�phone de la personne.
+	 * Le numero de telephone de la personne.
 	 */
 	protected String telephone;
 

@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+/**
+ * La classe Role est utilisee par JAAS pour gerer les authorisations des utilisateurs de l'application
+ */
 @Component
 @Scope("prototype")
 @Entity
@@ -24,8 +27,6 @@ public class Role {
 	 * role de l'utilisateur CONSEILLER / GERANT
 	 */
 	private String role;
-
-
 
 	public long getId() {
 		return id;
