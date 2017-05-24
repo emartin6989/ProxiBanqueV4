@@ -1,0 +1,8 @@
+com.gtm.proxiv4
+com.gtm.proxiv4.dao
+com.gtm.proxiv4.mbeans
+com.gtm.proxiv4.metier
+com.gtm.proxiv4.service
+com.gtm.proxiv4.service.exceptions
+com.gtm.proxiv4.service.intercepteurs
+com.gtm.proxiv4.webservices
