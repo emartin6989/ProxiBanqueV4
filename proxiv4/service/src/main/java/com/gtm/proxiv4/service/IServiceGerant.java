@@ -7,7 +7,6 @@ import java.util.Map;
 import com.gtm.proxiv4.metier.Client;
 import com.gtm.proxiv4.metier.Compte;
 import com.gtm.proxiv4.metier.Conseiller;
-import com.gtm.proxiv4.metier.Employe;
 import com.gtm.proxiv4.metier.Gerant;
 import com.gtm.proxiv4.metier.Transaction;
 
@@ -22,7 +21,7 @@ public interface IServiceGerant {
 	 * 
 	 * @param gerant
 	 *            dont on souhaite recuperer les clients
-	 * @return List<Client> clients dependant du gerant
+	 * @return List Client clients dependant du gerant
 	 */
 	public List<Client> listerClients(Gerant gerant);
 
@@ -31,15 +30,15 @@ public interface IServiceGerant {
 	 * 
 	 * @param gerant
 	 *            gerant dont on souhaite avoir les conseiller
-	 * @return List<Conseiller> conseillers sous la responsabilite du gerant
+	 * @return List Conseiller conseillers sous la responsabilite du gerant
 	 */
 	public List<Conseiller> listerConseiller(Gerant gerant);
 
 	/**
 	 * Liste tous les comptes dependant des conseillers du gerant
 	 * 
-	 * @param gerant
-	 * @return List<Compte> comptes dependant des conseillers du gerant
+	 * @param gerant gerant
+	 * @return List Compte comptes dependant des conseillers du gerant
 	 */
 	public List<Compte> listerComptes(Gerant gerant);
 
@@ -47,14 +46,14 @@ public interface IServiceGerant {
 	 * Liste tous les comptes dont le solde depasse le seuil d'alerte de
 	 * secouvert pour les clients dependant des conseillers du gerant
 	 * 
-	 * @param gerant
-	 * @return List<Compte> comptes dont le solde depasse le seuil d'alerte de
+	 * @param gerant gerant
+	 * @return List Compte comptes dont le solde depasse le seuil d'alerte de
 	 *         decouvert
 	 */
 	public List<Compte> listerComptesDecouvert(Gerant gerant);
 
 	/**
-	 * Donne une map de <client, nombre de transaction realisees par le client>
+	 * Donne une map de (client, nombre de transaction realisees par le client)
 	 * depuis une date de debut donnee pour une liste de clients donnee cette
 	 * methode est utilisee pour construire les pieChart de primefaces
 	 * 
@@ -62,8 +61,8 @@ public interface IServiceGerant {
 	 *            liste des clients dont on souhaite compter les transactions
 	 * @param dateDebut
 	 *            date de debut pour le decompte des transactions
-	 * @return Map<Client, Integer> Map<client, nombre de transaction realisees
-	 *         par le client>
+	 * @return Map (Client, Integer) Map (client, nombre de transaction realisees
+	 *         par le client)
 	 */
 	public Map<Client, Integer> listerNbTransactionsParClients(List<Client> clients, Date dateDebut);
 
