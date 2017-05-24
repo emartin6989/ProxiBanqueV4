@@ -10,62 +10,117 @@
     </ui:define>
 
 	<ui:define name="content">
-		<h2>Modification d'un client</h2>
 
-		<h:form>
-			<p:panel id="panel" header="Modifier Client"
-				style="margin-bottom:10px;">
-				<p:messages id="messages" globalOnly="true"/>
-				<h:panelGrid columns="3" cellpadding="5">
-					<h:outputLabel for="nom" value="Nom :" />
-					<p:inputText id="nom" value="#{clientBean.client.nom}"
-						required="true" requiredMessage="champ obligatoire" />
-					<p:message for="nom" autoUpdate="true"/>
-					<h:outputLabel for="prenom" value="Prénom :" />
-					<p:inputText id="prenom" value="#{clientBean.client.prenom}"
-						required="true" requiredMessage="champ obligatoire" />
-					<p:message for="prenom" />
-					<h:outputLabel for="nomEntreprise" value="Entreprise :" rendered="#{clientBean.client.entreprise}"/>
-					<p:inputText id="nomEntreprise"
-						value="#{clientBean.client.nomEntreprise}" rendered="#{clientBean.client.entreprise}"/>
-					<p:message for="nomEntreprise" rendered="#{clientBean.client.entreprise}"/>
-					<h:outputLabel value="Email :" />
-					<p:inputText id="email" value="#{clientBean.client.email}"
-						required="true" requiredMessage="champ obligatoire" />
-					<p:message for="email" />
-					<h:outputLabel value="Téléphone :" />
-					<p:inputText id="telephone" value="#{clientBean.client.telephone}"
-						required="true" requiredMessage="champ obligatoire" />
-					<p:message for="telephone" />
-				</h:panelGrid>
-				<h4>Adresse</h4>
-				<h:panelGrid columns="3" cellpadding="5">
-					<h:outputLabel for="#{clientBean.client.adresse.rue}" value="Rue :" />
-					<h:inputText id="rue" value="#{clientBean.client.adresse.rue}"
-						style="width: 100;" required="true"
-						requiredMessage="champ obligatoire"></h:inputText>
-					<p:message for="rue" />
-					<h:outputLabel for="#{clientBean.client.adresse.codePostal}"
-						value="Code postal :" />
-					<h:inputText id="codePostal"
-						value="#{clientBean.client.adresse.codePostal}"
-						style="width: 100;" required="true"
-						requiredMessage="champ obligatoire"></h:inputText>
-					<p:message for="codePostal" />
-					<h:outputLabel id="ville" for="#{clientBean.client.adresse.ville}"
-						value="Ville :" />
-					<h:inputText value="#{clientBean.client.adresse.ville}"
-						style="width: 100;" required="true"
-						requiredMessage="champ obligatoire"></h:inputText>
-					<p:message for="ville" />
-				</h:panelGrid>
-			</p:panel>
+	<p:panel id="infosClientAModifier" header="Modifier un client"
+			style="width: 700;">
+			<h:form styleClass="form-horizontal">
+				<p:messages globalOnly="true" />
 
-			<p:commandButton action="#{clientBean.modifierClient}"
-				value="Valider" update="panel" icon="ui-icon-check">
-			</p:commandButton>
+				<div class="form-group">
+					<p:outputLabel for="nom" value="Nom :"
+						styleClass="col-sm-4 col-md-4 col-lg-3 control-label" />
+					<div class="col-sm-9 col-md-9 col-lg-5">
+						<p:inputText id="nom" value="#{clientBean.client.nom}"
+							required="true" requiredMessage="champ obligatoire" />
+					</div>
+					<div class="col-sm-4 col-md-6 col-lg-4">
+						<p:message for="nom" autoUpdate="true"/>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<p:outputLabel for="prenom" value="Prénom :"
+						styleClass="col-sm-4 col-md-4 col-lg-3 control-label" />
+					<div class="col-sm-9 col-md-9 col-lg-5">
+						<p:inputText id="prenom" value="#{clientBean.client.prenom}"
+							required="true" requiredMessage="champ obligatoire" />
+					</div>
+					<div class="col-sm-4 col-md-6 col-lg-4">
+						<p:message for="prenom" />
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<p:outputLabel for="nomEntreprise" value="Entreprise :"
+						styleClass="col-sm-4 col-md-4 col-lg-3 control-label" rendered="#{clientBean.client.entreprise}"/>
+					<div class="col-sm-9 col-md-9 col-lg-5">
+						<p:inputText id="nomEntreprise" value="#{clientBean.client.nomEntreprise}"
+							rendered="#{clientBean.client.entreprise}" required="true" requiredMessage="champ obligatoire" />
+					</div>
+					<div class="col-sm-4 col-md-6 col-lg-4">
+						<p:message for="nomEntreprise" />
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<p:outputLabel for="email" value="Email :"
+						styleClass="col-sm-4 col-md-4 col-lg-3 control-label" />
+					<div class="col-sm-9 col-md-9 col-lg-5">
+						<p:inputText id="email" value="#{clientBean.client.email}"
+							required="true" requiredMessage="champ obligatoire" />
+					</div>
+					<div class="col-sm-4 col-md-6 col-lg-4">
+						<p:message for="email" />
+					</div>
+				</div>
 
-		</h:form>
+				<div class="form-group">
+					<p:outputLabel for="telephone" value="Téléphone :"
+						styleClass="col-sm-4 col-md-4 col-lg-3 control-label" />
+					<div class="col-sm-9 col-md-9 col-lg-5">
+						<p:inputText id="telephone"
+							value="#{clientBean.client.telephone}" required="true"
+							requiredMessage="champ obligatoire" />
+					</div>
+					<div class="col-sm-4 col-md-6 col-lg-4">
+						<p:message for="telephone" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<p:outputLabel for="rue" value="Rue :"
+						styleClass="col-sm-4 col-md-4 col-lg-3 control-label" />
+					<div class="col-sm-9 col-md-9 col-lg-5">
+						<p:inputText id="rue" value="#{clientBean.client.adresse.rue}"
+							required="true" requiredMessage="champ obligatoire" />
+					</div>
+					<div class="col-sm-4 col-md-6 col-lg-4">
+						<p:message for="rue" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<p:outputLabel for="codePostal" value="Code Postal :"
+						styleClass="col-sm-4 col-md-4 col-lg-3 control-label" />
+					<div class="col-sm-9 col-md-9 col-lg-5">
+						<p:inputText id="codePostal"
+							value="#{clientBean.client.adresse.codePostal}" required="true"
+							requiredMessage="champ obligatoire" />
+					</div>
+					<div class="col-sm-4 col-md-6 col-lg-4">
+						<p:message for="codePostal" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<p:outputLabel for="ville" value="Ville :"
+						styleClass="col-sm-4 col-md-4 col-lg-3 control-label" />
+					<div class="col-sm-9 col-md-9 col-lg-5">
+						<p:inputText id="ville" value="#{clientBean.client.adresse.ville}"
+							required="true" requiredMessage="champ obligatoire" />
+					</div>
+					<div class="col-sm-4 col-md-6 col-lg-4">
+						<p:message for="ville" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<p:commandButton action="#{clientBean.modifierClient}"
+						value="Valider" update="infosClientAModifier"
+						styleClass="col-sm-offset-4 col-md-offset-4 col-lg-offset-3" icon="ui-icon-check"/>
+				</div>
+			</h:form>
+		</p:panel>
 
 	</ui:define>
 </ui:composition>
