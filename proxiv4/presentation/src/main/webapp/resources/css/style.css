@@ -2,9 +2,8 @@
 
 body {
 	color: black;
-	background-color: aqua;
 	background-image: url("#{resource['img:background.jpg']}");
-	background-attachment:fixed;
+	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-position: top;
@@ -15,6 +14,7 @@ body {
 }
 
 .mytitle {
+	color: white;
 	margin-top: 60px;
 	margin-bottom: 30px;
 	font-family: Century Gothic;
@@ -27,6 +27,7 @@ body {
 }
 
 .mysubtitle {
+	color: white;
 	font-family: Brush Script MT, cursive;
 	font-size: 30px;
 	font-style: normal;
@@ -49,14 +50,15 @@ body {
 	
 }
 
-
 .footer {
+	color: white;
 	position: fixed;
 	bottom: 0px;
 	margin: 0;
-	padding-right: 5px;
+	margin-left:5px;
 	font-style: italic;
 }
-.jqplot-table-legend{
+
+.jqplot-table-legend {
 	display: none;
 }
