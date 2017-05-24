@@ -11,11 +11,18 @@
 
 	<ui:define name="content">
 		<p:panel id="pieChartPanel" header="Transactions par client"
-				style="width: 700;">
-			<p:chart type="pie" model="#{auditBean.pieModelLastThreeMonths}" rendered="#{auditBean.pieModelLastThreeMonths.isFill()}"/>
+			style="width: 700;">
+				<p:chart type="pie" model="#{auditBean.pieModelLastThreeMonths}"
+					style="float:left;width:400px;height:300px"
+					rendered="#{auditBean.pieModelLastThreeMonths.isFill()}" />
+
+				<p:chart type="pie" model="#{auditBean.pieModelLastWeek}"
+					style="float:left;width:400px;height:300px"
+					rendered="#{auditBean.pieModelLastWeek.isFill()}" />
+
 		</p:panel>
 		<p:panel id="warningAcountPannel" header="Comptes à surveiller"
-				style="width: 700;" widgetVar="oneUser">
+			style="width: 700;" widgetVar="oneUser">
 			<p:dataTable var="compte" value="#{auditBean.comptesASurveiller}"
 				id="userUpdateForm3">
 				<p:column>
@@ -29,26 +36,28 @@
 						<h:outputText value="SOLDE" />
 					</f:facet>
 					<h:outputText value="#{compte.solde}">
-					<f:convertNumber pattern="#0.00" />
+						<f:convertNumber pattern="#0.00" />
 					</h:outputText>
 				</p:column>
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Titulaire" />
 					</f:facet>
-					<h:outputText value="#{compte.client.nom.concat(' ').concat(compte.client.prenom)}">
+					<h:outputText
+						value="#{compte.client.nom.concat(' ').concat(compte.client.prenom)}">
 					</h:outputText>
 				</p:column>
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Conseiller" />
 					</f:facet>
-					<h:outputText value="#{compte.client.conseiller.nom.concat(' ').concat(compte.client.conseiller.prenom)}">
-					<f:convertDateTime pattern="dd.MM.yyyy" />
+					<h:outputText
+						value="#{compte.client.conseiller.nom.concat(' ').concat(compte.client.conseiller.prenom)}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
 					</h:outputText>
 				</p:column>
 			</p:dataTable>
-			</p:panel>
-		
-    </ui:define>
+		</p:panel>
+
+	</ui:define>
 </ui:composition>
