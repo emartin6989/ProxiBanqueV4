@@ -10,88 +10,138 @@
     </ui:define>
 
 	<ui:define name="content">
-		<h:form>
-			<p:panel id="panel" header="Saisie des informations du client"
-				style="margin-bottom:10px;">
+		<p:panel id="infosClientAAjouter" header="Ajouter un client"
+			style="width: 700;">
+			<h:form styleClass="form-horizontal">
+				<p:messages globalOnly="true" />
 
-				<p:messages id="messages" globalOnly="true"/>
+				<div class="form-group">
+					<p:outputLabel for="nom" value="Nom :"
+						styleClass="col-sm-4 col-md-4 col-lg-3 control-label" />
+					<div class="col-sm-9 col-md-9 col-lg-5">
+						<p:inputText id="nom" value="#{addClientBean.client.nom}"
+							required="true" requiredMessage="champ obligatoire" />
+						<p:watermark for="nom" value="Saisir un nom" />
+					</div>
+					<div class="col-sm-4 col-md-6 col-lg-4">
+						<p:message for="nom" />
+					</div>
+				</div>
 
-				<h:panelGrid columns="4" cellpadding="5" styleClass="noBorder">
+				<div class="form-group">
+					<p:outputLabel for="prenom" value="Prénom :"
+						styleClass="col-sm-4 col-md-4 col-lg-3 control-label" />
+					<div class="col-sm-9 col-md-9 col-lg-5">
+						<p:inputText id="prenom" value="#{addClientBean.client.prenom}"
+							required="true" requiredMessage="champ obligatoire" />
+						<p:watermark for="prenom" value="Saisir un prénom" />
+					</div>
+					<div class="col-sm-4 col-md-6 col-lg-4">
+						<p:message for="prenom" />
+					</div>
+				</div>
 
-					<h:outputLabel for="nom" value="Nom :" />
-					<p:inputText id="nom" value="#{addClientBean.client.nom}"
-						required="true" requiredMessage="champ obligatoire" />
-					<p:watermark for="nom" value="Saisir un nom"/>
-					<p:message for="nom" />
+				<div class="form-group">
+					<p:outputLabel for="entreprise" value="Type du client :"
+						styleClass="col-sm-4 col-md-4 col-lg-3 control-label" />
+					<div class="col-sm-9 col-md-9 col-lg-5">
+						<p:selectOneRadio id="entreprise" styleClass="noBorder"
+							value="#{addClientBean.client.entreprise}" label="Action">
+							<f:selectItem itemLabel="Entreprise" itemValue="true" />
+							<f:selectItem itemLabel="Particulier" itemValue="false" />
+						</p:selectOneRadio>
+					</div>
+					<div class="col-sm-4 col-md-6 col-lg-4"></div>
+				</div>
+				
+				<div class="form-group">
+					<p:outputLabel for="nomEntreprise" value="Entreprise :"
+						styleClass="col-sm-4 col-md-4 col-lg-3 control-label" />
+					<div class="col-sm-9 col-md-9 col-lg-5">
+						<p:inputText id="nomEntreprise"
+							value="#{addClientBean.client.nomEntreprise}"/>
+						<p:watermark for="nomEntreprise"
+							value="Saisir le nom de l'entreprise" />
+					</div>
+					<div class="col-sm-4 col-md-6 col-lg-4">
+						<p:message for="nomEntreprise" />
+					</div>
+				</div>
 
-					<h:outputLabel for="prenom" value="Prénom :" />
-					<p:inputText id="prenom" value="#{addClientBean.client.prenom}"
-						required="true" requiredMessage="champ obligatoire" />
-					<p:watermark for="prenom" value="Saisir un prénom"/>
-					<p:message for="prenom" />
+				<div class="form-group">
+					<p:outputLabel for="email" value="Email :"
+						styleClass="col-sm-4 col-md-4 col-lg-3 control-label" />
+					<div class="col-sm-9 col-md-9 col-lg-5">
+						<p:inputText id="email" value="#{addClientBean.client.email}"
+							required="true" requiredMessage="champ obligatoire" />
+						<p:watermark for="email" value="exemple@mail.fr" />
+					</div>
+					<div class="col-sm-4 col-md-6 col-lg-4">
+						<p:message for="email" />
+					</div>
+				</div>
 
+				<div class="form-group">
+					<p:outputLabel for="telephone" value="Téléphone :"
+						styleClass="col-sm-4 col-md-4 col-lg-3 control-label" />
+					<div class="col-sm-9 col-md-9 col-lg-5">
+						<p:inputText id="telephone"
+							value="#{addClientBean.client.telephone}" required="true"
+							requiredMessage="champ obligatoire" />
+						<p:watermark for="telephone" value="0102030405" />
+					</div>
+					<div class="col-sm-4 col-md-6 col-lg-4">
+						<p:message for="telephone" />
+					</div>
+				</div>
 
-					<p:outputLabel for="entreprise" value="Type du client :" />
-					<p:selectOneRadio id="entreprise" styleClass="noBorder"
-						value="#{addClientBean.entreprise}" label="Action">
-						<f:selectItem itemLabel="Entreprise" itemValue="true" />
-						<f:selectItem itemLabel="Particulier" itemValue="false" />
-						<f:ajax render="nomEntreprise" />
-					</p:selectOneRadio>
-					<p:watermark for="entreprise"/>
-					<p:message for="entreprise" />
+				<div class="form-group">
+					<p:outputLabel for="rue" value="Rue :"
+						styleClass="col-sm-4 col-md-4 col-lg-3 control-label" />
+					<div class="col-sm-9 col-md-9 col-lg-5">
+						<p:inputText id="rue" value="#{addClientBean.adresse.rue}"
+							required="true" requiredMessage="champ obligatoire" />
+						<p:watermark for="rue" value="Saisir un numéro et une rue" />
+					</div>
+					<div class="col-sm-4 col-md-6 col-lg-4">
+						<p:message for="rue" />
+					</div>
+				</div>
 
-					<h:outputLabel id="labelNomEntreprise" for="nomEntreprise" value="Entreprise :">
-					</h:outputLabel>
-					<p:inputText id="nomEntreprise"
-						value="#{addClientBean.client.nomEntreprise}"
-						disabled="#{addClientBean.entreprise == false}"
-						required="#{addClientBean.client.entreprise}"
-						requiredMessage="champ obligatoire" />
-					<p:watermark for="nomEntreprise" value="Saisir le nom de l'entreprise"/>
-					<p:message for="nomEntreprise" />
+				<div class="form-group">
+					<p:outputLabel for="codePostal" value="Code Postal :"
+						styleClass="col-sm-4 col-md-4 col-lg-3 control-label" />
+					<div class="col-sm-9 col-md-9 col-lg-5">
+						<p:inputText id="codePostal"
+							value="#{addClientBean.adresse.codePostal}" required="true"
+							requiredMessage="champ obligatoire" />
+						<p:watermark for="codePostal" value="01500" />
+					</div>
+					<div class="col-sm-4 col-md-6 col-lg-4">
+						<p:message for="codePostal" />
+					</div>
+				</div>
 
+				<div class="form-group">
+					<p:outputLabel for="ville" value="Ville :"
+						styleClass="col-sm-4 col-md-4 col-lg-3 control-label" />
+					<div class="col-sm-9 col-md-9 col-lg-5">
+						<p:inputText id="ville" value="#{addClientBean.adresse.ville}"
+							required="true" requiredMessage="champ obligatoire" />
+						<p:watermark for="ville" value="Saisir une ville" />
+					</div>
+					<div class="col-sm-4 col-md-6 col-lg-4">
+						<p:message for="ville" />
+					</div>
+				</div>
 
-					<h:outputLabel value="Email :" />
-					<p:inputText id="email" value="#{addClientBean.client.email}"
-						required="true" requiredMessage="champ obligatoire" />
-					<p:watermark for="email" value="exemple@mail.fr"/>
-					<p:message for="email" />
-
-					<h:outputLabel value="Téléphone :" />
-					<p:inputText id="telephone" value="#{addClientBean.client.telephone}"
-						required="true" requiredMessage="champ obligatoire" />
-					<p:watermark for="telephone" value="0102030405"/>
-					<p:message for="telephone" />
-
-
-					<h:outputLabel value="Rue :" />
-					<p:inputText id="rue" value="#{addClientBean.adresse.rue}"
-						required="true" requiredMessage="champ obligatoire" />
-					<p:watermark for="rue" value="Saisir un numéro et une rue"/>
-					<p:message for="rue" />
-
-					<h:outputLabel value="Code Postal :" />
-					<p:inputText id="codePostal"
-						value="#{addClientBean.adresse.codePostal}" required="true"
-						requiredMessage="champ obligatoire" />
-					<p:watermark for="codePostal" value="01500"/>
-					<p:message for="codePostal" />
-
-					<h:outputLabel value="Ville :" />
-					<p:inputText id="ville" value="#{addClientBean.adresse.ville}"
-						required="true" requiredMessage="champ obligatoire" />
-					<p:watermark for="ville" value="Saisir une ville"/>
-					<p:message for="ville" />
-
-				</h:panelGrid>
-			</p:panel>
-
-			<p:commandButton action="#{addClientBean.ajouterClient}" value="Valider"
-				update="panel" />
-		</h:form>
-
+				<div class="form-group">
+					<p:commandButton action="#{addClientBean.ajouterClient}"
+						value="Valider" update="infosClientAAjouter"
+						styleClass="col-sm-offset-4 col-md-offset-4 col-lg-offset-3" />
+				</div>
+			</h:form>
+		</p:panel>
 	</ui:define>
-
 </ui:composition>
 

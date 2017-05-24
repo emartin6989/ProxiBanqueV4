@@ -3,7 +3,9 @@ package com.gtm.proxiv4.mbeans;
 import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -113,5 +115,9 @@ public class AddClientBean implements Serializable{
 		
 		return "ajouterClient";
 	}
+	
+	 public void updateEntrepriseClient (AjaxBehaviorEvent event) {
+	        this.client.setEntreprise(true);
+	    }
 
 }
