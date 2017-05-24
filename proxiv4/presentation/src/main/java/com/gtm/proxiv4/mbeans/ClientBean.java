@@ -1,5 +1,6 @@
 package com.gtm.proxiv4.mbeans;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -19,8 +20,14 @@ import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.metier.Personne;
 import com.gtm.proxiv4.service.IServiceConseiller;
 
+/**
+ * Controller pour la vue lister/modifier clients du conseiller
+ *
+ */
 @Controller
-public class ClientBean {
+public class ClientBean implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
 	@Autowired
 	private IServiceConseiller serviceConseiller;
@@ -68,6 +75,10 @@ public class ClientBean {
 		this.conseillerBean = conseillerBean;
 	}
 
+	/**
+	 * Donne la liste des comptes courants du client selectionne
+	 * @return List<Compte>
+	 */
 	public List<Compte> getComptesCourants() {
 		return serviceConseiller.listerComptesCourantClient(client);
 	}
@@ -76,6 +87,10 @@ public class ClientBean {
 		this.comptesCourants = comptesCourants;
 	}
 
+	/**
+	 * Donne la liste des comptes epargne du client selectionne
+	 * @return List<Compte>
+	 */
 	public List<Compte> getComptesEpargnes() {
 		return serviceConseiller.listerComptesEpargneClient(client);
 	}
@@ -90,14 +105,17 @@ public class ClientBean {
 	public void rowUnSelect(SelectEvent event) {
 	}
 
+	/**
+	 * Modifie le client de la vue
+	 * @return redirection vers la vue modifications
+	 */
 	public String modifierClient() {
-		try {
-			serviceConseiller.modifierInfoClient(client);
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Client modifié", null);
-			FacesContext.getCurrentInstance().addMessage(null, message);
-		} finally {
-			return "modifierClient";
-		}
+
+		serviceConseiller.modifierInfoClient(client);
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Client modifié", null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
+
+		return "modifierClient";
 	}
-    
+
 }

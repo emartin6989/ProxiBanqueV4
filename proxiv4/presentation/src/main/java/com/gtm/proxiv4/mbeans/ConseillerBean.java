@@ -16,9 +16,14 @@ import com.gtm.proxiv4.metier.Compte;
 import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.service.IServiceConseiller;
 
+/**
+ * Controller pour les vues conseiller
+ */
 @Controller
 @SessionScope
 public class ConseillerBean implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Autowired
 	private IServiceConseiller serviceConseiller;

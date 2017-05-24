@@ -21,10 +21,15 @@ import com.gtm.proxiv4.service.exceptions.SoldeInsuffisantException;
 
 import javassist.expr.NewArray;
 
+/**
+ * Controller de la vue virement
+ */
 @Controller
 @SessionScope
 public class VirementBean implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Autowired
 	IServiceConseiller service;
 	@Autowired

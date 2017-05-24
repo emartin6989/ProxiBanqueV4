@@ -1,14 +1,12 @@
 package com.gtm.proxiv4.mbeans;
 
-import java.text.SimpleDateFormat;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import javax.swing.JSpinner.ListEditor;
 
 import org.primefaces.model.chart.PieChartModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +21,16 @@ import com.gtm.proxiv4.metier.Gerant;
 import com.gtm.proxiv4.service.IServiceConseiller;
 import com.gtm.proxiv4.service.IServiceGerant;
 
+/**
+ * Controller de la vue Auditer du conseiller et du gerant
+ *
+ */
 @Controller
 @RequestScope
-public class AuditBean {
+public class AuditBean implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	@Autowired
 	private ConnexionBean connexionBean;
 	@Autowired
@@ -36,8 +40,6 @@ public class AuditBean {
 	
 	private PieChartModel pieModelLastThreeMonths;
 	private PieChartModel pieModelLastWeek;
-
-	private List<Compte> comptesASurveiller;
 
 	private PieChartModel createPieModel(Date dateDebut, String titre) {
 	    PieChartModel pieModel = new PieChartModel();
@@ -59,6 +61,10 @@ public class AuditBean {
 	    return pieModel; 
 	}
 
+	/**
+	 * Donne la liste des comptes dépassant les seuils d'alerte de decouvert dont le titulaire est sous la responsabilite de l'employe connecte
+	 * @return Liste de comptes à surveiller
+	 */
 	public List<Compte> getComptesASurveiller() {
 
 		Employe employe = connexionBean.employeConnecte();
@@ -73,10 +79,11 @@ public class AuditBean {
 		return null;
 	}
 
-	public void setComptesASurveiller(List<Compte> comptesASurveiller) {
-		this.comptesASurveiller = comptesASurveiller;
-	}
 
+	/**
+	 * Cree le modele d'affichage pour le camembert des transactions a 3 mois
+	 * @return PieChartModel pour primefaces
+	 */
 	public PieChartModel getPieModelLastThreeMonths() {
 		Calendar c = new GregorianCalendar();
 	    c.setTime(new Date());
@@ -89,6 +96,10 @@ public class AuditBean {
 		this.pieModelLastThreeMonths = pieModelLastThreeMonths;
 	}
 
+	/**
+	 * Cree le modele d'affichage pour le camembert des transactions a une semaine
+	 * @return PieChartModel pour primefaces
+	 */
 	public PieChartModel getPieModelLastWeek() {
 		Calendar c = new GregorianCalendar();
 	    c.setTime(new Date());

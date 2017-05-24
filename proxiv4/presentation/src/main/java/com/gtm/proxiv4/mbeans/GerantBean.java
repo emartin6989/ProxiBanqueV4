@@ -15,11 +15,14 @@ import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.metier.Gerant;
 import com.gtm.proxiv4.service.IServiceGerant;
 
+/**
+ * Controller pour les vues gerant
+ */
 @Controller
-//@ManagedBean
-//@SessionScoped
 @SessionScope
 public class GerantBean implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private IServiceGerant service;
