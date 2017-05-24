@@ -7,7 +7,9 @@ import java.util.Map;
 import com.gtm.proxiv4.metier.Client;
 import com.gtm.proxiv4.metier.Compte;
 import com.gtm.proxiv4.metier.Conseiller;
+import com.gtm.proxiv4.metier.Employe;
 import com.gtm.proxiv4.metier.Gerant;
+import com.gtm.proxiv4.metier.Transaction;
 
 /**
  * Interface de services pour le gerant
@@ -40,7 +42,7 @@ public interface IServiceGerant {
 	 * @return List<Compte> comptes dependant des conseillers du gerant
 	 */
 	public List<Compte> listerComptes(Gerant gerant);
-	
+
 	/**
 	 * Liste tous les comptes dont le solde depasse le seuil d'alerte de
 	 * secouvert pour les clients dependant des conseillers du gerant
@@ -64,5 +66,14 @@ public interface IServiceGerant {
 	 *         par le client>
 	 */
 	public Map<Client, Integer> listerNbTransactionsParClients(List<Client> clients, Date dateDebut);
+
+	/**
+	 * Liste de l'ensemble des transactions de l'agence
+	 * 
+	 * @param gerant
+	 *            Gerant de l'agence
+	 * @return Une liste de transactions
+	 */
+	public List<Transaction> listerTransactions(Gerant gerant);
 
 }

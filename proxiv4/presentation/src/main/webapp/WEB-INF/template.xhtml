@@ -57,6 +57,7 @@
 					<ui:fragment rendered="#{request.isUserInRole('GERANT')}">
 						<li class="#{view.viewId eq '/index.xhtml' ? 'active' : ''}"><h:link value="Lister conseillers" outcome="/index.xhtml"/></li>
 						<li class="#{view.viewId eq '/gerant/audit.xhtml' ? 'active' : ''}"><h:link value="Auditer agence" outcome="/gerant/audit.xhtml" /></li>
+						<li class="#{view.viewId eq '/gerant/listerTransactions.xhtml' ? 'active' : ''}"><h:link value="Lister transactions" outcome="/gerant/listerTransactions.xhtml" /></li>
 					</ui:fragment>
 					</ul>
 				</div>

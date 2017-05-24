@@ -18,6 +18,7 @@ import com.gtm.proxiv4.metier.Compte;
 import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.metier.Employe;
 import com.gtm.proxiv4.metier.Gerant;
+import com.gtm.proxiv4.metier.Transaction;
 import com.gtm.proxiv4.service.IServiceConseiller;
 import com.gtm.proxiv4.service.IServiceGerant;
 
@@ -40,7 +41,8 @@ public class AuditBean implements Serializable{
 	
 	private PieChartModel pieModelLastThreeMonths;
 	private PieChartModel pieModelLastWeek;
-
+	private List<Transaction> transactions;
+	
 	private PieChartModel createPieModel(Date dateDebut, String titre) {
 	    PieChartModel pieModel = new PieChartModel();
 	    
@@ -110,6 +112,15 @@ public class AuditBean implements Serializable{
 
 	public void setPieModelLastWeek(PieChartModel pieModelLastWeek) {
 		this.pieModelLastWeek = pieModelLastWeek;
+	}
+
+	public List<Transaction> getTransactions() {
+		transactions = serviceGerant.listerTransactions((Gerant) connexionBean.employeConnecte()) ;
+		return transactions;
+	}
+
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
 	}
 
 }

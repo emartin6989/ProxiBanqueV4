@@ -290,4 +290,9 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 		return comptes;
 	}
 
+	@Override
+	public List<Transaction> listerTransactions(Gerant gerant) {
+		return transactionRepo.findByCompteDebiteurIn(listerComptes(gerant));
+	}
+
 }
