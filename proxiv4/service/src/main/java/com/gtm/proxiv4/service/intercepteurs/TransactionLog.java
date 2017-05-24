@@ -3,6 +3,7 @@ package com.gtm.proxiv4.service.intercepteurs;
 import java.util.Date;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -32,8 +33,8 @@ public class TransactionLog {
 	public void auditer(Compte compteDebiteur, Compte compteCrediteur, double montant) {
 	}
 
-	@Around("auditer(compteDebiteur, compteCrediteur, montant)")
-	public Object Enregistrement(ProceedingJoinPoint pjp, Compte compteDebiteur, Compte compteCrediteur, double montant)
+	@AfterReturning("auditer(compteDebiteur, compteCrediteur, montant)")
+	public void Enregistrement(Compte compteDebiteur, Compte compteCrediteur, double montant)
 			throws Throwable {
 		
 		
@@ -45,10 +46,6 @@ public class TransactionLog {
 		transaction.setMontant(montant);
 
 		transactionRepo.save(transaction);
-	
-		return pjp.proceed();
-
-		
 
 	}
 
