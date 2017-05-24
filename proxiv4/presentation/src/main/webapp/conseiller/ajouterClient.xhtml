@@ -16,16 +16,18 @@
 
 				<p:messages id="messages" globalOnly="true"/>
 
-				<h:panelGrid columns="3" cellpadding="5" styleClass="noBorder">
+				<h:panelGrid columns="4" cellpadding="5" styleClass="noBorder">
 
 					<h:outputLabel for="nom" value="Nom :" />
 					<p:inputText id="nom" value="#{addClientBean.client.nom}"
 						required="true" requiredMessage="champ obligatoire" />
+					<p:watermark for="nom" value="Saisir un nom"/>
 					<p:message for="nom" />
 
 					<h:outputLabel for="prenom" value="Prénom :" />
 					<p:inputText id="prenom" value="#{addClientBean.client.prenom}"
 						required="true" requiredMessage="champ obligatoire" />
+					<p:watermark for="prenom" value="Saisir un prénom"/>
 					<p:message for="prenom" />
 
 
@@ -36,6 +38,7 @@
 						<f:selectItem itemLabel="Particulier" itemValue="false" />
 						<f:ajax render="nomEntreprise" />
 					</p:selectOneRadio>
+					<p:watermark for="entreprise"/>
 					<p:message for="entreprise" />
 
 					<h:outputLabel id="labelNomEntreprise" for="nomEntreprise" value="Entreprise :">
@@ -45,34 +48,40 @@
 						disabled="#{addClientBean.entreprise == false}"
 						required="#{addClientBean.client.entreprise}"
 						requiredMessage="champ obligatoire" />
+					<p:watermark for="nomEntreprise" value="Saisir le nom de l'entreprise"/>
 					<p:message for="nomEntreprise" />
 
 
 					<h:outputLabel value="Email :" />
 					<p:inputText id="email" value="#{addClientBean.client.email}"
 						required="true" requiredMessage="champ obligatoire" />
+					<p:watermark for="email" value="exemple@mail.fr"/>
 					<p:message for="email" />
 
 					<h:outputLabel value="Téléphone :" />
 					<p:inputText id="telephone" value="#{addClientBean.client.telephone}"
 						required="true" requiredMessage="champ obligatoire" />
+					<p:watermark for="telephone" value="0102030405"/>
 					<p:message for="telephone" />
 
 
 					<h:outputLabel value="Rue :" />
 					<p:inputText id="rue" value="#{addClientBean.adresse.rue}"
 						required="true" requiredMessage="champ obligatoire" />
+					<p:watermark for="rue" value="Saisir un numéro et une rue"/>
 					<p:message for="rue" />
 
 					<h:outputLabel value="Code Postal :" />
 					<p:inputText id="codePostal"
 						value="#{addClientBean.adresse.codePostal}" required="true"
 						requiredMessage="champ obligatoire" />
+					<p:watermark for="codePostal" value="01500"/>
 					<p:message for="codePostal" />
 
 					<h:outputLabel value="Ville :" />
 					<p:inputText id="ville" value="#{addClientBean.adresse.ville}"
 						required="true" requiredMessage="champ obligatoire" />
+					<p:watermark for="ville" value="Saisir une ville"/>
 					<p:message for="ville" />
 
 				</h:panelGrid>
