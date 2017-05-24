@@ -204,16 +204,6 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 	}
 
 	@Override
-	public Gerant findGerantByEmail(String email) {
-		return gerantRepo.findOneByEmail(email);
-	}
-
-	@Override
-	public Conseiller findConseillerByEmail(String email) {
-		return conseillerRepo.findOneByEmail(email);
-	}
-
-	@Override
 	public List<Compte> listerComptesConseiller(Conseiller conseiller) {
 		List<Client> clients = clientRepo.findByConseillerId(conseiller.getId());
 		return compteRepo.findByClientIn(clients);
@@ -250,15 +240,15 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 		List<Transaction> transactions = transactionRepo.findByDateAfterAndCompteDebiteurIn(dateDebut, comptes);
 
 		Map<Client, Integer> liste = new HashMap<Client, Integer>();
-		if(transactions.size() > 0){
+		if (transactions.size() > 0) {
 			int nbTransactions = 0;
 			for (Client c : clients) {
 				for (Transaction t : transactions) {
-					if (t.getCompteDebiteur().getClient().getId() == c.getId()){
+					if (t.getCompteDebiteur().getClient().getId() == c.getId()) {
 						nbTransactions++;
 					}
 				}
-				if(nbTransactions > 0)
+				if (nbTransactions > 0)
 					liste.put(c, nbTransactions);
 				nbTransactions = 0;
 			}
