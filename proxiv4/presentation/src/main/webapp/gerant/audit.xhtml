@@ -10,7 +10,10 @@
     </ui:define>
 
 	<ui:define name="content">
-		<p:chart type="pie" model="#{auditBean.pieModel}" style="width:400px;height:300px" />
+		<p:panel id="pieChartPanel" header="Transactions par client"
+				style="width: 700;">
+			<p:chart type="pie" model="#{auditBean.pieModelLastThreeMonths}" rendered="#{auditBean.pieModelLastThreeMonths.isFill()}"/>
+		</p:panel>
 		<p:panel id="warningAcountPannel" header="Comptes à surveiller"
 				style="width: 700;" widgetVar="oneUser">
 			<p:dataTable var="compte" value="#{auditBean.comptesASurveiller}"
