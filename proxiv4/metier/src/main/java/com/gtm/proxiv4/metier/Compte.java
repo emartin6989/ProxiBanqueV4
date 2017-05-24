@@ -17,8 +17,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * La classe Compte permet de d�finir les comptes bancaires. Classe abstraite
- * n'ayant pas d'existence logique .
+ * La classe Compte permet de definir les comptes bancaires.
  */
 @Component
 @Scope("prototype")
@@ -46,7 +45,7 @@ public abstract class Compte {
 	protected Date dateOuverture;
 
 	/**
-	 * Le Client propri�taire du compte
+	 * Le Client titulaire du compte
 	 */
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Client client;

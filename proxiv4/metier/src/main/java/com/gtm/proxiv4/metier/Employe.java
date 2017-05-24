@@ -9,8 +9,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * represente un employe de la banque
- * 
- *
  */
 @Component
 @Scope("prototype")
@@ -18,6 +16,9 @@ import org.springframework.stereotype.Component;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Employe extends Personne {
 
+	/**
+	 * mot de passe de l'employe (crypte en base de donnee)
+	 */
 	private String password;
 
 	public String getPassword() {

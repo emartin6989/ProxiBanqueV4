@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * La classe Gerant permet de d�finir un g�rant
+ * La classe Gerant permet de definir un gerant, responsable de conseiller
  */
 @Component
 @Scope("prototype")
@@ -20,6 +20,9 @@ import org.springframework.stereotype.Component;
 @DiscriminatorValue(value = "Gerant")
 public class Gerant extends Employe {
 
+	/**
+	 * les conseillers sous la responsabilite du gerant
+	 */
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "gerant")
 	private List<Conseiller> conseillers = new ArrayList<Conseiller>();
 
