@@ -12,14 +12,14 @@
 	<ui:define name="content">
 		<p:panel id="pieChartPanel" header="Transactions par client"
 			style="width: 700;">
-				<p:chart type="pie" model="#{auditBean.pieModelLastThreeMonths}"
-					style="float:left;width:400px;height:300px"
+			<div class="row">
+				<p:chart type="pie" model="#{auditBean.pieModelLastThreeMonths}" styleClass="col-sm-8 col-md-8 col-lg-6" style="height:300px"
 					rendered="#{auditBean.pieModelLastThreeMonths.isFill()}" />
 
 				<p:chart type="pie" model="#{auditBean.pieModelLastWeek}"
-					style="float:left;width:400px;height:300px"
+					styleClass="col-sm-8 col-md-8 col-lg-6" style="height:300px"
 					rendered="#{auditBean.pieModelLastWeek.isFill()}" />
-
+			</div>
 		</p:panel>
 		<p:panel id="warningAcountPannel" header="Comptes à surveiller"
 			style="width: 700;" widgetVar="oneUser">
@@ -27,7 +27,7 @@
 				id="userUpdateForm3">
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="Numéro" />
+						<h:outputText value="NUMERO COMPTE" />
 					</f:facet>
 					<h:outputText value="#{compte.id}" />
 				</p:column>
@@ -41,7 +41,7 @@
 				</p:column>
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="Titulaire" />
+						<h:outputText value="TITULAIRE" />
 					</f:facet>
 					<h:outputText
 						value="#{compte.client.nom.concat(' ').concat(compte.client.prenom)}">
@@ -49,7 +49,7 @@
 				</p:column>
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="Conseiller" />
+						<h:outputText value="CONSEILLER" />
 					</f:facet>
 					<h:outputText
 						value="#{compte.client.conseiller.nom.concat(' ').concat(compte.client.conseiller.prenom)}">
