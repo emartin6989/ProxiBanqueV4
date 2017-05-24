@@ -2,7 +2,7 @@
 
 body {
 	color: black;
-	background-color: white;
+	background-color: aqua;
 	background-image: url("#{resource['img:background.jpg']}");
 	background-repeat: no-repeat;
 	background-position: center;
@@ -40,9 +40,6 @@ body {
 	font-size: 20px;
 }
 
-table {
-	border: 1px solid black;
-}
 
 th {
 	text-align: center;
@@ -52,39 +49,14 @@ td {
 	text-align: center;
 }
 
+.rightAlign {
+	float: right;
+}
+
 .connection {
 	
 }
 
-.menu {
-	font-family: Century Gothic;
-	background: none;
-	border: none;
-}
-
-.menuHeader {
-	color: black;
-	font-size: 25px;
-	font-style: normal;
-	font-variant : normal;
-	font-weight : 600;
-	background: none;
-	border: none;
-	font-variant: normal;
-	font-weight: 600;
-}
-
-.menuItem {
-	margin-left: 10px;
-	font-size: 18px;
-	font-weight: 600;
-	background: none;
-	border: none;
-}
-
-.content {
-	
-}
 
 .footer {
 	position: fixed;

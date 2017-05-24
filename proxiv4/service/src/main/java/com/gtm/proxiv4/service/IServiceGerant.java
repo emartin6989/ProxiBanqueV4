@@ -13,7 +13,9 @@ public interface IServiceGerant {
 	
 	public List<Conseiller> listerConseiller(Gerant gerant);
 	
-	public Map<Client, Integer> compterTransactionsParClient(Date dateDebut);
+	public List<Client> listerClients(Gerant gerant);
+	
+	public Map<Client, Integer> listerNbTransactionsParClients(List<Client> clients, Date dateDebut);
 
 	public List<Compte> listerComptesDecouvert(Gerant gerant);
 	
