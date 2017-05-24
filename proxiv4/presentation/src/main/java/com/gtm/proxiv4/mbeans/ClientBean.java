@@ -16,6 +16,7 @@ import com.gtm.proxiv4.metier.Adresse;
 import com.gtm.proxiv4.metier.Client;
 import com.gtm.proxiv4.metier.Compte;
 import com.gtm.proxiv4.metier.Conseiller;
+import com.gtm.proxiv4.metier.Personne;
 import com.gtm.proxiv4.service.IServiceConseiller;
 
 @Controller
@@ -27,14 +28,14 @@ public class ClientBean {
 	@Autowired
 	private Client client;
 	@Autowired
-	private	Adresse adresse;
+	private Adresse adresse;
 	@Autowired
-	private	List<Compte> comptesCourants;
+	private List<Compte> comptesCourants;
 	@Autowired
-	private	List<Compte> comptesEpargnes;
-	
+	private List<Compte> comptesEpargnes;
+
 	@Autowired
-    private ConseillerBean conseillerBean;
+	private ConseillerBean conseillerBean;
 
 	public IServiceConseiller getServiceConseiller() {
 		return serviceConseiller;
@@ -53,10 +54,7 @@ public class ClientBean {
 	}
 
 	public Client getClient() {
-		//if(client == null){
-          //  client = new Client();
-        //}
-        return client;
+		return client;
 	}
 
 	public void setClient(Client client) {
@@ -87,26 +85,20 @@ public class ClientBean {
 		this.comptesEpargnes = comptesEpargnes;
 	}
 
-	public void onUserSelect(SelectEvent event){ 
-    	this.client =  (Client)event.getObject();
-    	System.out.println("client = "+client.getId());
-    }
-    public void onUserUnselect(UnselectEvent event)
-    {
-    	client =  null;
-    }
-    
-    public void rowSelect(SelectEvent event){
-    	client =  (Client)event.getObject();
-    	System.out.println("client = "+client.getPrenom());	
-}
-    
-    public String modifierClient(){
-    	try{ serviceConseiller.modifierInfoClient(client);
-    	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"Client modifié", null);
-		FacesContext.getCurrentInstance().addMessage(null, message);}
-    	finally {return "modifierClients";}
-    }
+	public void rowSelect(SelectEvent event) {
+	}
+
+	public void rowUnSelect(SelectEvent event) {
+	}
+
+	public String modifierClient() {
+		try {
+			serviceConseiller.modifierInfoClient(client);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Client modifié", null);
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} finally {
+			return "modifierClient";
+		}
+	}
     
 }

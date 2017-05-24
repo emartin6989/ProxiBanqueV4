@@ -6,127 +6,107 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="title">
-        Lister clients
+        <h2>Liste d'un client</h2>
     </ui:define>
 
 	<ui:define name="content">
-		<h2>Liste des clients</h2>
-
 		<h:form id="formDataTable">
-			<p:dataTable var="c" value="#{conseillerBean.clients}"
-				selection="#{clientBean.client}" selectionMode="single"
-				style="width: 700" rowKey="#{not empty c.id ? c.id : c.hashCode()}"
-				first="#{c.id}" paginator="true" rows="5" editable="true">
-
-				<p:ajax event="rowSelect"
-					update=":formDataTable:userUpdateForm, :formDataTable:userUpdateForm2, :formDataTable:userUpdateForm3"
-					listener="#{clientBean.onUserSelect}" />
-
-				<p:column sortBy="#{c.id}" filterBy="#{c.id}">
-					<f:facet name="header">
-						<h:outputText value="ID" />
-					</f:facet>
+			<p:dataTable id="eventsClient" var="c"
+				value="#{conseillerBean.clients}" selectionMode="single"
+				selection="#{clientBean.client}" rowKey="#{c.id}">
+				<f:facet name="header">
+            Clients
+        </f:facet>
+				<p:ajax event="rowSelect" listener="#{clientBean.rowSelect}"
+					update=":formDataTable:clientDetail, :formDataTable:cocDetail, :formDataTable:coeDetail"
+					oncomplete="PF('clientDialog').show()" title="View" />
+				<p:ajax event="rowUnselect" listener="#{clientBean.rowUnselect}"/>
+				<p:column headerText="ID">
 					<h:outputText value="#{c.id}" />
 				</p:column>
-				<p:column sortBy="#{c.nom}" filterBy="#{c.nom}">
-					<f:facet name="header">
-						<h:outputText value="NOM" />
-					</f:facet>
+				<p:column headerText="NOM">
 					<h:outputText value="#{c.nom}" />
 				</p:column>
-				<p:column sortBy="#{c.prenom}" filterBy="#{c.prenom}">
-					<f:facet name="header">
-						<h:outputText value="PRENOM" />
-					</f:facet>
+				<p:column headerText="PRENOM">
 					<h:outputText value="#{c.prenom}" />
 				</p:column>
-				<p:column sortBy="#{c.nomEntreprise}" filterBy="#{c.nomEntreprise}">
-					<f:facet name="header">
-						<h:outputText value="ENTREPRISE" />
-					</f:facet>
+				<p:column headerText="ENTREPRISE">
 					<h:outputText value="#{c.nomEntreprise}" />
 				</p:column>
 			</p:dataTable>
 
-			<p:panel id="userDetailsPanelId" header="Détails Client"
-				style="width: 700;" widgetVar="oneUser">
-				<h:panelGrid columns="2" cellpadding="2" id="userUpdateForm">
-					<h:outputLabel for="#{clientBean.client.nom}" value="Nom" />
-					<h:outputText value="#{clientBean.client.nom}" style="width: 100;"></h:outputText>
-					<h:outputLabel for="#{clientBean.client.prenom}" value="Prenom" />
-					<h:outputText value="#{clientBean.client.prenom}"
-						style="width: 100;"></h:outputText>
-					<h:outputLabel for="#{clientBean.client.nomEntreprise}"
-						value="Entreprise" />
-					<h:outputText value="#{clientBean.client.nomEntreprise}"
-						style="width: 100;"></h:outputText>
-					<h:outputLabel for="#{clientBean.client.email}" value="Email" />
-					<h:outputText value="#{clientBean.client.email}"
-						style="width: 100;"></h:outputText>
-					<h:outputLabel for="#{clientBean.client.telephone}"
-						value="Telephone" />
-					<h:outputText value="#{clientBean.client.telephone}"
-						style="width: 100;"></h:outputText>
-					<h:outputLabel for="#{clientBean.client.adresse.rue}" value="Rue" />
-					<h:outputText value="#{clientBean.client.adresse.rue}"
-						style="width: 100;"></h:outputText>
-					<h:outputLabel for="#{clientBean.client.adresse.codePostal}"
-						value="Code postal" />
-					<h:outputText value="#{clientBean.client.adresse.codePostal}"
-						style="width: 100;"></h:outputText>
-					<h:outputLabel for="#{clientBean.client.adresse.ville}"
-						value="Ville" />
-					<h:outputText value="#{clientBean.client.adresse.ville}"
-						style="width: 100;"></h:outputText>
-				</h:panelGrid>
-				<h:commandButton type="submit" value="Modifier"
-					action="modifierClient" />
-			</p:panel>
-
-			<p:panel id="userDetailsPanelId2" header="Comptes courants"
-				style="width: 700;" widgetVar="oneUser">	
-			<p:dataTable var="coc" value="#{clientBean.comptesCourants}"
-				id="userUpdateForm2">
-				<p:column>
+			<p:dialog header="Informations client" widgetVar="clientDialog" modal="true"
+				showEffect="fade" hideEffect="fade" resizable="false">
+				<p:outputPanel id="clientDetail" style="text-align:center;">
+					<p:panelGrid columns="2" rendered="#{not empty clientBean.client}">
+						<f:facet name="header">
+						Coordonnées
+						</f:facet>
+						<h:outputText value="NOM" />
+						<h:outputText value="#{clientBean.client.nom}" />
+						<h:outputText value="PRENOM" />
+						<h:outputText value="#{clientBean.client.prenom}" />
+						<h:outputText value="ENTREPRISE" rendered="#{clientBean.client.entreprise}"/>
+						<h:outputText value="#{clientBean.client.nomEntreprise}" rendered="#{clientBean.client.entreprise}"/>
+						<h:outputText value="EMAIL" />
+						<h:outputText value="#{clientBean.client.email}" />
+						<h:outputText value="TELEPHONE" />
+						<h:outputText value="#{clientBean.client.telephone}" />
+						<h:outputText value="RUE" />
+						<h:outputText value="#{clientBean.client.adresse.rue}" />
+						<h:outputText value="CODE POSTAL" />
+						<h:outputText value="#{clientBean.client.adresse.codePostal}" />
+						<h:outputText value="VILLE" />
+						<h:outputText value="#{clientBean.client.adresse.ville}" />
+					</p:panelGrid>
+					<p:commandButton value="Modifier"
+					action="modifierClient" icon="ui-icon-pencil"/>
+				</p:outputPanel>
+				<p:outputPanel id="cocDetail" style="text-align:center;">
+					<p:dataTable var="coc" value="#{clientBean.comptesCourants}">
 					<f:facet name="header">
-						<h:outputText value="ID" />
-					</f:facet>
-					<h:outputText value="#{coc.id}" />
-				</p:column>
-				<p:column>
+						Comptes courants
+						</f:facet>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="NUMERO" />
+							</f:facet>
+							<h:outputText value="#{coc.id}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="SOLDE" />
+							</f:facet>
+							<h:outputText value="#{coc.solde}">
+								<f:convertNumber pattern="#0.00" />
+							</h:outputText>
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="DECOUVERT" />
+							</f:facet>
+							<h:outputText value="#{coc.decouvert}">
+								<f:convertNumber pattern="#0.00" />
+							</h:outputText>
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="DATE OUVERTURE" />
+							</f:facet>
+							<h:outputText value="#{coc.dateOuverture}">
+								<f:convertDateTime pattern="dd.MM.yyyy" />
+							</h:outputText>
+						</p:column>
+					</p:dataTable>
+				</p:outputPanel>
+				<p:outputPanel id="coeDetail" style="text-align:center;">
+					<p:dataTable var="coe" value="#{clientBean.comptesEpargnes}">
 					<f:facet name="header">
-						<h:outputText value="SOLDE" />
-					</f:facet>
-					<h:outputText value="#{coc.solde}">
-					<f:convertNumber pattern="#0.00" />
-					</h:outputText>
-				</p:column>
-				<p:column>
+						Comptes épargnes
+						</f:facet>
+					<p:column>
 					<f:facet name="header">
-						<h:outputText value="DECOUVERT" />
-					</f:facet>
-					<h:outputText value="#{coc.decouvert}">
-					<f:convertNumber pattern="#0.00" />
-					</h:outputText>
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="DATE OUVERTURE" />
-					</f:facet>
-					<h:outputText value="#{coc.dateOuverture}">
-					<f:convertDateTime pattern="dd.MM.yyyy" />
-					</h:outputText>
-				</p:column>
-			</p:dataTable>
-			</p:panel>
-			
-			<p:panel id="userDetailsPanelId3" header="Comptes épargnes"
-				style="width: 700;" widgetVar="oneUser">
-			<p:dataTable var="coe" value="#{clientBean.comptesEpargnes}"
-				id="userUpdateForm3">
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="ID" />
+						<h:outputText value="NUMERO" />
 					</f:facet>
 					<h:outputText value="#{coe.id}" />
 				</p:column>
@@ -155,9 +135,8 @@
 					</h:outputText>
 				</p:column>
 			</p:dataTable>
-			</p:panel>
-
+			</p:outputPanel>
+			</p:dialog>
 		</h:form>
-
 	</ui:define>
 </ui:composition>
