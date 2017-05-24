@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Classe Conseiller servant a definir les conseillers clientele des
  * agences bancaires
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 @Entity
 @DiscriminatorValue(value = "Conseiller")
+@JsonIgnoreProperties({"gerant","clients","password"})
 public class Conseiller extends Employe {
 
 	/**
