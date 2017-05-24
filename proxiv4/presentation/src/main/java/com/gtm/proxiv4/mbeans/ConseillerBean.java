@@ -22,11 +22,10 @@ public class ConseillerBean implements Serializable {
 	
 	@Autowired
 	private IServiceConseiller serviceConseiller;
-	
     @Autowired
     private ConnexionBean connexionBean;
-	
-	private List<Client> clients = new ArrayList<Client>();
+    @Autowired
+	private List<Client> clients;
 
 	public IServiceConseiller getServiceConseiller() {
 		return serviceConseiller;

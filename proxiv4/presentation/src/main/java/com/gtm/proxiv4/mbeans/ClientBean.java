@@ -20,7 +20,6 @@ import com.gtm.proxiv4.metier.Personne;
 import com.gtm.proxiv4.service.IServiceConseiller;
 
 @Controller
-//@SessionScope
 public class ClientBean {
 	
 	@Autowired
