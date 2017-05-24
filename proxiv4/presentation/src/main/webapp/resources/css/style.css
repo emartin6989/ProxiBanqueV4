@@ -4,6 +4,7 @@ body {
 	color: black;
 	background-color: aqua;
 	background-image: url("#{resource['img:background.jpg']}");
+	background-attachment:fixed;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-position: top;
