@@ -60,7 +60,7 @@ public interface IServiceConseiller {
 	 * 
 	 * @param idCompte
 	 *            identifiant du compte a exclure
-	 * @return List<Compte> tous les comptes de la baque sauf celui dont l'id
+	 * @return List Compte tous les comptes de la baque sauf celui dont l'id
 	 *         est passe en argument
 	 */
 	public List<Compte> listerAutresComptes(long idCompte);
@@ -68,8 +68,8 @@ public interface IServiceConseiller {
 	/**
 	 * Liste les clients du conseiller
 	 * 
-	 * @param conseiller
-	 * @return List<Client> clients du conseiller
+	 * @param conseiller conseiller
+	 * @return List Client clients du conseiller
 	 */
 	public List<Client> listerClients(Conseiller conseiller);
 
@@ -78,7 +78,7 @@ public interface IServiceConseiller {
 	 * 
 	 * @param client
 	 *            client dont on veut lister les comptes
-	 * @return List<Compte> comptes du client
+	 * @return List Compte comptes du client
 	 */
 	public List<Compte> listerComptesClient(Client client);
 
@@ -87,7 +87,7 @@ public interface IServiceConseiller {
 	 * 
 	 * @param conseiller
 	 *            conseiller dont on veut lister les comptes geres
-	 * @return List<Compte> comptes des clients du conseiller
+	 * @return List Compte comptes des clients du conseiller
 	 */
 	public List<Compte> listerComptesConseiller(Conseiller conseiller);
 
@@ -96,7 +96,7 @@ public interface IServiceConseiller {
 	 * 
 	 * @param client
 	 *            dont on desire liset les comptes courant
-	 * @return List<Compte> comptes courant du client
+	 * @return List Compte comptes courant du client
 	 */
 	public List<Compte> listerComptesCourantClient(Client client);
 
@@ -104,8 +104,8 @@ public interface IServiceConseiller {
 	 * Liste tous les comptes dont le solde depasse le seuil d'alerte de
 	 * secouvert pour les clients dependant du conseiller
 	 * 
-	 * @param conseiller
-	 * @return List<Compte> comptes dont le solde depasse le seuil d'alerte de
+	 * @param conseiller conseiller
+	 * @return List Compte comptes dont le solde depasse le seuil d'alerte de
 	 *         decouvert
 	 */
 	public List<Compte> listerComptesDecouvert(Conseiller conseiller);
@@ -115,7 +115,7 @@ public interface IServiceConseiller {
 	 * 
 	 * @param client
 	 *            dont on desire liset les comptes epargne
-	 * @return List<Compte> comptes eparne du client
+	 * @return List Compte comptes eparne du client
 	 */
 	public List<Compte> listerComptesEpargneClient(Client client);
 
