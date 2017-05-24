@@ -273,4 +273,21 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 		return clients;
 	}
 
+	@Override
+	public List<Compte> listerComptes(Gerant gerant) {
+		// préparation de la réponse
+		List<Compte> comptes = new ArrayList<Compte>();
+
+		// recherche de tous les conseillers du gérant
+		for (Conseiller conseiller : gerant.getConseillers()) {
+			// recherche de tous les clients du conseiller
+			for (Client client : conseiller.getClients()) {
+
+				comptes.addAll(client.getComptes());
+
+			}
+		}
+		return comptes;
+	}
+
 }

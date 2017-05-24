@@ -34,6 +34,14 @@ public interface IServiceGerant {
 	public List<Conseiller> listerConseiller(Gerant gerant);
 
 	/**
+	 * Liste tous les comptes dependant des conseillers du gerant
+	 * 
+	 * @param gerant
+	 * @return List<Compte> comptes dependant des conseillers du gerant
+	 */
+	public List<Compte> listerComptes(Gerant gerant);
+	
+	/**
 	 * Liste tous les comptes dont le solde depasse le seuil d'alerte de
 	 * secouvert pour les clients dependant des conseillers du gerant
 	 * 
