@@ -34,6 +34,8 @@ public class AddClientBean {
 	private Adresse adresse;
 	@Autowired
 	private ConnexionBean connexionBean;
+	
+	private String entreprise = "false"; //give the default value
 
 	public IServiceConseiller getServiceConseiller() {
 		return serviceConseiller;
@@ -67,6 +69,14 @@ public class AddClientBean {
 		this.connexionBean = connexionBean;
 	}
 
+	public String getEntreprise() {
+		return entreprise;
+	}
+
+	public void setEntreprise(String entreprise) {
+		this.entreprise = entreprise;
+	}
+
 	public String ajouterClient() {
 		client.setAdresse(adresse);
 		client.setConseiller((Conseiller) connexionBean.employeConnecte());
@@ -79,6 +89,7 @@ public class AddClientBean {
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			client = null;
 			adresse = null;
+			entreprise = "false";
 			
 		} catch (ConseillerNonSpecifieException e1) {
 

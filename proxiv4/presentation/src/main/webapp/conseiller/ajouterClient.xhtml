@@ -31,7 +31,7 @@
 
 					<p:outputLabel for="entreprise" value="Type du client :" />
 					<p:selectOneRadio id="entreprise" styleClass="noBorder"
-						value="#{addClientBean.client.entreprise}" label="Action">
+						value="#{addClientBean.entreprise}" label="Action">
 						<f:selectItem itemLabel="Entreprise" itemValue="true" />
 						<f:selectItem itemLabel="Particulier" itemValue="false" />
 						<f:ajax render="nomEntreprise" />
@@ -42,7 +42,7 @@
 					</h:outputLabel>
 					<p:inputText id="nomEntreprise"
 						value="#{addClientBean.client.nomEntreprise}"
-						disabled="#{addClientBean.client.entreprise == false}"
+						disabled="#{addClientBean.entreprise == false}"
 						required="#{addClientBean.client.entreprise}"
 						requiredMessage="champ obligatoire" />
 					<p:message for="nomEntreprise" />
