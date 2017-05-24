@@ -11,32 +11,33 @@
 
 	<ui:define name="content">
 		<h:form id="formDataTable"
-			rendered="#{request.isUserInRole('CONSEILLER')}"> 
-			<p:dataTable id="eventsClient" var="c"
-				value="#{conseillerBean.clients}" selectionMode="single"
-				selection="#{clientBean.client}" rowKey="#{c.id}">
-				<f:facet name="header">Clients</f:facet>
-				<p:ajax event="rowSelect" listener="#{clientBean.rowSelect}"
-					update=":formDataTable:clientDetail, :formDataTable:cocDetail, :formDataTable:coeDetail"
-					oncomplete="PF('clientDialog').show()" title="View" />
-				<p:ajax event="rowUnselect" listener="#{clientBean.rowUnselect}" />
-				<p:column headerText="ID">
-					<h:outputText value="#{c.id}" />
-				</p:column>
-				<p:column headerText="NOM">
-					<h:outputText value="#{c.nom}" />
-				</p:column>
-				<p:column headerText="PRENOM">
-					<h:outputText value="#{c.prenom}" />
-				</p:column>
-				<p:column headerText="ENTREPRISE">
-					<h:outputText value="#{c.nomEntreprise}" />
-				</p:column>
-			</p:dataTable>
-
+			rendered="#{request.isUserInRole('CONSEILLER')}">
+			<p:panel header="Mes clients" style="width: 700;">
+				<p:dataTable id="eventsClient" var="c"
+					value="#{conseillerBean.clients}" selectionMode="single"
+					selection="#{clientBean.client}" rowKey="#{c.id}">
+					<p:ajax event="rowSelect" listener="#{clientBean.rowSelect}"
+						update=":formDataTable:clientDetail, :formDataTable:cocDetail, :formDataTable:coeDetail"
+						oncomplete="PF('clientDialog').show()" title="View" />
+					<p:ajax event="rowUnselect" listener="#{clientBean.rowUnselect}" />
+					<p:column headerText="ID">
+						<h:outputText value="#{c.id}" />
+					</p:column>
+					<p:column headerText="NOM">
+						<h:outputText value="#{c.nom}" />
+					</p:column>
+					<p:column headerText="PRENOM">
+						<h:outputText value="#{c.prenom}" />
+					</p:column>
+					<p:column headerText="ENTREPRISE">
+						<h:outputText value="#{c.nomEntreprise}" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
 			<p:dialog header="Informations client" widgetVar="clientDialog"
 				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-				<p:outputPanel id="clientDetail" style="text-align:center;" header="Coordonnées">
+				<p:outputPanel id="clientDetail" style="text-align:center;"
+					header="Coordonnées">
 					<p:panelGrid columns="2" rendered="#{not empty clientBean.client}">
 						<h:outputText value="NOM" />
 						<h:outputText value="#{clientBean.client.nom}" />
@@ -63,8 +64,8 @@
 				<p:outputPanel id="cocDetail" style="text-align:center;">
 					<p:dataTable var="coc" value="#{clientBean.comptesCourants}">
 						<f:facet name="header">
-						Comptes courants
-						</f:facet>
+							Comptes courants
+							</f:facet>
 						<p:column>
 							<f:facet name="header">
 								<h:outputText value="NUMERO" />
@@ -100,8 +101,8 @@
 				<p:outputPanel id="coeDetail" style="text-align:center;">
 					<p:dataTable var="coe" value="#{clientBean.comptesEpargnes}">
 						<f:facet name="header">
-						Comptes épargnes
-						</f:facet>
+							Comptes épargnes
+							</f:facet>
 						<p:column>
 							<f:facet name="header">
 								<h:outputText value="NUMERO" />
@@ -135,28 +136,31 @@
 					</p:dataTable>
 				</p:outputPanel>
 			</p:dialog>
+
 		</h:form>
 
 		<h:form rendered="#{request.isUserInRole('GERANT')}">
-			<p:dataTable value="#{gerantBean.conseillers}" var="c" border="1"
-				style="width: 700">
-				<p:column>
-					<f:facet name="header">NOM</f:facet>
-					<h:outputText value="#{c.nom}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">PRENOM</f:facet>
-					<h:outputText value="#{c.prenom}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">EMAIL</f:facet>
-					<h:outputText value="#{c.email}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">TELEPHONE</f:facet>
-					<h:outputText value="#{c.telephone}" />
-				</p:column>
-			</p:dataTable>
+			<p:panel header="Mes conseillers" style="width: 700;">
+				<p:dataTable value="#{gerantBean.conseillers}" var="c" border="1"
+					style="width: 700">
+					<p:column>
+						<f:facet name="header">NOM</f:facet>
+						<h:outputText value="#{c.nom}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">PRENOM</f:facet>
+						<h:outputText value="#{c.prenom}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">EMAIL</f:facet>
+						<h:outputText value="#{c.email}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">TELEPHONE</f:facet>
+						<h:outputText value="#{c.telephone}" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
 		</h:form>
 	</ui:define>
 </ui:composition>
