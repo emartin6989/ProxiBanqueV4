@@ -30,7 +30,7 @@
 					<h:form>
 						<h:outputText
 							value="#{connexionBean.employeConnecte().prenom.concat(' ').concat(connexionBean.employeConnecte().nom).concat(' : ')}" />
-						connecté en tant que 
+						connecté(e) en tant que 
 						<h:outputText value="Conseiller"
 							rendered="#{request.isUserInRole('CONSEILLER')}" />
 						<h:outputText value="Gérant"
