@@ -2,6 +2,7 @@ package com.gtm.proxiv4.metier;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +26,8 @@ public class Transaction {
 	@ManyToOne
 	private Compte compteDebiteur;
 	@ManyToOne
-	private Compte compteCrediteur;
+	private Compte compteCrediteur;	
+	@Column(columnDefinition = "Decimal(10,2)") // bride à 2 décimales la BDD
 	private double montant;
 
 	public long getId() {
