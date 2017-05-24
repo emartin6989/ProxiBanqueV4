@@ -1,0 +1,43 @@
+POUR UTILISER LES DONNEES DE DEMONSTRATION IMPORTER LE FICHIER SQL DANS LA BASE DE DONNEE "proxibanque"
+
+COMPTES DISPONIBLES DANS LE FICHIER SQL DE DEMONSTRATION
+
+Type de compte	Login					Password
+
+Gerant		manon.dupond@proxibanque.fr		Manon
+Gerant		arthur.salomon@proxibanque.fr		Arthur
+Gerant		marine.espuche@proxibanque.fr		Marine
+
+Conseiller	marie.espuche@proxibanque.fr		Marie
+Conseiller	douglas.bonhomme@proxibanque.fr		Douglas
+Conseiller	paul.villar@proxibanque.fr		Paul
+Conseiller	guy.emin@proxibanque.fr			Guy
+Conseiller	theo.salomon@proxibanque.fr		Theo
+Conseiller	jerome.martin@proxibanque.fr		Jerome
+Conseiller	marine.legal@proxibanque.fr		Marine
+Conseiller	claudine.ayraut@proxibanque.fr		Claudine
+Conseiller	thomas.ayraut@proxibanque.fr		Thomas
+Conseiller	stephane.jeanjacquot@proxibanque.fr	Stephane
+Conseiller	manon.bonhomme@proxibanque.fr		Manon
+Conseiller	guillaume.emin@proxibanque.fr		Guillaume
+Conseiller	marine.doe@proxibanque.fr		Marine
+Conseiller	stephane.marin@proxibanque.fr		Stephane
+Conseiller	marine.michel@proxibanque.fr		Marine
+Conseiller	jean.dupond@proxibanque.fr		Jean
+Conseiller	thomas.emin@proxibanque.fr		Thomas
+Conseiller	nassur.durand@proxibanque.fr		Nassur
+Conseiller	paul.salomon@proxibanque.fr		Paul
+Conseiller	thomas.doe@proxibanque.fr		Thomas
+Conseiller	nassur.jeanjacquot@proxibanque.fr	Nassur
+Conseiller	jean.marin@proxibanque.fr		Jean
+Conseiller	arthur.espuche@proxibanque.fr		Arthur
+Conseiller	pierre.villar@proxibanque.fr		Pierre
+Conseiller	florent.ayraut@proxibanque.fr		Florent
+Conseiller	perrine.durand@proxibanque.fr		Perrine
+Conseiller	pierre.salomon@proxibanque.fr		Pierre
+Conseiller	paul.legal@proxibanque.fr		Paul
+Conseiller	amel.doe@proxibanque.fr			Amel
+Conseiller	amel.ayraut@proxibanque.fr		Amel
+Conseiller	marie.villar@proxibanque.fr		Marie
+Conseiller	thomas.jeanjacquot@proxibanque.fr	Thomas
+Conseiller	vincent.michel@proxibanque.fr		Vincent
