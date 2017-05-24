@@ -5,13 +5,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.catalina.realm.RealmBase;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
 
 import com.gtm.proxiv4.metier.Adresse;
 import com.gtm.proxiv4.metier.Client;
@@ -26,23 +22,39 @@ import com.gtm.proxiv4.metier.Transaction;
 /**
  * pour test population de la base de données
  */
-// @ContextConfiguration(locations = "classpath:/applicationContext.xml")
 public class RandomPopulateBdd {
 	// PARAMETRES
-	private static int NB_GERANTS = 2;
-	private static int NB_MAX_CONSEILLERS_PAR_GERANT = 15;
-	private static int NB_MAX_CLIENT_PAR_CONSEILLER = 15;
+	private static int NB_GERANTS = 3;
+	private static int NB_MAX_CONSEILLERS_PAR_GERANT = 20;
+	private static int NB_MAX_CLIENT_PAR_CONSEILLER = 10;
 	private static int DEBUT_DES_TRANSACTION_EN_MOIS = 6;
-	
 
+	
+	//pool de données pour random
 	private static String[] NOMS = { "DUPOND", "DURAND", "DOE", "MARTIN", "MICHEL", "OTHMANE", "IZARD", "JEANJACQUOT",
 			"BONHOMME", "ESPUCHE", "EMIN", "SALOMON", "AYRAUT", "LEGAL", "VILLAR", "MARIN" };
 	private static String[] PRENOMS = { "Paul", "Jean", "Arthur", "Guy", "Claude", "Claudine", "Marie", "Leo", "Thomas",
 			"Guillaume", "Jerome", "Emmanuel", "Pierre", "Manon", "Perrine", "Marine", "Stephane", "Vincent", "Florent",
 			"Theo", "Eddy", "Douglas", "Nassur", "Amel" };
-	private static String[] RUES = { "aaa", "bb", "cc" };
-	private static String[] CODEPOSTALS = { "69000", "69001", "69002", "69003", "69004" };
+	private static String[] RUES = { "Rue de l'Église", "Place de l'Église", "Grande Rue", "Rue du Moulin",
+			"Place de la Mairie", "Rue du Château", "Rue des Écoles", "Rue de la Gare", "Rue de la Mairie",
+			"Rue Principale", "Rue du Stade", "Rue de la Fontaine", "Rue Pasteur", "Rue des Jardins", "Rue Victor-Hugo",
+			"Rue du chat qui tousse", "Rue de la soif", "Place des Quinconces", "Place de la Concorde", "Cours Léopold",
+			"Place Bellecour", "Place Charles-de-Gaulle", "Place du Pâtis", "Place de la Comédie", "Place de Jaude",
+			"Place de la République", "Place Denfert-Rochereau", "Place des Palmistes", "Place Saint-Nicolas",
+			"Place Jean-Jaurès", "Grand-Place", "Place des Vosges", "Parc Salvator", "Place de la Liberté",
+			"Place Stanislas", "Place du Capitole", "Place Ducale", "Place du Général-de-Gaulle",
+			"Place du Ralliement" };
+	private static String[] CODEPOSTALS = { "69000", "69001", "69002", "69003", "69004", "69005", "69006", "69007",
+			"69008", "69009" };
+	private static String[] NOMS_ENTREPRISES = { "Accor", "Air Liquide", "Alstom", "Arcelor-Mittal", "AXA",
+			"BNP Paribas", "Bouygues", "Cap Gemini", "Carrefour", "Crédit agricole", "Danone", "EADS", "EDF", "Essilor",
+			"France Télécom", "GDF Suez", "Gemalto", "L'Oréal", "Lafarge", "Legrand", "LVMH", "Michelin",
+			"Pernod Ricard", "Kering", "Publicis", "Renault", "Safran", "Saint-Gobain", "Sanofi", "Schneider Electric",
+			"Société Générale", "Solvay", "STMicroelectronics", "Technip", "Total", "Unibail-Rodamco", "Vallourec",
+			"Véolia Environnement", "Vinci", "Vivendi" };
 
+	//reminders
 	private static List<String> usedEmail;
 	private static List<Compte> existingAccounts;
 	private static Date lastTransactionDate;
@@ -63,7 +75,6 @@ public class RandomPopulateBdd {
 		existingAccounts = new ArrayList<Compte>();
 		// liste des emails utilisés pour éviter les doublons de login
 		usedEmail = new ArrayList<String>();
-
 
 		for (int iGerant = 0; iGerant < NB_GERANTS; iGerant++) {
 
@@ -116,32 +127,29 @@ public class RandomPopulateBdd {
 			}
 
 		}
-		
-		//Generation des transactions
+
+		// Generation des transactions
 		Date now = new Date();
 		lastTransactionDate = new Date();
-		
-		//recul de la date de début
-	    Calendar c = new GregorianCalendar();
-	    c.setTime(lastTransactionDate);
-	    c.add(Calendar.MONTH, -DEBUT_DES_TRANSACTION_EN_MOIS);
-	    lastTransactionDate=c.getTime();
-		
-	    boolean continueTransaction = true;
-	    while (continueTransaction){
-	    	
-	    	Transaction t = randomTransaction();
-	    	
-	    	if (t.getDate().after(now)){
-	    		continueTransaction = false;
-	    	}
-	    	else {
-	    		transactionRep.save(t);
-	    	}
-	    	
-	    }
-		
-		
+
+		// recul de la date de début
+		Calendar c = new GregorianCalendar();
+		c.setTime(lastTransactionDate);
+		c.add(Calendar.MONTH, -DEBUT_DES_TRANSACTION_EN_MOIS);
+		lastTransactionDate = c.getTime();
+
+		boolean continueTransaction = true;
+		while (continueTransaction) {
+
+			Transaction t = randomTransaction();
+
+			if (t.getDate().after(now)) {
+				continueTransaction = false;
+			} else {
+				transactionRep.save(t);
+			}
+
+		}
 
 	}
 
@@ -156,8 +164,10 @@ public class RandomPopulateBdd {
 	}
 
 	public static String randomRue() {
+
+		int numero = (int) (Math.random() * 100);
 		int index = (int) (Math.random() * RUES.length);
-		return RUES[index];
+		return numero + " " + RUES[index];
 	}
 
 	public static String randomCP() {
@@ -176,20 +186,20 @@ public class RandomPopulateBdd {
 	}
 
 	public static Date randomDate() {
-		
-	    Calendar c = new GregorianCalendar();
-	    c.setTime(new Date());
-	    c.add(Calendar.MONTH, -3-(int) (Math.random()*48));
-	    c.add(Calendar.SECOND, -(int) (Math.random()*60*60*24));
-	    
-	    Date date = c.getTime();
-	    
-	    return date;
+
+		Calendar c = new GregorianCalendar();
+		c.setTime(new Date());
+		c.add(Calendar.MONTH, -3 - (int) (Math.random() * 48));
+		c.add(Calendar.SECOND, -(int) (Math.random() * 60 * 60 * 24));
+
+		Date date = c.getTime();
+
+		return date;
 	}
 
 	public static String randomNomEntreprise() {
-		int index = (int) (Math.random() * NOMS.length);
-		return NOMS[index];
+		int index = (int) (Math.random() * NOMS_ENTREPRISES.length);
+		return NOMS_ENTREPRISES[index];
 	}
 
 	public static Adresse randomAdresse() {
@@ -272,7 +282,7 @@ public class RandomPopulateBdd {
 
 		Gerant g = new Gerant();
 		g.setAdresse(randomAdresse());
-		
+
 		boolean findNewIdentity = true;
 		while (findNewIdentity) {
 			g.setNom(randomNom());
@@ -286,37 +296,37 @@ public class RandomPopulateBdd {
 
 		return g;
 	}
-	
-	public static Transaction randomTransaction(){
-		
+
+	public static Transaction randomTransaction() {
+
 		Transaction t = new Transaction();
-		
+
 		Compte cDebit = randomExistingCompte();
 		Compte cCredit = randomExistingCompte();
-		
-		Double montant = Math.random()*cDebit.getSolde();
-		
-	    Calendar c = new GregorianCalendar();
-	    c.setTime(lastTransactionDate);
-	    c.add(Calendar.MINUTE, (int) (Math.random()*60*24*2));
-	    
-	    Date date = c.getTime();
-	    
-	    lastTransactionDate = date;
-	    
-	    t.setCompteDebiteur(cDebit);
-	    t.setCompteCrediteur(cCredit);
-	    t.setDate(date);
-	    t.setMontant(montant);
-	    
-	    return t;
-		
+
+		Double montant = Math.random() * cDebit.getSolde();
+
+		Calendar c = new GregorianCalendar();
+		c.setTime(lastTransactionDate);
+		c.add(Calendar.MINUTE, (int) (Math.random() * 60 * 24 * 2));
+
+		Date date = c.getTime();
+
+		lastTransactionDate = date;
+
+		t.setCompteDebiteur(cDebit);
+		t.setCompteCrediteur(cCredit);
+		t.setDate(date);
+		t.setMontant(montant);
+
+		return t;
+
 	}
-	
-	public static Compte randomExistingCompte(){
-		
+
+	public static Compte randomExistingCompte() {
+
 		int index = (int) (Math.random() * existingAccounts.size());
 		return existingAccounts.get(index);
-		
+
 	}
 }
