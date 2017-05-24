@@ -10,14 +10,14 @@
     </ui:define>
 
 	<ui:define name="content">
-		<h:form id="formDataTable"
+		<p:panel header="Mes clients" style="width: 700;"
 			rendered="#{request.isUserInRole('CONSEILLER')}">
-			<p:panel header="Mes clients" style="width: 700;">
+			<h:form styleClass="form-horizontal">
 				<p:dataTable id="eventsClient" var="c"
 					value="#{conseillerBean.clients}" selectionMode="single"
 					selection="#{clientBean.client}" rowKey="#{c.id}">
 					<p:ajax event="rowSelect" listener="#{clientBean.rowSelect}"
-						update=":formDataTable:clientDetail, :formDataTable:cocDetail, :formDataTable:coeDetail"
+						update=":formCoordonnees:clientDetail, :formcoc:cocDetail, :formcoe:coeDetail"
 						oncomplete="PF('clientDialog').show()" title="View" />
 					<p:ajax event="rowUnselect" listener="#{clientBean.rowUnselect}" />
 					<p:column headerText="ID">
@@ -33,111 +33,114 @@
 						<h:outputText value="#{c.nomEntreprise}" />
 					</p:column>
 				</p:dataTable>
+			</h:form>
+		</p:panel>
+		<p:dialog widgetVar="clientDialog" header="Informations du client"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<p:panel header="Coordonnées" style="width: 700;">
+				<h:form styleClass="form-horizontal" id="formCoordonnees">
+					<p:outputPanel id="clientDetail">
+						<dl class="dl-horizontal">
+						<dt>NOM</dt>
+						<dd><h:outputText value="#{clientBean.client.nom}" /></dd>
+						<dt>PRENOM</dt>
+						<dd><h:outputText value="#{clientBean.client.prenom}" /></dd>
+						<ui:fragment rendered="#{clientBean.client.entreprise}">
+						<dt>ENTREPRISE</dt>
+						<dd><h:outputText value="#{clientBean.client.nomEntreprise}" /></dd></ui:fragment>
+						<dt>EMAIL</dt>
+						<dd><h:outputText value="#{clientBean.client.email}" /></dd>
+						<dt>TELEPHONE</dt>
+						<dd><h:outputText value="#{clientBean.client.telephone}" /></dd>
+						<dt>RUE</dt>
+						<dd><h:outputText value="#{clientBean.client.adresse.rue}" /></dd>
+						<dt>CODE POSTAL</dt>
+						<dd><h:outputText value="#{clientBean.client.adresse.codePostal}" /></dd>
+						<dt>VILLE</dt>
+						<dd><h:outputText value="#{clientBean.client.adresse.ville}" /></dd>
+					</dl>
+						<p:commandButton value="Modifier"
+							action="/conseiller/modifierClient" icon="ui-icon-pencil" />
+					</p:outputPanel>
+				</h:form>
 			</p:panel>
-			<p:dialog header="Informations client" widgetVar="clientDialog"
-				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-				<p:outputPanel id="clientDetail" style="text-align:center;"
-					header="Coordonnées">
-					<p:panelGrid columns="2" rendered="#{not empty clientBean.client}">
-						<h:outputText value="NOM" />
-						<h:outputText value="#{clientBean.client.nom}" />
-						<h:outputText value="PRENOM" />
-						<h:outputText value="#{clientBean.client.prenom}" />
-						<h:outputText value="ENTREPRISE"
-							rendered="#{clientBean.client.entreprise}" />
-						<h:outputText value="#{clientBean.client.nomEntreprise}"
-							rendered="#{clientBean.client.entreprise}" />
-						<h:outputText value="EMAIL" />
-						<h:outputText value="#{clientBean.client.email}" />
-						<h:outputText value="TELEPHONE" />
-						<h:outputText value="#{clientBean.client.telephone}" />
-						<h:outputText value="RUE" />
-						<h:outputText value="#{clientBean.client.adresse.rue}" />
-						<h:outputText value="CODE POSTAL" />
-						<h:outputText value="#{clientBean.client.adresse.codePostal}" />
-						<h:outputText value="VILLE" />
-						<h:outputText value="#{clientBean.client.adresse.ville}" />
-					</p:panelGrid>
-					<p:commandButton value="Modifier"
-						action="/conseiller/modifierClient" icon="ui-icon-pencil" />
-				</p:outputPanel>
-				<p:outputPanel id="cocDetail" style="text-align:center;">
-					<p:dataTable var="coc" value="#{clientBean.comptesCourants}">
-						<f:facet name="header">
-							Comptes courants
-							</f:facet>
-						<p:column>
-							<f:facet name="header">
-								<h:outputText value="NUMERO" />
-							</f:facet>
-							<h:outputText value="#{coc.id}" />
-						</p:column>
-						<p:column>
-							<f:facet name="header">
-								<h:outputText value="SOLDE" />
-							</f:facet>
-							<h:outputText value="#{coc.solde}">
-								<f:convertNumber pattern="#0.00" />
-							</h:outputText>
-						</p:column>
-						<p:column>
-							<f:facet name="header">
-								<h:outputText value="DECOUVERT" />
-							</f:facet>
-							<h:outputText value="#{coc.decouvert}">
-								<f:convertNumber pattern="#0.00" />
-							</h:outputText>
-						</p:column>
-						<p:column>
-							<f:facet name="header">
-								<h:outputText value="DATE OUVERTURE" />
-							</f:facet>
-							<h:outputText value="#{coc.dateOuverture}">
-								<f:convertDateTime pattern="dd.MM.yyyy" />
-							</h:outputText>
-						</p:column>
-					</p:dataTable>
-				</p:outputPanel>
-				<p:outputPanel id="coeDetail" style="text-align:center;">
-					<p:dataTable var="coe" value="#{clientBean.comptesEpargnes}">
-						<f:facet name="header">
-							Comptes épargnes
-							</f:facet>
-						<p:column>
-							<f:facet name="header">
-								<h:outputText value="NUMERO" />
-							</f:facet>
-							<h:outputText value="#{coe.id}" />
-						</p:column>
-						<p:column>
-							<f:facet name="header">
-								<h:outputText value="SOLDE" />
-							</f:facet>
-							<h:outputText value="#{coe.solde}">
-								<f:convertNumber pattern="#0.00" />
-							</h:outputText>
-						</p:column>
-						<p:column>
-							<f:facet name="header">
-								<h:outputText value="TAUX" />
-							</f:facet>
-							<h:outputText value="#{coe.taux}">
-								<f:convertNumber pattern="#0.00" />
-							</h:outputText>
-						</p:column>
-						<p:column>
-							<f:facet name="header">
-								<h:outputText value="DATE OUVERTURE" />
-							</f:facet>
-							<h:outputText value="#{coe.dateOuverture}">
-								<f:convertDateTime pattern="dd.MM.yyyy" />
-							</h:outputText>
-						</p:column>
-					</p:dataTable>
-				</p:outputPanel>
-			</p:dialog>
-
-		</h:form>
+			<p:panel header="Comptes courants" style="width: 700;">
+				<h:form styleClass="form-horizontal" id="formcoc">
+					<p:outputPanel id="cocDetail" style="text-align:center;">
+						<p:dataTable var="coc" value="#{clientBean.comptesCourants}">
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="NUMERO" />
+								</f:facet>
+								<h:outputText value="#{coc.id}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="SOLDE" />
+								</f:facet>
+								<h:outputText value="#{coc.solde}">
+									<f:convertNumber pattern="#0.00" />
+								</h:outputText>
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="DECOUVERT" />
+								</f:facet>
+								<h:outputText value="#{coc.decouvert}">
+									<f:convertNumber pattern="#0.00" />
+								</h:outputText>
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="DATE OUVERTURE" />
+								</f:facet>
+								<h:outputText value="#{coc.dateOuverture}">
+									<f:convertDateTime pattern="dd.MM.yyyy" />
+								</h:outputText>
+							</p:column>
+						</p:dataTable>
+					</p:outputPanel>
+				</h:form>
+			</p:panel>
+			<p:panel header="Comptes épargnes" style="width: 700;">
+				<h:form styleClass="form-horizontal" id="formcoe">
+					<p:outputPanel id="coeDetail" style="text-align:center;">
+						<p:dataTable var="coe" value="#{clientBean.comptesEpargnes}">
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="NUMERO" />
+								</f:facet>
+								<h:outputText value="#{coe.id}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="SOLDE" />
+								</f:facet>
+								<h:outputText value="#{coe.solde}">
+									<f:convertNumber pattern="#0.00" />
+								</h:outputText>
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="TAUX" />
+								</f:facet>
+								<h:outputText value="#{coe.taux}">
+									<f:convertNumber pattern="#0.00" />
+								</h:outputText>
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="DATE OUVERTURE" />
+								</f:facet>
+								<h:outputText value="#{coe.dateOuverture}">
+									<f:convertDateTime pattern="dd.MM.yyyy" />
+								</h:outputText>
+							</p:column>
+						</p:dataTable>
+					</p:outputPanel>
+				</h:form>
+			</p:panel>
+		</p:dialog>
 
 		<h:form rendered="#{request.isUserInRole('GERANT')}">
 			<p:panel header="Mes conseillers" style="width: 700;">
