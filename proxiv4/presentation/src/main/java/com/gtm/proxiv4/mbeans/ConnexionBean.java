@@ -1,6 +1,5 @@
 package com.gtm.proxiv4.mbeans;
 
-
 import java.io.Serializable;
 
 import javax.annotation.ManagedBean;
@@ -17,8 +16,10 @@ import com.gtm.proxiv4.metier.Employe;
 import com.gtm.proxiv4.service.IServiceConseiller;
 import com.gtm.proxiv4.service.IServiceEmploye;
 
+/**
+ * Controller pour toutes les vues permet la recuperation de l'employe connecte
+ */
 @Controller
-//@ManagedBean
 public class ConnexionBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -26,29 +27,24 @@ public class ConnexionBean implements Serializable{
 	@Autowired
 	private IServiceEmploye serviceEmploye;
 	
+	/**
+	 * Recupere l'objet Employe correspondant a l'utilisateur connecte
+	 * @return Employe connecte
+	 */
 	public Employe employeConnecte(){
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = facesContext.getExternalContext();
 		String email = externalContext.getRemoteUser();
-		
-		
+				
 		return serviceEmploye.findEmployeByEmail(email);
 	}
 	
-	
+	/**
+	 * Invalide la session de l'utilisateur connecte
+	 * @return redirection sur la page d'index
+	 */
 	public String logout(){
-		
-//		FacesContext facesContext = FacesContext.getCurrentInstance();
-//		ExternalContext externalContext = facesContext.getExternalContext();
-//		final HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-//		request.getSession(false).invalidate(); 
-		
-//		FacesContext context = FacesContext.getCurrentInstance();
-//		ExternalContext ec = context.getExternalContext();
-//		final HttpServletRequest request = (HttpServletRequest) ec.getRequest();
-//		request.getSession(false).invalidate(); 
-		
 		
 		FacesContext context = FacesContext.getCurrentInstance();	
 		HttpSession session = (HttpSession) context.getExternalContext().getSession(true);

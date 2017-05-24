@@ -1,31 +1,30 @@
 package com.gtm.proxiv4.mbeans;
 
-import java.util.List;
+import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
-import org.primefaces.event.SelectEvent;
-import org.primefaces.event.UnselectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.annotation.RequestScope;
-import org.springframework.web.context.annotation.SessionScope;
 
 import com.gtm.proxiv4.metier.Adresse;
 import com.gtm.proxiv4.metier.Client;
-import com.gtm.proxiv4.metier.Compte;
 import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.service.IServiceConseiller;
 import com.gtm.proxiv4.service.exceptions.ConseillerNonSpecifieException;
 import com.gtm.proxiv4.service.exceptions.NombreMaxDeClientException;
 
+/**
+ * Controller de la vue Ajouter client
+ */
 @Controller
-// @SessionScope
 @RequestScope
-public class AddClientBean {
+public class AddClientBean implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	@Autowired
 	private IServiceConseiller serviceConseiller;
 	@Autowired
@@ -77,6 +76,11 @@ public class AddClientBean {
 		this.entreprise = entreprise;
 	}
 
+	
+	/**
+	 * Ajoute le client en base pour le conseiller connecte
+	 * @return String de redirection sur la vue
+	 */
 	public String ajouterClient() {
 		client.setAdresse(adresse);
 		client.setConseiller((Conseiller) connexionBean.employeConnecte());
