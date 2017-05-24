@@ -26,6 +26,8 @@ public class GerantBean implements Serializable {
 
 	@Autowired
 	private IServiceGerant service;
+    @Autowired
+    private ConnexionBean connexionBean;
 
 	private Gerant gerant;
 	
@@ -39,10 +41,7 @@ public class GerantBean implements Serializable {
 		this.service = service;
 	}
 	public Gerant getGerant() {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		ExternalContext externalContext = facesContext.getExternalContext();
-		String email = externalContext.getRemoteUser();
-		return gerant = service.findGerantByEmail(email);
+		return gerant = (Gerant) connexionBean.employeConnecte();
 	}
 	public void setGerant(Gerant gerant) {
 		this.gerant = gerant;
