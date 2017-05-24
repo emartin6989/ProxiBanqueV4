@@ -23,7 +23,8 @@ public class ConseillerBean implements Serializable {
 	@Autowired
 	private IServiceConseiller serviceConseiller;
 	
-	private Conseiller conseiller;
+    @Autowired
+    private ConnexionBean connexionBean;
 	
 	private List<Client> clients = new ArrayList<Client>();
 
@@ -35,24 +36,12 @@ public class ConseillerBean implements Serializable {
 		this.serviceConseiller = serviceConseiller;
 	}
 
-	public Conseiller getConseiller() {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		ExternalContext externalContext = facesContext.getExternalContext();
-		String email = externalContext.getRemoteUser();
-		return conseiller = serviceConseiller.findConseillerByEmail(email);
-	}
-
-	public void setConseiller(Conseiller conseiller) {
-		this.conseiller = conseiller;
-	}
-
 	public List<Client> getClients() {
-		return serviceConseiller.listerClients(getConseiller());
+		return serviceConseiller.listerClients((Conseiller) connexionBean.employeConnecte());
 	}
 
 	public void setClients(List<Client> clients) {
 		this.clients = clients;
 	}
-
 
 }
