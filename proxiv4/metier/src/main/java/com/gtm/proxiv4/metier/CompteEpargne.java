@@ -1,5 +1,6 @@
 package com.gtm.proxiv4.metier;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -15,8 +16,9 @@ import org.springframework.stereotype.Component;
 @DiscriminatorValue(value="CompteEpargne")
 public class CompteEpargne extends Compte {
 	/**
-	 * Le taux de r�mun�ration du compte �pargne
+	 * Le taux de  remuneration du compte epargne en pourcentage
 	 */
+	@Column(columnDefinition = "Decimal(10,2)") // bride à 2 décimales la BDD
 	private float taux;
 
 	public float getTaux() {

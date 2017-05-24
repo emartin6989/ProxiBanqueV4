@@ -29,6 +29,8 @@ public class VirementBean implements Serializable {
 	IServiceConseiller service;
 	@Autowired
 	ConseillerBean conseillerBean;
+	@Autowired
+	ConnexionBean connexionBean;
 
 	private Compte compteDebiteur;
 	private Compte compteCrediteur;
@@ -120,7 +122,7 @@ public class VirementBean implements Serializable {
 	}
 
 	public List<Compte> getComptesConseiller() {
-		Conseiller c = service.findConseillerByEmail("conseiller@test.fr");
+		Conseiller c = (Conseiller) connexionBean.employeConnecte();
 		comptesConseiller = service.listerComptesConseiller(c);
 		return comptesConseiller;
 	}
