@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -22,7 +23,7 @@ import com.gtm.proxiv4.service.exceptions.NombreMaxDeClientException;
  * Controller de la vue Ajouter client
  */
 @Controller
-@RequestScope
+@Scope("view")
 public class AddClientBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;

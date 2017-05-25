@@ -49,24 +49,30 @@
 							value="#{addClientBean.client.entreprise}" label="Action">
 							<f:selectItem itemLabel="Entreprise" itemValue="true" />
 							<f:selectItem itemLabel="Particulier" itemValue="false" />
+							<p:ajax process="entreprise" update="refresh" />
 						</p:selectOneRadio>
 					</div>
 					<div class="col-sm-4 col-md-6 col-lg-4"></div>
 				</div>
 				
+				<h:panelGroup id="refresh">
 				<div class="form-group">
 					<p:outputLabel for="nomEntreprise" value="Entreprise :"
-						styleClass="col-sm-4 col-md-4 col-lg-3 control-label" />
+						styleClass="col-sm-4 col-md-4 col-lg-3 control-label"
+						rendered="#{addClientBean.client.entreprise eq 'true'}" />
 					<div class="col-sm-9 col-md-9 col-lg-5">
 						<p:inputText id="nomEntreprise"
-							value="#{addClientBean.client.nomEntreprise}"/>
+							value="#{addClientBean.client.nomEntreprise}" 
+							rendered="#{addClientBean.client.entreprise eq 'true'}"/>
 						<p:watermark for="nomEntreprise"
-							value="Saisir le nom de l'entreprise" />
+							value="Saisir le nom de l'entreprise" 
+							rendered="#{addClientBean.client.entreprise eq 'true'}"/>
 					</div>
 					<div class="col-sm-4 col-md-6 col-lg-4">
 						<p:message for="nomEntreprise" />
 					</div>
 				</div>
+</h:panelGroup>
 
 				<div class="form-group">
 					<p:outputLabel for="email" value="Email :"

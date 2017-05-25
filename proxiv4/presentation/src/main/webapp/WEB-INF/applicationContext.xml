@@ -1,8 +1,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
@@ -26,37 +24,50 @@
 		<property name="password" value="${db.password}" />
 	</bean>
 
-<!-- definition de l'entityManagerFactory pour JPA -->
-<bean id="entityManagerFactory"
-        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" primary="true"> 
-        <property name="persistenceUnitName" value="testPU" />
-        <property name="dataSource" ref="dataSource" />
-    </bean>
+	<!-- definition de l'entityManagerFactory pour JPA -->
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		primary="true">
+		<property name="persistenceUnitName" value="testPU" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
-	<!-- définition du gestionnaire de transactions faisant référence au bean entityManagerFactory de JPA -->
-    <bean id="transactionManagerJPA" class="org.springframework.orm.jpa.JpaTransactionManager"> 
-        <property name="entityManagerFactory" ref="entityManagerFactory" />
-    </bean>
-    
-    <!-- CONFIG SPRING DATA -->
-    <jpa:repositories base-package="com.gtm.proxiv4.dao" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManagerJPA"/>
-    
+	<!-- définition du gestionnaire de transactions faisant référence au bean 
+		entityManagerFactory de JPA -->
+	<bean id="transactionManagerJPA" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<!-- CONFIG SPRING DATA -->
+	<jpa:repositories base-package="com.gtm.proxiv4.dao"
+		entity-manager-factory-ref="entityManagerFactory"
+		transaction-manager-ref="transactionManagerJPA" />
+
 	<!-- pour utiliser les annotations spring -->
 	<context:annotation-config />
 	<!-- package contenant les classes annotées spring -->
 	<context:component-scan base-package="com.gtm.proxiv4" />
 
-		<!-- prise en compte du gestionnaire de transaction pour @Transactional -->
-	<tx:annotation-driven transaction-manager="transactionManagerJPA"/>
-	
-<!-- 	 permet de détecter les @Aspect -->
-		<aop:aspectj-autoproxy />
-		
-		<!-- config aop via annotations-->
-<bean id="transactionLog" class="com.gtm.proxiv4.service.intercepteurs.TransactionLog" /> 
+	<!-- prise en compte du gestionnaire de transaction pour @Transactional -->
+	<tx:annotation-driven transaction-manager="transactionManagerJPA" />
+
+	<!-- permet de détecter les @Aspect -->
+	<aop:aspectj-autoproxy />
+
+	<!-- config aop via annotations -->
+	<bean id="transactionLog" class="com.gtm.proxiv4.service.intercepteurs.TransactionLog" />
 	<aop:config>
 		<aop:aspect ref="transactionLog">
 		</aop:aspect>
-	</aop:config> 
-		
+	</aop:config>
+
+	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+		<property name="scopes">
+			<map>
+				<entry key="view">
+					<bean class="com.gtm.proxiv4.springScopes.ViewScope" />
+				</entry>
+			</map>
+		</property>
+	</bean>
 </beans>
