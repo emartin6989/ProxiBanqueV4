@@ -19,7 +19,7 @@ import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.metier.Personne;
 
 @Controller
-@Path("/proxibanque")
+@Path("/")
 public class WebService {
 
 	@Autowired
