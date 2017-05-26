@@ -75,4 +75,5 @@ public interface IServiceGerant {
 	 */
 	public List<Transaction> listerTransactions(Gerant gerant);
 
+	public List<Transaction> listerTransactionsParGerantEtApresDate(Gerant gerant, Date dateDebut);
 }

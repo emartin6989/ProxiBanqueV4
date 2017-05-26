@@ -56,7 +56,7 @@ public class Client extends Personne {
 	 */
 	// cascade ALL car la suppression d'un client entraine la suppression de ses
 	// comptes
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "client", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
 	protected List<Compte> comptes = new ArrayList<Compte>();
 
 	/**

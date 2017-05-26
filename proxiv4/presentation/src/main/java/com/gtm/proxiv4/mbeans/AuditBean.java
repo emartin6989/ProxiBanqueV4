@@ -7,6 +7,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.primefaces.model.chart.PieChartModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +64,26 @@ public class AuditBean implements Serializable{
 	    }
 	    return pieModel; 
 	}
+	
+	private PieChartModel createPieModel2(Date dateDebut, String titre){
+	    PieChartModel pieModel = new PieChartModel();
+	    Gerant gerant = (Gerant) connexionBean.employeConnecte();
+	    List<Transaction> transactions = serviceGerant.listerTransactionsParGerantEtApresDate(gerant, dateDebut);
+	    
+	    Map<String, Long> counts = transactions.stream().collect(Collectors.groupingBy(c -> c.getCompteDebiteur().getClient().getPrenom() + " " + c.getCompteDebiteur().getClient().getNom(), Collectors.counting()));
+	    
+	    if(counts.size() > 0) {
+	    	for (Map.Entry<String, Long> c : counts.entrySet()) {
+				pieModel.set(c.getKey(), c.getValue());
+			}
+		    pieModel.setTitle(titre);
+		    pieModel.setLegendPosition("w");
+	    }else{
+	    	pieModel.setFill(false);
+	    }
+	    
+	    return pieModel; 
+	}
 
 	/**
 	 * Donne la liste des comptes dépassant les seuils d'alerte de decouvert dont le titulaire est sous la responsabilite de l'employe connecte
@@ -90,7 +112,7 @@ public class AuditBean implements Serializable{
 		Calendar c = new GregorianCalendar();
 	    c.setTime(new Date());
 	    c.add(Calendar.MONTH, -3);
-		pieModelLastThreeMonths = createPieModel(c.getTime(), "Trois derniers mois");
+		pieModelLastThreeMonths = createPieModel2(c.getTime(), "Trois derniers mois");
 		return pieModelLastThreeMonths;
 	}
 
@@ -106,7 +128,7 @@ public class AuditBean implements Serializable{
 		Calendar c = new GregorianCalendar();
 	    c.setTime(new Date());
 	    c.add(Calendar.DAY_OF_YEAR, -7);
-		pieModelLastWeek = createPieModel(c.getTime(), "Semaine dernière");
+		pieModelLastWeek = createPieModel2(c.getTime(), "Semaine dernière");
 		return pieModelLastWeek;
 	}
 
@@ -115,8 +137,9 @@ public class AuditBean implements Serializable{
 	}
 
 	public List<Transaction> getTransactions() {
-		transactions = serviceGerant.listerTransactions((Gerant) connexionBean.employeConnecte()) ;
-		return transactions;
+		//transactions = serviceGerant.listerTransactions((Gerant) connexionBean.employeConnecte()) ;
+		Gerant gerant = (Gerant) connexionBean.employeConnecte();
+		return serviceGerant.listerTransactions(gerant);
 	}
 
 	public void setTransactions(List<Transaction> transactions) {

@@ -20,7 +20,7 @@ public class TestListerComptesDecouvertGerant {
 
 	private IServiceGerant service = new ServiceImpl();
 	
-	
+	@Ignore
 	@Test
 	public void TestListerComptesDecouvertGerantAucunConseiller() {
 
@@ -32,6 +32,7 @@ public class TestListerComptesDecouvertGerant {
 
 	}
 	
+	@Ignore
 	@Test
 	public void TestListerComptesDecouvertGerantAucunClient() {
 
@@ -45,6 +46,7 @@ public class TestListerComptesDecouvertGerant {
 
 	}
 
+	@Ignore
 	@Test
 	public void testListerComptesDecouvertGerantCasNominalClientsParticuliers() {
 		
@@ -108,6 +110,7 @@ public class TestListerComptesDecouvertGerant {
 		
 	}
 
+	@Ignore
 	@Test
 	public void testListerComptesDecouvertGerantCasNominalClientsEntreprises() {
 		

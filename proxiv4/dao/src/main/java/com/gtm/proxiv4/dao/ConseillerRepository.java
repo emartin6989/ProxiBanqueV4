@@ -13,4 +13,6 @@ public interface ConseillerRepository extends JpaRepository<Conseiller, Long> {
 	public List<Conseiller> findByGerantId(long id);
 
 	public Conseiller findOneByEmail(String email);
+
+	public Conseiller findWithClientsById(long id);
 }

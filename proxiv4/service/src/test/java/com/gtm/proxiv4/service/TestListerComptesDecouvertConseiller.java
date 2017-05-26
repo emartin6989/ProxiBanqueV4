@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.gtm.proxiv4.metier.Client;
@@ -16,7 +17,7 @@ public class TestListerComptesDecouvertConseiller {
 
 	private IServiceConseiller service = new ServiceImpl();
 	
-	
+	@Ignore
 	@Test
 	public void testListerComptesDecouvertConseillerAucunClient() {
 
@@ -28,6 +29,7 @@ public class TestListerComptesDecouvertConseiller {
 
 	}
 
+	@Ignore
 	@Test
 	public void testListerComptesDecouvertConseillerCasNominalClientsParticuliers() {
 		
@@ -84,6 +86,7 @@ public class TestListerComptesDecouvertConseiller {
 		
 	}
 
+	@Ignore
 	@Test
 	public void testListerComptesDecouvertConseillerCasNominalClientsEntreprises() {
 		

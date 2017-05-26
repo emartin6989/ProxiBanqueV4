@@ -17,5 +17,15 @@ public interface TransactionRepository  extends JpaRepository<Transaction,Long> 
 
 	List<Transaction> findByDateAfterAndCompteDebiteurIn(Date dateDebut, List<Compte> comptes);
 
-	List<Transaction> findByCompteDebiteurIn(List<Compte> comptes);
+	List<Transaction> findByCompteDebiteurInOrderByDateDesc(List<Compte> comptes);
+
+	@Query("SELECT t "
+			+ "FROM Transaction t "
+			+ "JOIN FETCH t.compteDebiteur cb "
+			+ "JOIN FETCH cb.client cl "
+			+ "JOIN FETCH cl.conseiller cs "
+			+ "JOIN FETCH cs.gerant g "
+			+ "WHERE g.id = ?1 "
+			+ "AND t.date >= ?2 ")
+	List<Transaction> findByGerantAndByDateAfter(long idGerant, Date dateDebut);
 }

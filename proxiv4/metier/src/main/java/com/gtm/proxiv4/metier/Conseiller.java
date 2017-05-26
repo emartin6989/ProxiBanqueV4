@@ -34,7 +34,7 @@ public class Conseiller extends Employe {
 	/**
 	 * Les clients du conseiller
 	 */
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "conseiller")
+	@OneToMany(mappedBy = "conseiller")
 	private Collection<Client> clients = new ArrayList<Client>();
 
 	public Gerant getGerant() {
