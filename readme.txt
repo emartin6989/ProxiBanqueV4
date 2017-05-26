@@ -72,8 +72,8 @@ Etape 7 : utiliser l'application
 
 => Allez sur l'url suivante : localhost:8080/ProxiBanque/ 
 => Maintenant votre programme est lance.
-=> Le WebService pour accéder à la liste des conseillers  est accessisble à l'adresse url suivante : localhost:8080/ProxiBanque/rest/proxibanque/conseillers
-=> Le WebService pour accéder aux coordonnees de son conseiller est accessisble à l'aide de l'adresse mail du client, par exemple : localhost:8080/ProxiBanque/rest/proxibanque/monconseiller/arthur.emin@test.fr (si vous avez installe la base de données de démonstration)
+=> Le WebService pour acceder a la liste des conseillers  est accessisble à l'adresse url suivante : localhost:8080/ProxiBanque/rest/conseillers
+=> Le WebService pour accéder aux coordonnees de son conseiller est accessisble à l'aide de l'adresse mail du client, par exemple : localhost:8080/ProxiBanque/rest/monconseiller/arthur.emin@test.fr (si vous avez installe la base de donnees de démonstration)
 
 NOTE : si vous avez installe les donnees de demo a l'etape 4, vous pouvez tester le logiciel à l'aide des informations contenues dans le fichier info_utilisation_proxibanque_demo.txt du dossier fichiersConfig
 
