@@ -81,4 +81,4 @@ NOTE : si vous avez installe les donnees de demo a l'etape 4, vous pouvez tester
 => Pour consulter la documentation (javadoc) de l'application, double-cliquez sur le fichier index.html se trouvant dans le repertoire "doc" 
 livre avec le dossier ProxiBanque.  
 
-ATTENTION LA FONCTIONNALITE MODIFIER CLIENT PRESENTE DES DYSFONCTIONNEMENTS AVEC LE NAVIGATEUR MOZILLA FIREFOX. Elle fonctionne parfaitement avec la navigateur GOOGLE CHROME. 
+
