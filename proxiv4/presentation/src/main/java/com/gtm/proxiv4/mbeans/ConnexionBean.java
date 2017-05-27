@@ -2,18 +2,14 @@ package com.gtm.proxiv4.mbeans;
 
 import java.io.Serializable;
 
-import javax.annotation.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.gtm.proxiv4.metier.Employe;
-import com.gtm.proxiv4.service.IServiceConseiller;
 import com.gtm.proxiv4.service.IServiceEmploye;
 
 /**

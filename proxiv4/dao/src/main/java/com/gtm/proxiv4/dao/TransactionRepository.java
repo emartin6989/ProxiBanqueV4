@@ -7,9 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.gtm.proxiv4.metier.Client;
 import com.gtm.proxiv4.metier.Compte;
-import com.gtm.proxiv4.metier.Gerant;
 import com.gtm.proxiv4.metier.Transaction;
 
 @Repository

@@ -1,7 +1,6 @@
 package com.gtm.proxiv4.mbeans;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -18,8 +17,6 @@ import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.service.IServiceConseiller;
 import com.gtm.proxiv4.service.exceptions.MontantNegatifException;
 import com.gtm.proxiv4.service.exceptions.SoldeInsuffisantException;
-
-import javassist.expr.NewArray;
 
 /**
  * Controller de la vue virement
