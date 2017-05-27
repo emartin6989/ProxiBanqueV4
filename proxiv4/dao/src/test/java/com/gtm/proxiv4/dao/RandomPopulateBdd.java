@@ -215,7 +215,7 @@ public class RandomPopulateBdd {
 
 		CompteEpargne c = new CompteEpargne();
 		c.setDateOuverture(randomDate());
-		c.setSolde(Math.random() * 300_000);
+		c.setSolde(Math.random() * 100_000);
 		c.setTaux((float) Math.random() * 3);
 
 		return c;
@@ -225,7 +225,7 @@ public class RandomPopulateBdd {
 
 		CompteCourant c = new CompteCourant();
 		c.setDateOuverture(randomDate());
-		c.setSolde(Math.random() * 300_000 - Math.random() * 100_000);
+		c.setSolde(Math.random() * 200_000 - Math.random() * 100_000);
 		c.setDecouvert(500);
 
 		return c;
@@ -304,11 +304,11 @@ public class RandomPopulateBdd {
 		Compte cDebit = randomExistingCompte();
 		Compte cCredit = randomExistingCompte();
 
-		Double montant = Math.random() * cDebit.getSolde();
+		Double montant = Math.abs(Math.random() * cDebit.getSolde());
 
 		Calendar c = new GregorianCalendar();
 		c.setTime(lastTransactionDate);
-		c.add(Calendar.MINUTE, (int) (Math.random() * 60 * 24 * 2));
+		c.add(Calendar.MINUTE, (int) (Math.random() * 60 * 5));
 
 		Date date = c.getTime();
 
@@ -329,4 +329,5 @@ public class RandomPopulateBdd {
 		return existingAccounts.get(index);
 
 	}
+	
 }
