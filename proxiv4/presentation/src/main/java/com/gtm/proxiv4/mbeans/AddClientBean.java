@@ -3,14 +3,12 @@ package com.gtm.proxiv4.mbeans;
 import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.context.annotation.RequestScope;
 
 import com.gtm.proxiv4.metier.Adresse;
 import com.gtm.proxiv4.metier.Client;

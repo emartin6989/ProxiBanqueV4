@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.gtm.proxiv4.metier.Client;
-import com.gtm.proxiv4.metier.Conseiller;
 import com.gtm.proxiv4.metier.Gerant;
 
 @Repository

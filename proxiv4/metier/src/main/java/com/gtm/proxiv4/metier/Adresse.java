@@ -8,12 +8,15 @@ import javax.persistence.Id;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * La classe Adresse permet de definir une adresse.
  */
 @Component
 @Scope("prototype")
 @Entity
+@JsonIgnoreProperties({"id","rue","codePostal","ville"})
 public class Adresse {
 
 	@Id
