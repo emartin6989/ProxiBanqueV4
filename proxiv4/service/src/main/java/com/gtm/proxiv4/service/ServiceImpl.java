@@ -325,4 +325,29 @@ public class ServiceImpl implements IServiceConseiller, IServiceGerant, IService
 		return transactionRepo.findByGerantAndByDateAfter(gerant.getId(), dateDebut);
 	}
 
+	@Override
+	public Map<Date, Double> getPreviousSoldes(Compte compte, Date dateDebut) {
+		
+		//on reconstruit l'historique du solde a partir du solde actuel et des transactions passées
+		
+		//stock temporairement le solde
+		double lastSolde = compte.getSolde();
+
+		Map<Date, Double> previousSoldes = new HashMap<Date, Double>();
+		
+		//recuperation des trasactions qui concerne le solde depuis la date donnee du plus proche au plus lointain
+		List<Transaction> previousTransactions = transactionRepo.findByDateAfterAndCompteDebiteurOrDateAfterAndCompteCrediteurOrderByDateDesc(dateDebut, compte,dateDebut, compte);
+		
+		for(Transaction t : previousTransactions){
+			
+			//System.out.println("t : " + t.getCompteDebiteur().getId() + " " + t.getMontant() + " " + t.getCompteCrediteur().getId());
+			//calcul du solde precedent la transaction
+			lastSolde = t.getCompteCrediteur().getId()==compte.getId() ? lastSolde + t.getMontant() : lastSolde - t.getMontant();
+			
+			previousSoldes.put(t.getDate(), lastSolde);
+		}
+		
+		return previousSoldes;
+	}
+
 }

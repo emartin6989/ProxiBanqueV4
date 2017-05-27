@@ -13,7 +13,8 @@
 		<p:panel id="pieChartPanel" header="Transactions par client"
 			style="width: 700;">
 			<div class="row">
-				<p:chart type="pie" model="#{auditBean.pieModelLastThreeMonths}" styleClass="col-sm-8 col-md-8 col-lg-6" style="height:300px"
+				<p:chart type="pie" model="#{auditBean.pieModelLastThreeMonths}"
+					styleClass="col-sm-8 col-md-8 col-lg-6" style="height:300px"
 					rendered="#{auditBean.pieModelLastThreeMonths.isFill()}" />
 
 				<p:chart type="pie" model="#{auditBean.pieModelLastWeek}"
@@ -21,42 +22,58 @@
 					rendered="#{auditBean.pieModelLastWeek.isFill()}" />
 			</div>
 		</p:panel>
+
+
 		<p:panel id="warningAcountPannel" header="Comptes à surveiller"
 			style="width: 700;" widgetVar="oneUser">
-			<p:dataTable var="compte" value="#{auditBean.comptesASurveiller}"
-				id="userUpdateForm3">
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="NUMERO COMPTE" />
-					</f:facet>
-					<h:outputText value="#{compte.id}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="SOLDE" />
-					</f:facet>
-					<h:outputText value="#{compte.solde}">
-						<f:convertNumber pattern="#0.00" />
-					</h:outputText>
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="TITULAIRE" />
-					</f:facet>
-					<h:outputText
-						value="#{compte.client.nom.concat(' ').concat(compte.client.prenom)}">
-					</h:outputText>
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="CONSEILLER" />
-					</f:facet>
-					<h:outputText
-						value="#{compte.client.conseiller.nom.concat(' ').concat(compte.client.conseiller.prenom)}">
-						<f:convertDateTime pattern="dd.MM.yyyy" />
-					</h:outputText>
-				</p:column>
-			</p:dataTable>
+			<h:form styleClass="form-horizontal">
+				<p:dataTable id="eventsCompte" var="compte"
+					value="#{auditBean.comptesASurveiller}" selectionMode="single"
+					selection="#{auditBean.compte}" rowKey="#{compte.id}">
+
+					<p:ajax event="rowSelect" listener="#{auditBean.rowSelect}"
+						update="soldeDetail" />
+					<p:ajax event="rowUnselect" listener="#{auditBean.rowUnselect}" />
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="NUMERO" />
+						</f:facet>
+						<h:outputText value="#{compte.id}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="SOLDE" />
+						</f:facet>
+						<h:outputText value="#{compte.solde}">
+							<f:convertNumber pattern="#0.00" />
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="TITULAIRE" />
+						</f:facet>
+						<h:outputText
+							value="#{compte.client.nom.concat(' ').concat(compte.client.prenom)}">
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="CONSEILLER" />
+						</f:facet>
+						<h:outputText
+							value="#{compte.client.conseiller.nom.concat(' ').concat(compte.client.conseiller.prenom)}" />
+
+					</p:column>
+				</p:dataTable>
+			</h:form>
+
+			<p:outputPanel id="soldeDetail">
+				<p:chart id="soldeChart" type="line"
+					model="#{auditBean.courbeSolde3mois}" style="height:300px"
+					rendered="#{!empty auditBean.compte}" />
+			</p:outputPanel>
+
 		</p:panel>
 
 	</ui:define>

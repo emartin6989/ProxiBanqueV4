@@ -16,6 +16,8 @@ import com.gtm.proxiv4.metier.Transaction;
 public interface TransactionRepository  extends JpaRepository<Transaction,Long> {
 
 	List<Transaction> findByDateAfterAndCompteDebiteurIn(Date dateDebut, List<Compte> comptes);
+	
+	List<Transaction> findByDateAfterAndCompteDebiteurOrDateAfterAndCompteCrediteurOrderByDateDesc(Date dateDebut1, Compte compteDebiteur,Date dateDebut2, Compte compteCrediteur);
 
 	List<Transaction> findByCompteDebiteurInOrderByDateDesc(List<Compte> comptes);
 

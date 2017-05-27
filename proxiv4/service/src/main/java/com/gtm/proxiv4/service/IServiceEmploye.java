@@ -1,5 +1,11 @@
 package com.gtm.proxiv4.service;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import com.gtm.proxiv4.metier.Client;
+import com.gtm.proxiv4.metier.Compte;
 import com.gtm.proxiv4.metier.Employe;
 
 /**
@@ -15,4 +21,15 @@ public interface IServiceEmploye {
 	 * @return Employe
 	 */
 	public Employe findEmployeByEmail(String email);
+
+	/**
+	 * renvoie la liste des anciens soldes d'un compte depuis une date donnee
+	 * 
+	 * @param compte
+	 *            compte dont on desire connaitre l'historique des soldes
+	 * @param dateDebut
+	 *            date de debut de la liste
+	 * @return historiques du solde du compte
+	 */
+	public Map<Date, Double> getPreviousSoldes(Compte compte, Date dateDebut);
 }
