@@ -63,8 +63,8 @@ public class RandomPopulateBdd {
 
 		ClassPathXmlApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
 
-		AdresseRepository adresseRep = (AdresseRepository) appContext.getBean("adresseRepository");
-		CompteRepository compteRep = (CompteRepository) appContext.getBean("compteRepository");
+		//AdresseRepository adresseRep = (AdresseRepository) appContext.getBean("adresseRepository");
+		//CompteRepository compteRep = (CompteRepository) appContext.getBean("compteRepository");
 		ConseillerRepository conseillerRep = (ConseillerRepository) appContext.getBean("conseillerRepository");
 		GerantRepository gerantRep = (GerantRepository) appContext.getBean("gerantRepository");
 		ClientRepository clientRep = (ClientRepository) appContext.getBean("clientRepository");
@@ -150,6 +150,8 @@ public class RandomPopulateBdd {
 			}
 
 		}
+		
+		appContext.close();
 
 	}
 
