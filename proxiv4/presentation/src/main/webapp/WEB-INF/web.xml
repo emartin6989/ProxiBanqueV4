@@ -99,7 +99,7 @@
 	<!-- rôles utilisés dans l'application -->
 	<security-role>
 		<description>conseiller</description>
-		<role-name>CONSEIELLER</role-name>
+		<role-name>CONSEILLER</role-name>
 	</security-role>
 	<security-role>
 		<description>gerant</description>
